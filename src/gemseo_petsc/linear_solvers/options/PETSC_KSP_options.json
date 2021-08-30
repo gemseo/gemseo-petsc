@@ -11,7 +11,7 @@
    "solver_type":{
    		"type":"string"
 	} ,  	
-   "rtol": {
+   "tol": {
       "type": "number",
       "minimum": 0
     },

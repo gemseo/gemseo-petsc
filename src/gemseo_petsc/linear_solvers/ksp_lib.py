@@ -26,7 +26,7 @@ from typing import Any, Dict, List, Tuple, Union
 from numpy import ndarray, arange, array, zeros_like
 from scipy.sparse.base import issparse
 from scipy.sparse.linalg import LinearOperator, bicg, bicgstab, gmres, lgmres, qmr
-
+from scipy.sparse import csr_matrix
 from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
 import petsc4py
 import sys
@@ -64,7 +64,7 @@ class PetscKSPAlgos(LinearSolverLib):
         self,
         solver_type='gmres',
         max_iter=100000,  # type: int
-        rtol=1e-5,
+        tol=1e-5,
         atol=1e-50,
         dtol = 1e5,
         preconditioner_type='ilu',
@@ -79,7 +79,7 @@ class PetscKSPAlgos(LinearSolverLib):
             max_iter: Maximum number of iterations.
             solver_type: The KSP solver type. 
                 See https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType 
-            rtol: The relative convergence tolerance, relative decrease in the (possibly preconditioned) residual norm.
+            tol: The relative convergence tolerance, relative decrease in the (possibly preconditioned) residual norm.
             abstol: The absolute convergence tolerance absolute size of the (possibly preconditioned) residual norm.
             dtol: The divergence tolerance, amount (possibly preconditioned) residual norm can increase.
             preconditioner_type: The name of the precondtioner, 
@@ -99,7 +99,7 @@ class PetscKSPAlgos(LinearSolverLib):
             max_iter=max_iter,
             solver_type=solver_type,
             monitor_residuals=monitor_residuals,
-            rtol=rtol,
+            tol=tol,
             atol=atol,
             dtol=dtol,
             preconditioner_type=preconditioner_type,
@@ -136,7 +136,7 @@ class PetscKSPAlgos(LinearSolverLib):
             petsc4py.init()
         ksp = PETSc.KSP().create()
         ksp.setType(options["solver_type"])
-        ksp.setTolerances(options["rtol"],options["atol"], options["dtol"], options["max_iter"])
+        ksp.setTolerances(options["tol"],options["atol"], options["dtol"], options["max_iter"])
         ksp.setConvergenceHistory()
         a_mat = ndarray2petsc(self.problem.lhs)
         ksp.setOperators(a_mat)
@@ -173,12 +173,48 @@ class PetscKSPAlgos(LinearSolverLib):
 
 def ndarray2petsc(np_arr):
     n_dim=np_arr.ndim
+    if n_dim>2:
+        raise ValueError("Unsupported dimension {}!".format(n_dim))
+    
+    if issparse(np_arr):
+        print("SPARSE mat",np_arr.shape)
+        if not isinstance(np_arr,csr_matrix):
+            np_arr=np_arr.tocsr()
+        if n_dim==2 and np_arr.shape[1]>1:
+            print("Case1")
+            
+            petsc_arr = PETSc.Mat().createAIJ(size=np_arr.shape, 
+                                       csr=(np_arr.indptr, np_arr.indices, np_arr.data))
+            petsc_arr.assemble()
+            return petsc_arr
+        else:
+            print("Case2")
+            petsc_arr = PETSc.Vec().createSeq(np_arr.shape[0])
+            petsc_arr.setUp()
+            print("np_arr",type(np_arr),dir(np_arr))
+            print("np_arr.indices",np_arr.indices)
+            print("np_arr.indptr",np_arr.indptr)
+            print("np_arr.data",np_arr.data)
+            print("dense",np_arr.todense())
+            print("np_arr.size",np_arr.size)
+            print("np_arr.shape",np_arr.shape)
+            petsc_arr.setValues(np_arr.indptr, np_arr.data)
+            petsc_arr.assemble()
+            #csr_matrix((data, indices, indptr), [shape=(M, N)])
+# is the standard CSR representation where the column indices for row i are stored
+#  in indices[indptr[i]:indptr[i+1]] and their corresponding values are stored in
+#   data[indptr[i]:indptr[i+1]]. If the shape parameter is not supplied, the matrix dimensions are inferred from the index arrays.
+
+            return petsc_arr
+             
+    # Update because of flatten() called in previous line
+    n_dim=np_arr.ndim
     if n_dim == 1:
         a = array(np_arr, dtype=PETSc.ScalarType)
         petsc_arr = PETSc.Vec().createWithArray(a)
         petsc_arr.assemble()
         return petsc_arr
-    if n_dim == 2:
+    elif n_dim == 2:
         #a = array(np_arr, dtype=PETSc.ScalarType)
         petsc_arr = PETSc.Mat().createDense(np_arr.shape)
         a_shape=np_arr.shape
@@ -186,7 +222,8 @@ def ndarray2petsc(np_arr):
         petsc_arr.setValues(arange(a_shape[0],dtype="int32"),arange(a_shape[1],dtype="int32"),np_arr)
         petsc_arr.assemble()
         return petsc_arr
-    raise ValueError("Unsupported dimension {}!".format(n_dim))
+    else:
+        raise ValueError("Unsupported dimension {}!".format(n_dim))
 
 # KSP example here
 # https://fossies.org/linux/petsc/src/binding/petsc4py/demo/petsc-examples/ksp/ex2.py

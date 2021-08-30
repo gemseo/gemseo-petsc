@@ -26,6 +26,8 @@ from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
 from gemseo_petsc.linear_solvers.ksp_lib import PetscKSPAlgos
 
+from gemseo.api import create_discipline,create_mda
+
 
 def test_algo_list():
     """Tests the algo list detection at lib creation."""
@@ -62,15 +64,16 @@ def test_hard_conv(seed):
 __petsc=PetscKSPAlgos()
 opt_grammar=__petsc.init_options_grammar("PETSC_KSP")
 options=opt_grammar.schema.to_dict()
-@pytest.mark.parametrize("algo", options["properties"]["solver_type"]["enum"])
+@pytest.mark.parametrize("solver_type", options["properties"]["solver_type"]["enum"])
 @pytest.mark.parametrize("preconditioner_type", ['ilu','jacobi','sor'])
-def test_options(algo, preconditioner_type):
+def test_options(solver_type, preconditioner_type):
     random.seed(1)
     n = 3
     problem = LinearProblem(random.rand(n, n), random.rand(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
+        solver_type=solver_type,
         max_iter=100000,
         preconditioner_type=preconditioner_type
     )
@@ -90,3 +93,16 @@ def test_residuals_history():
     )
     assert len(problem.residuals_history)>=2
     assert problem.residuals(True) < 1e-10
+    
+    
+def test_mda_adjoint():
+    disciplines=create_discipline(["SobieskiPropulsion","SobieskiAerodynamics",
+                                   "SobieskiStructure","SobieskiMission"])
+    linear_solver_options={"solver_type":"gmres",
+        "max_iter":100000,
+        "view_config":True}
+    mda=create_mda("MDAChain",disciplines,linear_solver="PETSC_KSP",
+                   linear_solver_options=linear_solver_options)
+    mda.add_differentiated_inputs(["x_shared"])
+    mda.add_differentiated_outputs(["y_4"])
+    mda.linearize()
