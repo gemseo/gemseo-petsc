@@ -8,6 +8,9 @@
       "type": "integer",
       "minimum": 1
     },
+   "solver_type":{
+   		"type":"string"
+	} ,  	
    "rtol": {
       "type": "number",
       "minimum": 0
@@ -23,13 +26,11 @@
       "type": "number",
       "minimum": 0
     },
-    "options_cmd": {
-      "type": [
-        "null",
-        "string"
-      ]
+    "set_from_options": {
+      "type": "boolean"
     },
-    "print_residuals": {
+   "options_hook_func":{},
+    "monitor_residuals": {
       "type": "boolean"
     },
     "solver_type": {

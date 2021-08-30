@@ -58,7 +58,6 @@ def test_hard_conv(seed):
         view_config=True
     )
     assert problem.residuals(True) < 1e-10
-    
 
 __petsc=PetscKSPAlgos()
 opt_grammar=__petsc.init_options_grammar("PETSC_KSP")
@@ -75,4 +74,19 @@ def test_options(algo, preconditioner_type):
         max_iter=100000,
         preconditioner_type=preconditioner_type
     )
+    assert problem.residuals(True) < 1e-10
+    
+    
+def test_residuals_history():
+    random.seed(1)
+    n = 3000
+    problem = LinearProblem(random.rand(n, n), random.rand(n))
+    LinearSolversFactory().execute(
+        problem,
+        "PETSC_KSP",
+        max_iter=100000,
+        preconditioner_type="ilu",
+        monitor_residuals=True
+    )
+    assert len(problem.residuals_history)>=2
     assert problem.residuals(True) < 1e-10
