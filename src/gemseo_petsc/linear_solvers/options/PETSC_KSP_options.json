@@ -8,6 +8,21 @@
       "type": "integer",
       "minimum": 1
     },
+   "rtol": {
+      "type": "number",
+      "minimum": 0
+    },
+    "atol": {
+      "type": "number",
+      "minimum": 0
+    },
+    "view_config": {
+      "type": "boolean"
+    },
+   "dtol": {
+      "type": "number",
+      "minimum": 0
+    },
     "options_cmd": {
       "type": [
         "null",
@@ -69,8 +84,9 @@
       ]
     },
     "preconditioner_type": {
-      "type": "string",
+      "type": ["null","string"],
       "enum": [
+      	null,
         "jacobi",
         "bjacobi",
         "sor",

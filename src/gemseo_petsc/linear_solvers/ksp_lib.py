@@ -22,7 +22,7 @@ from __future__ import division, unicode_literals
 import logging
 from typing import Any, Dict, List, Tuple, Union
 
-from numpy import ndarray, arange
+from numpy import ndarray, arange, array, zeros_like
 from scipy.sparse.base import issparse
 from scipy.sparse.linalg import LinearOperator, bicg, bicgstab, gmres, lgmres, qmr
 
@@ -30,24 +30,29 @@ from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
 import petsc4py
 import sys
 
-petsc4py.init(sys.argv)
+# Must be done before from petsc4py import PETSc
+petsc4py.init()
 from petsc4py import PETSc
+import petsc4py
 from matplotlib import pylab
 
 
 LOGGER = logging.getLogger(__name__)
-
-
+comm = PETSc.COMM_WORLD
 class PetscKSPAlgos(LinearSolverLib):
     OPTIONS_MAP = {
-        "max_iter": "maxits"
     }
 
 
     def __init__(self):  # type: (...) -> None # noqa: D107
         super(PetscKSPAlgos, self).__init__()
         self.lib_dict = {
-            "PETSC_GMRES": self.get_default_properties("GMRES"),
+            "PETSC_KSP": {
+            self.RHS_MUST_BE_POSITIVE_DEFINITE: False,
+            self.RHS_MUST_BE_SYMMETRIC: False,
+            self.RHS_CAN_BE_LINEAR_OPERATOR: True,
+            self.INTERNAL_NAME: "PETSC",
+        }
         }
 
     def _get_options(
@@ -59,7 +64,8 @@ class PetscKSPAlgos(LinearSolverLib):
         rtol=1e-5,
         atol=1e-50,
         dtol = 1e5,
-        preconditioner_type='ilu'
+        preconditioner_type='ilu',
+        view_config=False
     ):  # type: (...) -> Dict
         """Checks the options and sets the default values.
 
@@ -68,6 +74,7 @@ class PetscKSPAlgos(LinearSolverLib):
             rtol: the relative convergence tolerance, relative decrease in the (possibly preconditioned) residual norm.
             abstol: the absolute convergence tolerance absolute size of the (possibly preconditioned) residual norm.
             dtol: the divergence tolerance, amount (possibly preconditioned) residual norm can increase.
+            view_config: if True, calls ksp.view() to view the configuration of the solver before run
         Returns:
             The options dict
         """
@@ -79,7 +86,8 @@ class PetscKSPAlgos(LinearSolverLib):
             rtol=rtol,
             atol=atol,
             dtol=dtol,
-            preconditioner_type=preconditioner_type
+            preconditioner_type=preconditioner_type,
+            view_config=view_config
         )
 
     def _run(
@@ -99,29 +107,38 @@ class PetscKSPAlgos(LinearSolverLib):
             rhs = self.problem.rhs.toarray()
 
         # Initialize ksp solver.
+        # Creates the options database
+        options_cmd=options.get("options_cmd")
+        if options_cmd is not None:
+            petsc4py.init(options_cmd)
+        else:
+            petsc4py.init()
         ksp = PETSc.KSP().create()
         ksp.setType(options["solver_type"])
-        ksp.setTolerances(options["rtol"],options["atol"], options["dtol"], options["maxit"])
-
-        ksp.view()
+        ksp.setTolerances(options["rtol"],options["atol"], options["dtol"], options["max_iter"])
         ksp.setConvergenceHistory()
         a_mat = ndarray2petsc(self.problem.lhs)
         ksp.setOperators(a_mat)
-
-        precond=options.get("preconditioner_type")
-        if precond is not None:
-            ksp.setPCType(precond)
+        prec_type=options.get("preconditioner_type")
+        if prec_type is not None:
+            pc = ksp.getPC()
+            pc.setType(prec_type)
+            
             
         # Allow for solver choice to be set from command line with -ksp_type <solver>.
         # Recommended option: -ksp_type preonly -pc_type lu
-        options_cmd=options.get("options_cmd")
-        if options_cmd is not None:
-            ksp.setFromOptions(options_cmd)
+        if  options_cmd is not None:
+            ksp.setFromOptions()
         print("Solving with:", ksp.getType())
 
         b_mat = ndarray2petsc(self.problem.rhs)
-        solution = PETSc.Vec().createSeq(len(b_mat))
-        sol = ksp.solve(b_mat, solution)
+        solution=b_mat.duplicate()
+#         solution = PETSc.Vec(comm=comm).createSeq(len(b_mat))
+#         solution.setUp()
+#         solution.assemble()
+        if options["view_config"]:
+            ksp.view()
+        ksp.solve(b_mat, solution)
         self.problem.solution = solution.getArray()
 
         reason = ksp.getConvergedReason()
@@ -130,26 +147,42 @@ class PetscKSPAlgos(LinearSolverLib):
 
 
 def ndarray2petsc(np_arr):
-    np_shape = np_arr.shape
-    if len(np_shape) == 1:
-        petsc_arr = PETSc.Vec().create()
-        petsc_arr.setSize(np_shape[0])
-        petsc_arr.setType("aij")
-        petsc_arr.setUp()
-        petsc_arr.setValues(len(np_arr), np_arr)
+    n_dim=np_arr.ndim
+    if n_dim == 1:
+        a = array(np_arr, dtype=PETSc.ScalarType)
+        petsc_arr = PETSc.Vec().createWithArray(a)
         petsc_arr.assemble()
         return petsc_arr
-    if len(np_shape) == 2:
-        petsc_arr = PETSc.Mat().create()
-        petsc_arr.setSizes(np_shape)
-        petsc_arr.setType("aij")
+    if n_dim == 2:
+        #a = array(np_arr, dtype=PETSc.ScalarType)
+        petsc_arr = PETSc.Mat().createDense(np_arr.shape)
+        a_shape=np_arr.shape
         petsc_arr.setUp()
-
-        petsc_arr.setValues(arange(np_shape[0]), arange(np_shape[1]), np_arr)
+        petsc_arr.setValues(arange(a_shape[0],dtype="int32"),arange(a_shape[1],dtype="int32"),np_arr)
         petsc_arr.assemble()
         return petsc_arr
     raise ValueError("Unsupported dimension !")
 
+# KSP example here
+# https://fossies.org/linux/petsc/src/binding/petsc4py/demo/petsc-examples/ksp/ex2.py
+
+#  dir(ksp()'ConvergedReason', 'NormType', 'appctx', 'atol', 'buildResidual', 'buildSolution', 'callConvergenceTest', 
+#       'cancelMonitor', 'classid', 'comm', 'compose', 'computeEigenvalues', 'computeExtremeSingularValues', 
+#       'converged', 'create', 'createPython', 'decRef', 'destroy', 'diverged', 'divtol', 'dm', 'fortran', 
+#       'getAppCtx', 'getAttr', 'getClassId', 'getClassName', 'getComm', 'getComputeEigenvalues', 'getComputeSingularValues', 
+#       'getConvergedReason', 'getConvergenceHistory', 'getConvergenceTest', 'getDM', 'getDict', 'getInitialGuessKnoll', 
+#       'getInitialGuessNonzero', 'getIterationNumber', 'getMonitor', 'getName', 'getNormType', 'getOperators', 
+#       'getOptionsPrefix', 'getPC', 'getPCSide', 'getPythonContext', 'getRefCount', 'getResidualNorm', 'getRhs', 
+#       'getSolution', 'getTabLevel', 'getTolerances', 'getType', 'getWorkVecs', 'guess_knoll', 'guess_nonzero',
+#        'handle', 'history', 'incRef', 'incrementTabLevel', 'iterating', 'its', 'klass', 'logConvergenceHistory',
+#         'mat_op', 'mat_pc', 'max_it', 'monitor', 'name', 'norm', 'norm_type', 'pc', 'pc_side', 'prefix', 'query', 
+#         'reason', 'refcount', 'reset', 'rtol', 'setAppCtx', 'setAttr', 'setComputeEigenvalues', 'setComputeOperators', 
+#         'setComputeRHS', 'setComputeSingularValues', 'setConvergedReason', 'setConvergenceHistory', 'setConvergenceTest', 
+#         'setDM', 'setDMActive', 'setFromOptions', 'setGMRESRestart', 'setInitialGuessKnoll', 'setInitialGuessNonzero', 
+#         'setIterationNumber', 'setMonitor', 'setName', 'setNormType', 'setOperators', 'setOptionsPrefix', 'setPC', 'setPCSide', 
+#         'setPythonContext', 'setPythonType', 'setResidualNorm', 'setTabLevel', 'setTolerances', 'setType', 
+#         'setUp', 'setUpOnBlocks', 'setUseFischerGuess', 'solve', 'solveTranspose', 'stateIncrease', 'type', 
+#         'vec_rhs', 'vec_sol', 'view', 'viewFromOptions
 
 
 # -ksp_type
