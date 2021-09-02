@@ -21,13 +21,14 @@
 from numpy import eye
 from numpy import random
 import pytest
-
+import pickle
+from os.path import join, dirname
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
-from gemseo_petsc.linear_solvers.ksp_lib import PetscKSPAlgos
 
 from gemseo.api import create_discipline,create_mda
 
+from scipy.sparse import load_npz
 
 def test_algo_list():
     """Tests the algo list detection at lib creation."""
@@ -60,12 +61,9 @@ def test_hard_conv(seed):
         view_config=True
     )
     assert problem.residuals(True) < 1e-10
-
-__petsc=PetscKSPAlgos()
-opt_grammar=__petsc.init_options_grammar("PETSC_KSP")
-options=opt_grammar.schema.to_dict()
-@pytest.mark.parametrize("solver_type", options["properties"]["solver_type"]["enum"])
-@pytest.mark.parametrize("preconditioner_type", ['ilu','jacobi','sor'])
+ 
+@pytest.mark.parametrize("solver_type", ['gmres','lgmres','fgmres','bcgs'])
+@pytest.mark.parametrize("preconditioner_type", ['ilu','jacobi'])
 def test_options(solver_type, preconditioner_type):
     random.seed(1)
     n = 3
@@ -93,6 +91,23 @@ def test_residuals_history():
     )
     assert len(problem.residuals_history)>=2
     assert problem.residuals(True) < 1e-10
+    
+
+def test_hard_pb1():
+    lhs=load_npz(join(dirname(__file__),"data","a_mat.npz"))
+    rhs=pickle.load(open(join(dirname(__file__),"data","b_vec.pkl"),'rb'))
+    problem = LinearProblem(lhs,rhs )
+    LinearSolversFactory().execute(
+        problem,
+        "PETSC_KSP",
+        solver_type="gmres",
+        tol=1e-13,
+        atol=1e-50,
+        max_iter=100,
+        preconditioner_type="ilu",
+        monitor_residuals=False
+    )
+    assert problem.residuals(True) < 1e-3
     
     
 def test_mda_adjoint():
