@@ -26,7 +26,7 @@ from typing import Any, Dict, List, Tuple, Union
 from numpy import ndarray, arange, array, zeros_like
 from scipy.sparse.base import issparse
 from scipy.sparse.linalg import LinearOperator, bicg, bicgstab, gmres, lgmres, qmr
-from scipy.sparse import csr_matrix
+from scipy.sparse import csr_matrix, find
 from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
 import petsc4py
 import sys
@@ -177,34 +177,19 @@ def ndarray2petsc(np_arr):
         raise ValueError("Unsupported dimension {}!".format(n_dim))
     
     if issparse(np_arr):
-        print("SPARSE mat",np_arr.shape)
         if not isinstance(np_arr,csr_matrix):
             np_arr=np_arr.tocsr()
         if n_dim==2 and np_arr.shape[1]>1:
-            print("Case1")
-            
             petsc_arr = PETSc.Mat().createAIJ(size=np_arr.shape, 
                                        csr=(np_arr.indptr, np_arr.indices, np_arr.data))
             petsc_arr.assemble()
             return petsc_arr
         else:
-            print("Case2")
             petsc_arr = PETSc.Vec().createSeq(np_arr.shape[0])
             petsc_arr.setUp()
-            print("np_arr",type(np_arr),dir(np_arr))
-            print("np_arr.indices",np_arr.indices)
-            print("np_arr.indptr",np_arr.indptr)
-            print("np_arr.data",np_arr.data)
-            print("dense",np_arr.todense())
-            print("np_arr.size",np_arr.size)
-            print("np_arr.shape",np_arr.shape)
-            petsc_arr.setValues(np_arr.indptr, np_arr.data)
+            inds, _, vals=find(np_arr)
+            petsc_arr.setValues(inds,vals)
             petsc_arr.assemble()
-            #csr_matrix((data, indices, indptr), [shape=(M, N)])
-# is the standard CSR representation where the column indices for row i are stored
-#  in indices[indptr[i]:indptr[i+1]] and their corresponding values are stored in
-#   data[indptr[i]:indptr[i+1]]. If the shape parameter is not supplied, the matrix dimensions are inferred from the index arrays.
-
             return petsc_arr
              
     # Update because of flatten() called in previous line
@@ -215,7 +200,6 @@ def ndarray2petsc(np_arr):
         petsc_arr.assemble()
         return petsc_arr
     elif n_dim == 2:
-        #a = array(np_arr, dtype=PETSc.ScalarType)
         petsc_arr = PETSc.Mat().createDense(np_arr.shape)
         a_shape=np_arr.shape
         petsc_arr.setUp()
