@@ -131,7 +131,7 @@ def test_mda_adjoint():
         linear_solver="PETSC_KSP",
         linear_solver_options=linear_solver_options,
     )
-    assert mda.check_jacobian()
+    assert mda.check_jacobian(threshold=1e-4)
 
 
 def test_mda_newton():
