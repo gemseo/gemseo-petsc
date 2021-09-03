@@ -123,7 +123,6 @@ def test_mda_adjoint():
     linear_solver_options = {
         "solver_type": "gmres",
         "max_iter": 100000,
-        "view_config": True,
     }
     mda = create_mda(
         "MDAChain",
@@ -146,7 +145,6 @@ def test_mda_newton():
     linear_solver_options = {
         "solver_type": "gmres",
         "max_iter": 100000,
-        "view_config": True,
     }
 
     tolerance = 1e-13
