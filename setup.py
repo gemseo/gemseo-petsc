@@ -11,10 +11,11 @@ from setuptools import setup, find_packages
 setup(
     name='gemseo_petsc',
     version='0.0.1',
-    packages=find_packages('.'),
+    packages=find_packages(where="src"),
     install_requires=[
         'gemseo',
         "petsc4py"],
+    package_dir={"": "src"},
     include_package_data=True,
     author="Francois Gallard",
     author_email='contact@gemseo.org',
