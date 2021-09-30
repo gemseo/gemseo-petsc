@@ -16,7 +16,7 @@ Bugs can be reported in the PETSc GEMSEO interface issue `tracker <http://forge-
 License
 -------
 
-TODO: to be defined.
+This GEMSEO plugin is licensed under the LGPLv3 licence.
 
 Contributors
 ------------
