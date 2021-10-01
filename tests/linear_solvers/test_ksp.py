@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 IRT Saint Exupéry, https://www.irt-saintexupery.com
 #
 # This program is free software; you can redistribute it and/or
@@ -17,17 +16,17 @@
 #    INITIAL AUTHORS - API and implementation and/or documentation
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
-
-from numpy import eye
-from numpy import random
-import pytest
 import pickle
-from os.path import join, dirname
+from os.path import dirname
+from os.path import join
+
+import pytest
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
-
-from gemseo.api import create_discipline, create_mda
-
+from gemseo.api import create_discipline
+from gemseo.api import create_mda
+from numpy import eye
+from numpy import random
 from scipy.sparse import load_npz
 
 
@@ -39,6 +38,7 @@ def test_algo_list():
 
 
 def test_basic():
+    """Test the resolution of a random linear problem."""
     random.seed(1)
     n = 3
     problem = LinearProblem(eye(n), random.rand(n))
@@ -49,23 +49,25 @@ def test_basic():
         view_config=True,
         preconditioner_type=None,
     )
-    assert problem.residuals(True) < 1e-10
+    assert problem.compute_residuals(True) < 1e-10
 
 
 @pytest.mark.parametrize("seed", range(3))
 def test_hard_conv(seed):
+    """Test the resolution of a pseudo-random large linear problem."""
     random.seed(seed)
     n = 300
     problem = LinearProblem(random.rand(n, n), random.rand(n))
     LinearSolversFactory().execute(
         problem, "PETSC_KSP", max_iter=100000, view_config=True
     )
-    assert problem.residuals(True) < 1e-10
+    assert problem.compute_residuals(True) < 1e-10
 
 
 @pytest.mark.parametrize("solver_type", ["gmres", "lgmres", "fgmres", "bcgs"])
 @pytest.mark.parametrize("preconditioner_type", ["ilu", "jacobi"])
 def test_options(solver_type, preconditioner_type):
+    """Test the options to be passed to PETSc."""
     random.seed(1)
     n = 3
     problem = LinearProblem(random.rand(n, n), random.rand(n))
@@ -76,10 +78,11 @@ def test_options(solver_type, preconditioner_type):
         max_iter=100000,
         preconditioner_type=preconditioner_type,
     )
-    assert problem.residuals(True) < 1e-10
+    assert problem.compute_residuals(True) < 1e-10
 
 
 def test_residuals_history():
+    """Test that the residual history is correctly cmputed."""
     random.seed(1)
     n = 3000
     problem = LinearProblem(random.rand(n, n), random.rand(n))
@@ -91,10 +94,11 @@ def test_residuals_history():
         monitor_residuals=True,
     )
     assert len(problem.residuals_history) >= 2
-    assert problem.residuals(True) < 1e-10
+    assert problem.compute_residuals(True) < 1e-10
 
 
 def test_hard_pb1():
+    """Test with a hard problem."""
     lhs = load_npz(join(dirname(__file__), "data", "a_mat.npz"))
     rhs = pickle.load(open(join(dirname(__file__), "data", "b_vec.pkl"), "rb"))
     problem = LinearProblem(lhs, rhs)
@@ -108,10 +112,11 @@ def test_hard_pb1():
         preconditioner_type="ilu",
         monitor_residuals=False,
     )
-    assert problem.residuals(True) < 1e-3
+    assert problem.compute_residuals(True) < 1e-3
 
 
 def test_mda_adjoint():
+    """Test with a MDA with total derivatives computed with adjoint."""
     disciplines = create_discipline(
         [
             "SobieskiPropulsion",
@@ -134,6 +139,7 @@ def test_mda_adjoint():
 
 
 def test_mda_newton():
+    """Test a Newton MDA."""
     disciplines = create_discipline(
         [
             "SobieskiPropulsion",

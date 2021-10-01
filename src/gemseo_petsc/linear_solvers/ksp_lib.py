@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 IRT Saint Exupéry, https://www.irt-saintexupery.com
 #
 # This program is free software; you can redistribute it and/or
@@ -17,81 +16,92 @@
 #    INITIAL AUTHORS - API and implementation and/or documentation
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
-
-"""A PETSC KSP linear solvers library wrapper"""
-
+"""A PETSC KSP linear solvers library wrapper."""
 import logging
-from typing import Any, Dict, List, Tuple, Union
-
-from numpy import ndarray, arange, array, zeros_like
-from scipy.sparse.base import issparse
-from scipy.sparse import csr_matrix, find
-from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
-import petsc4py
 import sys
+from typing import Any
+from typing import Dict
+from typing import Optional
+from typing import Union
+
+import petsc4py
+from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
+from numpy import arange
+from numpy import array
+from numpy import ndarray
+from scipy.sparse import csr_matrix
+from scipy.sparse import find
+from scipy.sparse.base import issparse
 
 # Must be done before from petsc4py import PETSc, this loads the options from
 # command args in the options database.
 petsc4py.init(sys.argv)
-from petsc4py import PETSc
+from petsc4py import PETSc  # noqa: E402
 
 LOGGER = logging.getLogger(__name__)
 
 
 class PetscKSPAlgos(LinearSolverLib):
-    """Interface to PETSC KSP
+    """Interface to PETSC KSP.
 
     For further information, please read
     https://petsc4py.readthedocs.io/en/stable/manual/ksp/
 
     https://petsc.org/release/docs/manualpages/KSP/KSP.html#KSP
-
     """
 
     OPTIONS_MAP = {}
 
     def __init__(self):  # type: (...) -> None # noqa: D107
-        super(PetscKSPAlgos, self).__init__()
+        super().__init__()
         self.lib_dict = {
             "PETSC_KSP": {
-                self.RHS_MUST_BE_POSITIVE_DEFINITE: False,
-                self.RHS_MUST_BE_SYMMETRIC: False,
-                self.RHS_CAN_BE_LINEAR_OPERATOR: True,
+                self.LHS_MUST_BE_POSITIVE_DEFINITE: False,
+                self.LHS_MUST_BE_SYMMETRIC: False,
+                self.LHS_CAN_BE_LINEAR_OPERATOR: True,
                 self.INTERNAL_NAME: "PETSC",
             }
         }
 
     def _get_options(
         self,
-        solver_type="gmres",  # type: string
+        solver_type="gmres",  # type: str
         max_iter=100000,  # type: int
         tol=1e-5,  # type: float
         atol=1e-50,  # type: float
         dtol=1e5,  # type: float
-        preconditioner_type="ilu",  # type: string
-        view_config=False,  # type: boolean
-        options_hook_func=None,  # type: Optional[boolean]
-        set_from_options=False,  # type: boolean
-        monitor_residuals=False,  # type: boolean
+        preconditioner_type="ilu",  # type: str
+        view_config=False,  # type: bool
+        options_hook_func=None,  # type: Optional[bool]
+        set_from_options=False,  # type: bool
+        monitor_residuals=False,  # type: bool
     ):  # type: (...) -> Dict
         """Checks the options and sets the default values.
 
         Args:
-            max_iter: Maximum number of iterations.
             solver_type: The KSP solver type.
                 See https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType
-            tol: The relative convergence tolerance, relative decrease in the (possibly preconditioned) residual norm.
-            abstol: The absolute convergence tolerance absolute size of the (possibly preconditioned) residual norm.
-            dtol: The divergence tolerance, amount (possibly preconditioned) residual norm can increase.
+            max_iter: Maximum number of iterations.
+            tol: The relative convergence tolerance,
+                relative decrease in the (possibly preconditioned) residual norm.
+            atol: The absolute convergence tolerance absolute size of the
+                (possibly preconditioned) residual norm.
+            dtol: The divergence tolerance,
+                amount (possibly preconditioned) residual norm can increase.
             preconditioner_type: The name of the precondtioner,
-                see https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html
-            view_config: if True, calls ksp.view() to view the configuration of the solver before run
-            options_hook_func: A callback functions that is called with (ksp problem, options dict) as arguments
-                before calling ksp.solve(), use to allow the user an advanced configuration that is not
+                see https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html # noqa: B950
+            view_config: if True, calls ksp.view() to view the configuration
+                of the solver before run
+            options_hook_func: A callback functions that is called with (ksp problem,
+                options dict) as arguments before calling ksp.solve(),
+                use to allow the user an advanced configuration that is not
                 supported by the current wrapper.
-            set_from_options: if True, the options are set from sys.argv, a classical Petsc configuration mode.
-            monitor_residuals: if True, stores the residuals during convergence in self.problem.
-                WARNING: as said in Petsc documentation, "the routine is slow and should be used only for
+            set_from_options: Whether the options are set from sys.argv,
+                a classical Petsc configuration mode.
+            monitor_residuals: Whether to store the residuals during convergence
+                in self.problem.
+                WARNING: as said in Petsc documentation,
+                 "the routine is slow and should be used only for
                  testing or convergence studies, not for timing."
         Returns:
             The options dict
@@ -124,7 +134,6 @@ class PetscKSPAlgos(LinearSolverLib):
             The solution of the problem.
         """
         rhs = self.problem.rhs
-        lhs = self.problem.lhs
         if issparse(rhs):
             rhs = self.problem.rhs.toarray()
 
@@ -141,7 +150,7 @@ class PetscKSPAlgos(LinearSolverLib):
             options["tol"], options["atol"], options["dtol"], options["max_iter"]
         )
         ksp.setConvergenceHistory()
-        a_mat = ndarray2petsc(self.problem.lhs)
+        a_mat = convert_ndarray_to_mat_or_vec(self.problem.lhs)
         ksp.setOperators(a_mat)
         prec_type = options.get("preconditioner_type")
         if prec_type is not None:
@@ -166,7 +175,7 @@ class PetscKSPAlgos(LinearSolverLib):
             )
             ksp.setMonitor(self.__monitor)
 
-        b_mat = ndarray2petsc(self.problem.rhs)
+        b_mat = convert_ndarray_to_mat_or_vec(self.problem.rhs)
         solution = b_mat.duplicate()
         if options["view_config"]:
             ksp.view()
@@ -176,10 +185,23 @@ class PetscKSPAlgos(LinearSolverLib):
         return self.problem.solution
 
 
-def ndarray2petsc(np_arr):
+def convert_ndarray_to_mat_or_vec(
+    np_arr,  # type: ndarray
+):  # type: (...) -> Union[PETSc.Mat, PETSc.Vec]
+    """Convert a Numpy array to a PETSc Mat or Vec.
+
+    Args:
+         np_arr: Input Numpy array.
+
+    Returns:
+        A PETSc Mat or Vec, depending on the input dimension.
+
+    Raises:
+        ValueError: If the dimension of the input vector is greater than 2.
+    """
     n_dim = np_arr.ndim
     if n_dim > 2:
-        raise ValueError("Unsupported dimension {}!".format(n_dim))
+        raise ValueError(f"Unsupported dimension {n_dim}!")
 
     if issparse(np_arr):
         if not isinstance(np_arr, csr_matrix):
@@ -189,33 +211,28 @@ def ndarray2petsc(np_arr):
                 size=np_arr.shape, csr=(np_arr.indptr, np_arr.indices, np_arr.data)
             )
             petsc_arr.assemble()
-            return petsc_arr
         else:
             petsc_arr = PETSc.Vec().createSeq(np_arr.shape[0])
             petsc_arr.setUp()
             inds, _, vals = find(np_arr)
             petsc_arr.setValues(inds, vals)
             petsc_arr.assemble()
-            return petsc_arr
-
-    # Update because of flatten() called in previous line
-    n_dim = np_arr.ndim
-    if n_dim == 1:
-        a = array(np_arr, dtype=PETSc.ScalarType)
-        petsc_arr = PETSc.Vec().createWithArray(a)
-        petsc_arr.assemble()
-        return petsc_arr
-    elif n_dim == 2:
-        petsc_arr = PETSc.Mat().createDense(np_arr.shape)
-        a_shape = np_arr.shape
-        petsc_arr.setUp()
-        petsc_arr.setValues(
-            arange(a_shape[0], dtype="int32"), arange(a_shape[1], dtype="int32"), np_arr
-        )
-        petsc_arr.assemble()
-        return petsc_arr
     else:
-        raise ValueError("Unsupported dimension {}!".format(n_dim))
+        if n_dim == 1:
+            a = array(np_arr, dtype=PETSc.ScalarType)
+            petsc_arr = PETSc.Vec().createWithArray(a)
+            petsc_arr.assemble()
+        elif n_dim == 2:
+            petsc_arr = PETSc.Mat().createDense(np_arr.shape)
+            a_shape = np_arr.shape
+            petsc_arr.setUp()
+            petsc_arr.setValues(
+                arange(a_shape[0], dtype="int32"),
+                arange(a_shape[1], dtype="int32"),
+                np_arr,
+            )
+            petsc_arr.assemble()
+    return petsc_arr
 
 
 # KSP example here

@@ -8,9 +8,6 @@
       "type": "integer",
       "minimum": 1
     },
-   "solver_type":{
-   		"type":"string"
-	} ,  	
    "tol": {
       "type": "number",
       "minimum": 0
@@ -111,5 +108,3 @@
   "additionalProperties": false,
   "type": "object"
 }
-
-
