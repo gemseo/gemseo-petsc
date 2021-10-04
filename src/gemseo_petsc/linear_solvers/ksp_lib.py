@@ -190,7 +190,7 @@ class PetscKSPAlgos(LinearSolverLib):
         if options["view_config"]:
             ksp.view()
         ksp.solve(b_mat, solution)
-        self.problem.solution = solution.getArray()
+        self.problem.solution = solution.getArray().copy()
         self.problem.convergence_info = ksp.reason
         return self.problem.solution
 
