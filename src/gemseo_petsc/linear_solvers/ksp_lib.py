@@ -120,6 +120,16 @@ class PetscKSPAlgos(LinearSolverLib):
         )
 
     def __monitor(self, ksp, its, rnorm):
+        """Add the normed residual value to the problem residual history.
+
+        This method is aimed to be passed to petsc4py as a reference.
+        This is the reason why some of its arguments are not used.
+
+        Args:
+             ksp: The KSP PETSc solver.
+             its: The current iteration.
+             rnorm: The normed residual.
+        """
         self.problem.residuals_history.append(rnorm)
 
     def _run(
