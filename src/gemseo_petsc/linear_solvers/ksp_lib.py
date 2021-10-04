@@ -103,6 +103,7 @@ class PetscKSPAlgos(LinearSolverLib):
                 WARNING: as said in Petsc documentation,
                  "the routine is slow and should be used only for
                  testing or convergence studies, not for timing."
+
         Returns:
             The options dict
         """
