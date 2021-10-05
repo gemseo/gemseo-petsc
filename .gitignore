@@ -1,6 +1,6 @@
 /.tox
 *.pyc
-/src/{{cookiecutter.project_slug}}.egg-info
+/src/gemseo_petsc.egg-info
 
 /.project
 /.pydevproject

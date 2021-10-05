@@ -16,15 +16,18 @@
 #    INITIAL AUTHORS - API and implementation and/or documentation
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
+"""KSP algorithm library tests."""
 import pickle
 from os.path import dirname
 from os.path import join
+from typing import List
 
 import pytest
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
 from gemseo.api import create_discipline
 from gemseo.api import create_mda
+from gemseo.core.discipline import MDODiscipline
 from numpy import eye
 from numpy import random
 from scipy.sparse import load_npz
@@ -115,8 +118,13 @@ def test_hard_pb1():
     assert problem.compute_residuals(True) < 1e-3
 
 
-def test_mda_adjoint():
-    """Test with a MDA with total derivatives computed with adjoint."""
+@pytest.fixture()
+def sobieski_disciplines():  # type: (...) -> List[MDODiscipline]
+    """Return the Sobieski disciplines.
+
+    Returns:
+         The Sobieski disciplines.
+    """
     disciplines = create_discipline(
         [
             "SobieskiPropulsion",
@@ -125,29 +133,26 @@ def test_mda_adjoint():
             "SobieskiMission",
         ]
     )
+    return disciplines
+
+
+def test_mda_adjoint(sobieski_disciplines):
+    """Test with a MDA with total derivatives computed with adjoint."""
     linear_solver_options = {
         "solver_type": "gmres",
         "max_iter": 100000,
     }
     mda = create_mda(
         "MDAChain",
-        disciplines,
+        sobieski_disciplines,
         linear_solver="PETSC_KSP",
         linear_solver_options=linear_solver_options,
     )
     assert mda.check_jacobian(threshold=1e-4)
 
 
-def test_mda_newton():
+def test_mda_newton(sobieski_disciplines):
     """Test a Newton MDA."""
-    disciplines = create_discipline(
-        [
-            "SobieskiPropulsion",
-            "SobieskiAerodynamics",
-            "SobieskiStructure",
-            "SobieskiMission",
-        ]
-    )
     linear_solver_options = {
         "solver_type": "gmres",
         "max_iter": 100000,
@@ -156,7 +161,7 @@ def test_mda_newton():
     tolerance = 1e-13
     mda = create_mda(
         "MDANewtonRaphson",
-        disciplines,
+        sobieski_disciplines,
         tolerance=tolerance,
         linear_solver="PETSC_KSP",
         linear_solver_options=linear_solver_options,

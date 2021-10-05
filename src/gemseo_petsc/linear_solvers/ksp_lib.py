@@ -75,37 +75,41 @@ class PetscKSPAlgos(LinearSolverLib):
         options_hook_func=None,  # type: Optional[bool]
         set_from_options=False,  # type: bool
         monitor_residuals=False,  # type: bool
-    ):  # type: (...) -> Dict
-        """Checks the options and sets the default values.
+    ):  # type: (...) -> Dict[str, Any]
+        """Return the algorithm options.
+
+        This method returns the algoritms options after having done some checks,
+        and if necessary,
+        set the default values.
 
         Args:
             solver_type: The KSP solver type.
-                See https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType
-            max_iter: Maximum number of iterations.
+                See `https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType`_
+            max_iter: The maximum number of iterations.
             tol: The relative convergence tolerance,
                 relative decrease in the (possibly preconditioned) residual norm.
-            atol: The absolute convergence tolerance absolute size of the
+            atol: The absolute convergence tolerance of the
                 (possibly preconditioned) residual norm.
             dtol: The divergence tolerance,
-                amount (possibly preconditioned) residual norm can increase.
+                e.g. the amount the (possibly preconditioned) residual norm can increase.
             preconditioner_type: The name of the precondtioner,
-                see https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html # noqa: B950
-            view_config: if True, calls ksp.view() to view the configuration
-                of the solver before run
-            options_hook_func: A callback functions that is called with (ksp problem,
-                options dict) as arguments before calling ksp.solve(),
-                use to allow the user an advanced configuration that is not
+                see `https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html`_ # noqa: B950
+            view_config: Whether to call ksp.view() to view the configuration
+                of the solver before run.
+            options_hook_func: A callback function that is called with (KSP problem,
+                options dict) as arguments before calling ksp.solve().
+                It allows the user to obtain an advanced configuration that is not
                 supported by the current wrapper.
+                If None, do not perform any call.
             set_from_options: Whether the options are set from sys.argv,
                 a classical Petsc configuration mode.
-            monitor_residuals: Whether to store the residuals during convergence
-                in self.problem.
+            monitor_residuals: Whether to store the residuals during convergence.
                 WARNING: as said in Petsc documentation,
                  "the routine is slow and should be used only for
                  testing or convergence studies, not for timing."
 
         Returns:
-            The options dict
+            The algorithm options.
         """
         return self._process_options(
             max_iter=max_iter,
@@ -136,10 +140,10 @@ class PetscKSPAlgos(LinearSolverLib):
     def _run(
         self, **options  # type: Any
     ):  # type: (...) -> ndarray
-        """Runs the algorithm.
+        """Run the algorithm.
 
         Args:
-            **options: The options for the algorithm.
+            **options: The algorithm options.
 
         Returns:
             The solution of the problem.
@@ -148,8 +152,8 @@ class PetscKSPAlgos(LinearSolverLib):
         if issparse(rhs):
             rhs = self.problem.rhs.toarray()
 
-        # Initialize ksp solver.
-        # Creates the options database
+        # Initialize the KSP solver.
+        # Create the options database
         options_cmd = options.get("options_cmd")
         if options_cmd is not None:
             petsc4py.init(options_cmd)
@@ -161,7 +165,7 @@ class PetscKSPAlgos(LinearSolverLib):
             options["tol"], options["atol"], options["dtol"], options["max_iter"]
         )
         ksp.setConvergenceHistory()
-        a_mat = convert_ndarray_to_mat_or_vec(self.problem.lhs)
+        a_mat = _convert_ndarray_to_mat_or_vec(self.problem.lhs)
         ksp.setOperators(a_mat)
         prec_type = options.get("preconditioner_type")
         if prec_type is not None:
@@ -186,7 +190,7 @@ class PetscKSPAlgos(LinearSolverLib):
             )
             ksp.setMonitor(self.__monitor)
 
-        b_mat = convert_ndarray_to_mat_or_vec(self.problem.rhs)
+        b_mat = _convert_ndarray_to_mat_or_vec(self.problem.rhs)
         solution = b_mat.duplicate()
         if options["view_config"]:
             ksp.view()
@@ -196,13 +200,13 @@ class PetscKSPAlgos(LinearSolverLib):
         return self.problem.solution
 
 
-def convert_ndarray_to_mat_or_vec(
+def _convert_ndarray_to_mat_or_vec(
     np_arr,  # type: ndarray
 ):  # type: (...) -> Union[PETSc.Mat, PETSc.Vec]
     """Convert a Numpy array to a PETSc Mat or Vec.
 
     Args:
-         np_arr: Input Numpy array.
+         np_arr: The input Numpy array.
 
     Returns:
         A PETSc Mat or Vec, depending on the input dimension.
