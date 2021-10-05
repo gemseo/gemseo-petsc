@@ -73,6 +73,7 @@ class PetscKSPAlgos(LinearSolverLib):
         preconditioner_type="ilu",  # type: str
         view_config=False,  # type: bool
         options_hook_func=None,  # type: Optional[bool]
+        options_cmd=None,  # type: Optional[Dict[str, Any]]
         set_from_options=False,  # type: bool
         monitor_residuals=False,  # type: bool
     ):  # type: (...) -> Dict[str, Any]
@@ -120,6 +121,7 @@ class PetscKSPAlgos(LinearSolverLib):
             dtol=dtol,
             preconditioner_type=preconditioner_type,
             view_config=view_config,
+            options_cmd=options_cmd,
             set_from_options=set_from_options,
             options_hook_func=options_hook_func,
         )
