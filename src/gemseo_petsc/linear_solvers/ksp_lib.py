@@ -218,7 +218,9 @@ def _convert_ndarray_to_mat_or_vec(
     """
     n_dim = np_arr.ndim
     if n_dim > 2:
-        raise ValueError(f"Unsupported dimension {n_dim}!")
+        raise ValueError(
+            f"The dimension of the input array ({n_dim}) is not supported."
+        )
 
     if issparse(np_arr):
         if not isinstance(np_arr, csr_matrix):
@@ -239,7 +241,7 @@ def _convert_ndarray_to_mat_or_vec(
             a = array(np_arr, dtype=PETSc.ScalarType)
             petsc_arr = PETSc.Vec().createWithArray(a)
             petsc_arr.assemble()
-        elif n_dim == 2:
+        else:
             petsc_arr = PETSc.Mat().createDense(np_arr.shape)
             a_shape = np_arr.shape
             petsc_arr.setUp()
