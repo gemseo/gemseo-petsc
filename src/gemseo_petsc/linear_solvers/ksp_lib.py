@@ -72,7 +72,7 @@ class PetscKSPAlgos(LinearSolverLib):
         dtol=1e5,  # type: float
         preconditioner_type="ilu",  # type: str
         view_config=False,  # type: bool
-        options_hook_func=None,  # type: Optional[bool]
+        ksp_pre_processor=None,  # type: Optional[bool]
         options_cmd=None,  # type: Optional[Dict[str, Any]]
         set_from_options=False,  # type: bool
         monitor_residuals=False,  # type: bool
@@ -93,11 +93,11 @@ class PetscKSPAlgos(LinearSolverLib):
                 (possibly preconditioned) residual norm.
             dtol: The divergence tolerance,
                 e.g. the amount the (possibly preconditioned) residual norm can increase.
-            preconditioner_type: The name of the precondtioner,
+            preconditioner_type: The type of the precondtioner,
                 see `https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html`_ # noqa: B950
             view_config: Whether to call ksp.view() to view the configuration
                 of the solver before run.
-            options_hook_func: A callback function that is called with (KSP problem,
+            ksp_pre_processor: A callback function that is called with (KSP problem,
                 options dict) as arguments before calling ksp.solve().
                 It allows the user to obtain an advanced configuration that is not
                 supported by the current wrapper.
@@ -123,7 +123,7 @@ class PetscKSPAlgos(LinearSolverLib):
             view_config=view_config,
             options_cmd=options_cmd,
             set_from_options=set_from_options,
-            options_hook_func=options_hook_func,
+            options_hook_func=ksp_pre_processor,
         )
 
     def __monitor(self, ksp, its, rnorm):
@@ -180,7 +180,7 @@ class PetscKSPAlgos(LinearSolverLib):
         if options["set_from_options"]:
             ksp.setFromOptions()
 
-        options_hook_func = options.get("options_hook_func")
+        options_hook_func = options.get("ksp_pre_processor")
         if options_hook_func is not None:
             options_hook_func(ksp, options)
 
