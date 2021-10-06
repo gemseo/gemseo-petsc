@@ -29,7 +29,7 @@
     "set_from_options": {
       "type": "boolean"
     },
-   "options_hook_func":{},
+   "ksp_pre_processor":{},
     "monitor_residuals": {
       "type": "boolean"
     },

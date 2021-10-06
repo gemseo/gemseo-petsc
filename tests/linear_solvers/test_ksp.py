@@ -80,7 +80,7 @@ def test_basic_using_hook():
         max_iter=100000,
         view_config=True,
         preconditioner_type=None,
-        options_hook_func=func,
+        ksp_pre_processor=func,
     )
     assert problem.compute_residuals(True) < 1e-10
 

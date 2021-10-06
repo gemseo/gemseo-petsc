@@ -123,7 +123,7 @@ class PetscKSPAlgos(LinearSolverLib):
             view_config=view_config,
             options_cmd=options_cmd,
             set_from_options=set_from_options,
-            options_hook_func=ksp_pre_processor,
+            ksp_pre_processor=ksp_pre_processor,
         )
 
     def __monitor(self, ksp, its, rnorm):
@@ -180,9 +180,9 @@ class PetscKSPAlgos(LinearSolverLib):
         if options["set_from_options"]:
             ksp.setFromOptions()
 
-        options_hook_func = options.get("ksp_pre_processor")
-        if options_hook_func is not None:
-            options_hook_func(ksp, options)
+        ksp_pre_processor = options.get("ksp_pre_processor")
+        if ksp_pre_processor is not None:
+            ksp_pre_processor(ksp, options)
 
         self.problem.residuals_history = []
         if options["monitor_residuals"]:
