@@ -20,6 +20,7 @@
 import logging
 import sys
 from typing import Any
+from typing import List
 from typing import Dict
 from typing import Optional
 from typing import Union
@@ -126,7 +127,11 @@ class PetscKSPAlgos(LinearSolverLib):
             ksp_pre_processor=ksp_pre_processor,
         )
 
-    def __monitor(self, ksp, its, rnorm):
+    def __monitor(self,
+                  ksp, # type: PETSc.KSP
+                  its, # type: int
+                  rnorm # type: List
+                  ):  # type: (...) -> None
         """Add the normed residual value to the problem residual history.
 
         This method is aimed to be passed to petsc4py as a reference.
