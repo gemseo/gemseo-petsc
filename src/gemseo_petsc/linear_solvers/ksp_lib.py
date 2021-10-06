@@ -20,8 +20,8 @@
 import logging
 import sys
 from typing import Any
-from typing import List
 from typing import Dict
+from typing import List
 from typing import Optional
 from typing import Union
 
@@ -103,6 +103,8 @@ class PetscKSPAlgos(LinearSolverLib):
                 It allows the user to obtain an advanced configuration that is not
                 supported by the current wrapper.
                 If None, do not perform any call.
+            options_cmd: The options to pass to the PETSc KSP solver.
+                If None, use default options.
             set_from_options: Whether the options are set from sys.argv,
                 a classical Petsc configuration mode.
             monitor_residuals: Whether to store the residuals during convergence.
@@ -127,11 +129,12 @@ class PetscKSPAlgos(LinearSolverLib):
             ksp_pre_processor=ksp_pre_processor,
         )
 
-    def __monitor(self,
-                  ksp, # type: PETSc.KSP
-                  its, # type: int
-                  rnorm # type: List
-                  ):  # type: (...) -> None
+    def __monitor(
+        self,
+        ksp,  # type: PETSc.KSP
+        its,  # type: int
+        rnorm,  # type: List
+    ):  # type: (...) -> None
         """Add the normed residual value to the problem residual history.
 
         This method is aimed to be passed to petsc4py as a reference.
