@@ -104,7 +104,7 @@ class PetscKSPAlgos(LinearSolverLib):
                 supported by the current wrapper.
                 If None, do not perform any call.
             options_cmd: The options to pass to the PETSc KSP solver.
-                If None, use default options.
+                If None, use the default options.
             set_from_options: Whether the options are set from sys.argv,
                 a classical Petsc configuration mode.
             monitor_residuals: Whether to store the residuals during convergence.
