@@ -1,0 +1,3 @@
+# These dependencies must be compatible with the ones in setup.cfg/options.extras_require
+# provides both graphviz and dot
+conda-forge::petsc4py

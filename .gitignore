@@ -1,0 +1,17 @@
+/.tox
+*.pyc
+/src/gemseo_petsc.egg-info
+
+/.project
+/.pydevproject
+/.settings
+/.idea
+/.vim*
+/.vscode
+/tags
+
+/htmlcov
+
+/coverage.xml
+/.coverage*
+/.pytest_cache
