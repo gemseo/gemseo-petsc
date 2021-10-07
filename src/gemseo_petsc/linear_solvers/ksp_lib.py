@@ -21,7 +21,6 @@ import logging
 import sys
 from typing import Any
 from typing import Dict
-from typing import List
 from typing import Optional
 from typing import Union
 
@@ -133,7 +132,7 @@ class PetscKSPAlgos(LinearSolverLib):
         self,
         ksp,  # type: PETSc.KSP
         its,  # type: int
-        rnorm,  # type: List
+        rnorm,  # type: float
     ):  # type: (...) -> None
         """Add the normed residual value to the problem residual history.
 
