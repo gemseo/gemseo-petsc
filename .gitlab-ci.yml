@@ -132,10 +132,6 @@ style:
     - sed "s|filename=\".*/site-packages|filename=\"src|" -i coverage.xml
 
 
-py36:
-  extends:
-    - .tests-linux
-
 py37:
   extends:
     - .tests-linux
