@@ -1,25 +1,41 @@
-The developers thank all the open source libraries making GEMSEO-petsc possible.
+..
+    Copyright 2021 IRT Saint Exupéry, https://www.irt-saintexupery.com
+
+    This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+    International License. To view a copy of this license, visit
+    http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+    Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+The developers thank all the open source libraries making **gemseo-petsc** possible.
 
 External Dependencies
 ---------------------
 
-GEMSEO-petsc depends on software with compatible licenses that are listed below.
+**gemseo-petsc** depends on software with compatible licenses that are listed below.
 
-`GEMSEO <http://gemseo.org/>`_
+`GEMSEO <http://www.gemseo.org/>`_
     GNU LGPL v3.0
+
+`PETSc <http://petsc.org/>`_
+    2-Clause BSD License
+
+`petsc4py <http://petsc.org/>`_
+    2-Clause BSD License
+
+`numpy <http://numpy.org/>`_
+    3-Clause BSD License
+
+`scipy <http://scipy.org/>`_
+    3-Clause BSD License
 
 `Python <http://python.org/>`_
     Python Software License
 
-Internal Dependencies
----------------------
-
-GEMSEO-petsc source code includes software with compatible licenses that are listed below.
 
 External application
 --------------------
 
-Some external applications are used by GEMSEO-petsc,
+Some external applications are used by **gemseo-petsc**,
 but not linked with the application,
 for documentation generation,
 training or example purposes.
@@ -56,8 +72,3 @@ training or example purposes.
 
 `setuptools_scm <https://github.com/pypa/setuptools_scm/>`_
     MIT
-
-Resources
----------
-
-Some icons and fonts are used by GEMSEO-petsc or its documentation.
