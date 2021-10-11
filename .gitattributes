@@ -24,3 +24,5 @@
 *.xlsx binary
 *.eot binary
 *.ttf binary
+*.pkl binary
+*.npz binary

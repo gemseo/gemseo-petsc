@@ -7,12 +7,6 @@ stages:
   - tests
 
 variables:
-  TEST_ALL_ENVS:
-    value: "false"
-    description: "Whether to run the tox tests for all python versions and all platforms."
-  TEST_ANACONDA_ENV_FILE:
-    value: "false"
-    description: "Whether to run the tox tests for the anaconda env file."
   TOX_CONDA_VERSION: "0.8.0"
 
 # Jobs are defined as a hierarchy from the most common settings to the specific ones.
