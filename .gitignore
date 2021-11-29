@@ -1,3 +1,5 @@
+/build
+/dist
 /.tox
 *.pyc
 /src/gemseo_petsc.egg-info
