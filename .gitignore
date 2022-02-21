@@ -17,5 +17,3 @@
 /coverage.xml
 /.coverage*
 /.pytest_cache
-
-/dist
