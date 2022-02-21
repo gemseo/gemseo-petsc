@@ -17,12 +17,11 @@
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """A PETSC KSP linear solvers library wrapper."""
+from __future__ import annotations
+
 import logging
 import sys
 from typing import Any
-from typing import Dict
-from typing import Optional
-from typing import Union
 
 import petsc4py
 from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
@@ -52,7 +51,7 @@ class PetscKSPAlgos(LinearSolverLib):
 
     OPTIONS_MAP = {}
 
-    def __init__(self):  # type: (...) -> None # noqa: D107
+    def __init__(self) -> None:  # noqa: D107
         super().__init__()
         self.lib_dict = {
             "PETSC_KSP": {
@@ -65,18 +64,18 @@ class PetscKSPAlgos(LinearSolverLib):
 
     def _get_options(
         self,
-        solver_type="gmres",  # type: str
-        max_iter=100000,  # type: int
-        tol=1e-5,  # type: float
-        atol=1e-50,  # type: float
-        dtol=1e5,  # type: float
-        preconditioner_type="ilu",  # type: str
-        view_config=False,  # type: bool
-        ksp_pre_processor=None,  # type: Optional[bool]
-        options_cmd=None,  # type: Optional[Dict[str, Any]]
-        set_from_options=False,  # type: bool
-        monitor_residuals=False,  # type: bool
-    ):  # type: (...) -> Dict[str, Any]
+        solver_type: str = "gmres",
+        max_iter: int = 100000,
+        tol: float = 1e-5,
+        atol: float = 1e-50,
+        dtol: float = 1e5,
+        preconditioner_type: str = "ilu",
+        view_config: bool = False,
+        ksp_pre_processor: bool | None = None,
+        options_cmd: dict[str, Any] | None = None,
+        set_from_options: bool = False,
+        monitor_residuals: bool = False,
+    ) -> dict[str, Any]:
         """Return the algorithm options.
 
         This method returns the algoritms options after having done some checks,
@@ -130,10 +129,10 @@ class PetscKSPAlgos(LinearSolverLib):
 
     def __monitor(
         self,
-        ksp,  # type: PETSc.KSP
-        its,  # type: int
-        rnorm,  # type: float
-    ):  # type: (...) -> None
+        ksp: PETSc.KSP,
+        its: int,
+        rnorm: float,
+    ) -> None:
         """Add the normed residual value to the problem residual history.
 
         This method is aimed to be passed to petsc4py as a reference.
@@ -146,9 +145,7 @@ class PetscKSPAlgos(LinearSolverLib):
         """
         self.problem.residuals_history.append(rnorm)
 
-    def _run(
-        self, **options  # type: Any
-    ):  # type: (...) -> ndarray
+    def _run(self, **options: Any) -> ndarray:
         """Run the algorithm.
 
         Args:
@@ -210,8 +207,8 @@ class PetscKSPAlgos(LinearSolverLib):
 
 
 def _convert_ndarray_to_mat_or_vec(
-    np_arr,  # type: ndarray
-):  # type: (...) -> Union[PETSc.Mat, PETSc.Vec]
+    np_arr: ndarray,
+) -> PETSc.Mat | PETSc.Vec:
     """Convert a Numpy array to a PETSc Mat or Vec.
 
     Args:

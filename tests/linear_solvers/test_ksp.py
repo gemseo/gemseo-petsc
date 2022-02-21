@@ -17,6 +17,8 @@
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """KSP algorithm library tests."""
+from __future__ import annotations
+
 import pickle
 from itertools import product
 from os.path import dirname

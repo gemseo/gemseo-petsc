@@ -92,10 +92,6 @@ style:
     # Workaround coverage files path issues, see https://gitlab.com/gitlab-org/gitlab/-/issues/217664
     - sed "s|filename=\".*/site-packages|filename=\"src|" -i $COVERAGE_FILE
 
-py36:
-  extends:
-    - .tests-linux
-
 py37:
   extends:
     - .tests-linux
