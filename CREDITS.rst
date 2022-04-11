@@ -22,14 +22,14 @@ External Dependencies
 `petsc4py <http://petsc.org/>`_
     2-Clause BSD License
 
+`Python <http://python.org/>`_
+    Python Software License
+
 `numpy <http://numpy.org/>`_
     3-Clause BSD License
 
 `scipy <http://scipy.org/>`_
     3-Clause BSD License
-
-`Python <http://python.org/>`_
-    Python Software License
 
 
 External application
@@ -41,9 +41,6 @@ for documentation generation,
 training or example purposes.
 
 `black <https://black.readthedocs.io>`_
-    MIT
-
-`commitizen <https://commitizen-tools.github.io/commitizen/>`_
     MIT
 
 `flake8 <https://flake8.pycqa.org>`_
@@ -64,7 +61,7 @@ training or example purposes.
 `pytest-xdist <https://github.com/pytest-dev/pytest-xdist>`_
     MIT
 
-`python-reorder-import <https://github.com/asottile/reorder_python_imports>`_
+`reorder-python-imports <https://github.com/asottile/reorder_python_imports>`_
     MIT
 
 `setuptools <https://setuptools.readthedocs.io/>`_
