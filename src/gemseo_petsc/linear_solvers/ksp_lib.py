@@ -24,6 +24,7 @@ import sys
 from typing import Any
 
 import petsc4py
+from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverDescription
 from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
 from numpy import arange
 from numpy import array
@@ -54,12 +55,11 @@ class PetscKSPAlgos(LinearSolverLib):
     def __init__(self) -> None:  # noqa: D107
         super().__init__()
         self.lib_dict = {
-            "PETSC_KSP": {
-                self.LHS_MUST_BE_POSITIVE_DEFINITE: False,
-                self.LHS_MUST_BE_SYMMETRIC: False,
-                self.LHS_CAN_BE_LINEAR_OPERATOR: True,
-                self.INTERNAL_NAME: "PETSC",
-            }
+            "PETSC_KSP": LinearSolverDescription(
+                lhs_must_be_linear_operator=True,
+                internal_algorithm_name="PETSC",
+                algorithm_name="PETSC",
+            )
         }
 
     def _get_options(
