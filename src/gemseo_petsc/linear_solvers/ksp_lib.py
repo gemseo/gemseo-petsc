@@ -54,7 +54,7 @@ class PetscKSPAlgos(LinearSolverLib):
 
     def __init__(self) -> None:  # noqa: D107
         super().__init__()
-        self.lib_dict = {
+        self.descriptions = {
             "PETSC_KSP": LinearSolverDescription(
                 lhs_must_be_linear_operator=True,
                 internal_algorithm_name="PETSC",
