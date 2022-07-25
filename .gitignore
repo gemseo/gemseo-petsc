@@ -12,6 +12,9 @@
 /.vscode
 /tags
 
+/doc_src/build
+/doc
+
 /htmlcov
 
 /coverage.xml
