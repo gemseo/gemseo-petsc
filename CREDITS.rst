@@ -43,6 +43,9 @@ training or example purposes.
 `black <https://black.readthedocs.io>`_
     MIT
 
+`commitizen <https://commitizen-tools.github.io/commitizen/>`_
+    MIT
+
 `flake8 <https://flake8.pycqa.org>`_
     MIT
 
