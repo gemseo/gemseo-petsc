@@ -17,6 +17,8 @@
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """KSP algorithm library tests."""
+from __future__ import annotations
+
 import pickle
 from itertools import product
 from os.path import dirname
@@ -235,7 +237,7 @@ def test_mda_newton(sobieski_disciplines):
     )
 
     mda.execute()
-    assert mda.residual_history[-1][0] <= tolerance
+    assert mda.residual_history[-1] <= tolerance
     assert mda.check_jacobian(threshold=1e-3)
 
 
