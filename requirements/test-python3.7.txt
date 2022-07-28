@@ -123,7 +123,7 @@ typing-extensions==4.3.0
     #   gemseo
     #   importlib-metadata
     #   kiwisolver
-urllib3==1.26.10
+urllib3==1.26.11
     # via requests
 xdsmjs==1.0.1
     # via gemseo
