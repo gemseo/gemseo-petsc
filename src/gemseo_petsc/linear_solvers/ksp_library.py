@@ -24,8 +24,8 @@ import sys
 from typing import Any
 
 import petsc4py
-from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverDescription
-from gemseo.algos.linear_solvers.linear_solver_lib import LinearSolverLib
+from gemseo.algos.linear_solvers.linear_solver_library import LinearSolverDescription
+from gemseo.algos.linear_solvers.linear_solver_library import LinearSolverLibrary
 from numpy import arange
 from numpy import array
 from numpy import ndarray
@@ -41,7 +41,7 @@ from petsc4py import PETSc  # noqa: E402
 LOGGER = logging.getLogger(__name__)
 
 
-class PetscKSPAlgos(LinearSolverLib):
+class PetscKSPAlgos(LinearSolverLibrary):
     """Interface to PETSC KSP.
 
     For further information, please read
