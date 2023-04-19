@@ -23,15 +23,19 @@ import pickle
 from itertools import product
 from os.path import dirname
 from os.path import join
+from typing import Any
+from typing import Mapping
 
 import pytest
+from gemseo import create_discipline
+from gemseo import create_mda
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
-from gemseo.api import create_discipline
-from gemseo.api import create_mda
+from gemseo.core.discipline import MDODiscipline
 from gemseo_petsc.linear_solvers.ksp_library import _convert_ndarray_to_mat_or_vec
 from numpy import eye
 from numpy import random
+from petsc4py import PETSc
 from scipy.sparse import coo_matrix
 from scipy.sparse import load_npz
 
@@ -62,8 +66,8 @@ def test_basic_using_hook():
     """Test the resolution of a random linear problem."""
 
     def func(
-        ksp,  # type: PETSc.KSP
-        options,  # type: Mapping[str, Any]
+        ksp: PETSc.KSP,
+        options: Mapping[str, Any],
     ):
         """Set the options of the KSP with options."""
         ksp.setType("cg")
@@ -183,7 +187,7 @@ def test_hard_pb1():
 
 
 @pytest.fixture()
-def sobieski_disciplines():  # type: (...) -> List[MDODiscipline]
+def sobieski_disciplines() -> list[MDODiscipline]:
     """Return the Sobieski disciplines.
 
     Returns:
