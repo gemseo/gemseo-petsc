@@ -63,12 +63,26 @@ A description of the procedure to build these dependencies can be found `here <h
 Bugs/Questions
 --------------
 
-Bugs can be reported in the PETSc GEMSEO interface issue `tracker <http://forge-mdo.irt-aese.local/dev/gems/gemseo_petsc/-/issues>`_.
+Please use the gitlab issue tracker at
+https://gitlab.com/gemseo/dev/gemseo-petsc/-/issues
+to submit bugs or questions.
 
 License
 -------
 
-The gemseo-petsc plugin is licensed under the `GNU Lesser General Public License v3 <https://www.gnu.org/licenses/lgpl-3.0.en.html.>`_
+The GEMSEO-PETSc source code is distributed under the GNU LGPL v3.0 license.
+A copy of it can be found in the LICENSE.txt file.
+The GNU LGPL v3.0 license is an exception to the GNU GPL v3.0 license.
+A copy of the GNU GPL v3.0 license can be found in the LICENSES folder.
+
+The GEMSEO-PETSc examples are distributed under the BSD 0-Clause, a permissive
+license that allows to copy paste the code of examples without preserving the
+copyright mentions.
+
+The GEMSEO-PETSc documentation is distributed under the CC BY-SA 4.0 license.
+
+The GEMSEO-PETSc product depends on other software which have various licenses.
+The list of dependencies with their licenses is given in the CREDITS.rst file.
 
 Contributors
 ------------
