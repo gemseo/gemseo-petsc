@@ -26,6 +26,17 @@ and this project adheres to
 `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
 
+Version 3.0.0 (June 2023)
+*************************
+
+Update to GEMSEO 5.0.0.
+
+Changed
+-------
+
+Renamed ``ksp_lib.py`` to ``ksp_library.py``.
+
+
 Version 2.0.0 (November 2021)
 *****************************
 

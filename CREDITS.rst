@@ -72,3 +72,8 @@ training or example purposes.
 
 `setuptools_scm <https://github.com/pypa/setuptools_scm/>`_
     MIT
+
+Resources
+---------
+
+Some icons and fonts are used by GEMSEO-pdfo or its documentation.
