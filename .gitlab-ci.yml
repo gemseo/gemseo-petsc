@@ -7,5 +7,5 @@ variables:
   UPDATE_DOCKER_IMAGE:
     value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
 
-.tags:
+.test-tags:
   - docker
