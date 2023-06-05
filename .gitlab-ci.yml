@@ -1,8 +1,11 @@
 include:
   - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/main/plugin.yml"
 
+variables:
+  TEST_DOCKER_IMAGE:
+    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
+  UPDATE_DOCKER_IMAGE:
+    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
+
 .tags:
   - docker
-
-test:
-  image: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
