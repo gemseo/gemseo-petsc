@@ -6,7 +6,7 @@
 #
 certifi==2023.5.7
     # via requests
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
     # via requests
 contourpy==1.1.0
     # via matplotlib
@@ -20,9 +20,9 @@ cycler==0.11.0
     # via matplotlib
 docstring-inheritance==2.0.0
     # via gemseo
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via pytest
-execnet==1.9.0
+execnet==2.0.2
     # via pytest-xdist
 fastjsonschema==2.16.3
     # via gemseo
@@ -36,7 +36,7 @@ h5py==3.8.0
     # via gemseo
 idna==3.4
     # via requests
-importlib-resources==5.12.0
+importlib-resources==6.0.0
     # via matplotlib
 iniconfig==2.0.0
     # via pytest
@@ -70,7 +70,7 @@ pandas==2.0.0
     # via gemseo
     # via petsc4py
     # via gemseo-petsc (setup.py)
-pillow==9.5.0
+pillow==10.0.0
     # via matplotlib
 pluggy==1.2.0
     # via pytest
@@ -111,7 +111,7 @@ tomli==2.0.1
     #   pytest
 tqdm==4.65.0
     # via gemseo
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   gemseo
     #   pydantic
@@ -123,5 +123,5 @@ xdsmjs==2.0.0
     # via gemseo
 xxhash==3.2.0
     # via gemseo
-zipp==3.15.0
+zipp==3.16.0
     # via importlib-resources
