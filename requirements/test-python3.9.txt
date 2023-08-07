@@ -4,7 +4,7 @@
 #
 #    pip-compile --extra=test --output-file=requirements/test-python3.9.txt
 #
-certifi==2023.5.7
+certifi==2023.7.22
     # via requests
 charset-normalizer==3.2.0
     # via requests
@@ -26,7 +26,7 @@ execnet==2.0.2
     # via pytest-xdist
 fastjsonschema==2.16.3
     # via gemseo
-fonttools==4.40.0
+fonttools==4.42.0
     # via matplotlib
 gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@develop
     # via gemseo-petsc (setup.py)
@@ -76,7 +76,7 @@ pluggy==1.2.0
     # via pytest
 pydantic==1.10.8
     # via gemseo
-pyparsing==3.1.0
+pyparsing==3.1.1
     # via matplotlib
 pytest==7.4.0
     # via
@@ -117,11 +117,11 @@ typing-extensions==4.7.1
     #   pydantic
 tzdata==2023.3
     # via pandas
-urllib3==2.0.3
+urllib3==2.0.4
     # via requests
 xdsmjs==2.0.0
     # via gemseo
 xxhash==3.2.0
     # via gemseo
-zipp==3.16.0
+zipp==3.16.2
     # via importlib-resources
