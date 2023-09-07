@@ -1,0 +1,13 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 987903e
+_src_path: /home/ad/gemseo-copier
+author_email: contact@gemseo.org
+author_name: François Gallard
+gemseo_min_version: '5'
+package_is_a_gemseo_plugin: true
+project_is_open_source: true
+project_name: gemseo-petsc
+project_name_suffix: petsc
+project_slug: gemseo_petsc
+short_description: PETSc GEMSEO interface.
+use_gemseo_develop: true
