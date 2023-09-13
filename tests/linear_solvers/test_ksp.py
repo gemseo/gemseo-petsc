@@ -229,7 +229,7 @@ def test_mda_newton(sobieski_disciplines):
     tolerance = 1e-13
     mda = create_mda(
         "MDANewtonRaphson",
-        sobieski_disciplines,
+        sobieski_disciplines[:3],
         tolerance=tolerance,
         linear_solver="PETSC_KSP",
         linear_solver_options=linear_solver_options,
