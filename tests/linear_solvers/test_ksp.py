@@ -23,6 +23,7 @@ import pickle
 from itertools import product
 from os.path import dirname
 from os.path import join
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import Mapping
 
@@ -31,13 +32,16 @@ from gemseo import create_discipline
 from gemseo import create_mda
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
 from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
-from gemseo.core.discipline import MDODiscipline
-from gemseo_petsc.linear_solvers.ksp_library import _convert_ndarray_to_mat_or_vec
 from numpy import eye
 from numpy import random
-from petsc4py import PETSc
 from scipy.sparse import coo_matrix
 from scipy.sparse import load_npz
+
+from gemseo_petsc.linear_solvers.ksp_library import _convert_ndarray_to_mat_or_vec
+
+if TYPE_CHECKING:
+    from gemseo.core.discipline import MDODiscipline
+    from petsc4py import PETSc
 
 
 def test_algo_list():
@@ -49,9 +53,9 @@ def test_algo_list():
 
 def test_basic():
     """Test the resolution of a random linear problem."""
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3
-    problem = LinearProblem(eye(n), random.rand(n))
+    problem = LinearProblem(eye(n), rng.random(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
@@ -72,9 +76,9 @@ def test_basic_using_hook():
         """Set the options of the KSP with options."""
         ksp.setType("cg")
 
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3
-    problem = LinearProblem(eye(n), random.rand(n))
+    problem = LinearProblem(eye(n), rng.random(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
@@ -88,9 +92,9 @@ def test_basic_using_hook():
 
 def test_basic_with_options():
     """Test the resolution of a random linear problem."""
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3
-    problem = LinearProblem(eye(n), random.rand(n))
+    problem = LinearProblem(eye(n), rng.random(n))
     petsc_options = {"ksp_type": "cg"}
     LinearSolversFactory().execute(
         problem,
@@ -109,9 +113,9 @@ def test_basic_set_from_options():
     Note that, as we run the test from pytest, we cannot verify that the options are
     passed from the command line.
     """
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3
-    problem = LinearProblem(eye(n), random.rand(n))
+    problem = LinearProblem(eye(n), rng.random(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
@@ -126,9 +130,9 @@ def test_basic_set_from_options():
 @pytest.mark.parametrize("seed", range(3))
 def test_hard_conv(seed):
     """Test the resolution of a pseudo-random large linear problem."""
-    random.seed(seed)
+    rng = random.default_rng(seed)
     n = 300
-    problem = LinearProblem(random.rand(n, n), random.rand(n))
+    problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolversFactory().execute(
         problem, "PETSC_KSP", max_iter=100000, view_config=True
     )
@@ -139,9 +143,9 @@ def test_hard_conv(seed):
 @pytest.mark.parametrize("preconditioner_type", ["ilu", "jacobi"])
 def test_options(solver_type, preconditioner_type):
     """Test the options to be passed to PETSc."""
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3
-    problem = LinearProblem(random.rand(n, n), random.rand(n))
+    problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
@@ -154,9 +158,9 @@ def test_options(solver_type, preconditioner_type):
 
 def test_residuals_history():
     """Test that the residual history is correctly cmputed."""
-    random.seed(1)
+    rng = random.default_rng(1)
     n = 3000
-    problem = LinearProblem(random.rand(n, n), random.rand(n))
+    problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolversFactory().execute(
         problem,
         "PETSC_KSP",
@@ -171,7 +175,8 @@ def test_residuals_history():
 def test_hard_pb1():
     """Test with a hard problem."""
     lhs = load_npz(join(dirname(__file__), "data", "a_mat.npz"))
-    rhs = pickle.load(open(join(dirname(__file__), "data", "b_vec.pkl"), "rb"))
+    with open(join(dirname(__file__), "data", "b_vec.pkl"), "rb") as f:
+        rhs = pickle.load(f)
     problem = LinearProblem(lhs, rhs)
     LinearSolversFactory().execute(
         problem,
@@ -193,7 +198,7 @@ def sobieski_disciplines() -> list[MDODiscipline]:
     Returns:
          The Sobieski disciplines.
     """
-    disciplines = create_discipline(
+    return create_discipline(
         [
             "SobieskiPropulsion",
             "SobieskiAerodynamics",
@@ -201,7 +206,6 @@ def sobieski_disciplines() -> list[MDODiscipline]:
             "SobieskiMission",
         ]
     )
-    return disciplines
 
 
 def test_mda_adjoint(sobieski_disciplines):
@@ -242,7 +246,8 @@ def test_mda_newton(sobieski_disciplines):
 
 def test_convert_ndarray_to_numpy():
     """Test that an exception is raised if the dimension of the ndarray > 2."""
-    wrong_nd_array = random.rand(2, 2, 2)
+    rng = random.default_rng(1)
+    wrong_nd_array = rng.random((2, 2, 2))
     with pytest.raises(
         ValueError, match=r"The dimension of the input array \(\d*\) is not supported\."
     ):
@@ -251,7 +256,8 @@ def test_convert_ndarray_to_numpy():
 
 def test_convert_ndarray_coo_to_mat():
     """Test that the conversion is correctly made from a sparse COO matrix to PETSc."""
-    nd_array = random.rand(5, 5)
+    rng = random.default_rng(1)
+    nd_array = rng.random((5, 5))
     coo_mat = coo_matrix(nd_array)
     petsc_mat = _convert_ndarray_to_mat_or_vec(coo_mat)
 
@@ -263,7 +269,8 @@ def test_convert_ndarray_coo_to_mat():
 
 def test_convert_1d_dense_ndarray_to_vec():
     """Test that the conversion is correctly made from a sparse COO matrix to PETSc."""
-    nd_array = random.rand(5)
+    rng = random.default_rng(1)
+    nd_array = rng.random(5)
     petsc_vec = _convert_ndarray_to_mat_or_vec(nd_array)
     for i in range(5):
         assert nd_array[i] == petsc_vec[i]

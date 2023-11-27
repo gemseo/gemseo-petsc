@@ -22,6 +22,7 @@ from __future__ import annotations
 import logging
 import sys
 from typing import Any
+from typing import ClassVar
 
 import petsc4py
 from gemseo.algos.linear_solvers.linear_solver_library import LinearSolverDescription
@@ -50,7 +51,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
     https://petsc.org/release/docs/manualpages/KSP/KSP.html#KSP
     """
 
-    OPTIONS_MAP = {}
+    OPTIONS_MAP: ClassVar[dict[str, str]] = {}
 
     def __init__(self) -> None:  # noqa: D107
         super().__init__()
@@ -93,7 +94,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
             dtol: The divergence tolerance,
                 e.g. the amount the (possibly preconditioned) residual norm can increase.
             preconditioner_type: The type of the precondtioner,
-                see `https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html`_ # noqa: B950
+                see `https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html`_
             view_config: Whether to call ksp.view() to view the configuration
                 of the solver before run.
             ksp_pre_processor: A callback function that is called with (KSP problem,
@@ -112,7 +113,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
 
         Returns:
             The algorithm options.
-        """
+        """  # noqa: E501
         return self._process_options(
             max_iter=max_iter,
             solver_type=solver_type,
