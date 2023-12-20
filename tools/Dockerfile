@@ -11,6 +11,6 @@ RUN  apt-get update \
 
 RUN python -m pip install "tox<4"
 
-RUN  curl -Os https://uploader.codecov.io/latest/linux/codecov  \
+RUN  curl -Os https://cli.codecov.io/latest/linux/codecov \
   && chmod +x codecov \
   && mv codecov /usr/bin

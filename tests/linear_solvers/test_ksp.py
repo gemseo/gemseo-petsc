@@ -17,6 +17,7 @@
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """KSP algorithm library tests."""
+
 from __future__ import annotations
 
 import pickle
@@ -25,7 +26,6 @@ from os.path import dirname
 from os.path import join
 from typing import TYPE_CHECKING
 from typing import Any
-from typing import Mapping
 
 import pytest
 from gemseo import create_discipline
@@ -40,6 +40,8 @@ from scipy.sparse import load_npz
 from gemseo_petsc.linear_solvers.ksp_library import _convert_ndarray_to_mat_or_vec
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
+
     from gemseo.core.discipline import MDODiscipline
     from petsc4py import PETSc
 
@@ -198,14 +200,12 @@ def sobieski_disciplines() -> list[MDODiscipline]:
     Returns:
          The Sobieski disciplines.
     """
-    return create_discipline(
-        [
-            "SobieskiPropulsion",
-            "SobieskiAerodynamics",
-            "SobieskiStructure",
-            "SobieskiMission",
-        ]
-    )
+    return create_discipline([
+        "SobieskiPropulsion",
+        "SobieskiAerodynamics",
+        "SobieskiStructure",
+        "SobieskiMission",
+    ])
 
 
 def test_mda_adjoint(sobieski_disciplines):
