@@ -17,6 +17,7 @@
 #        :author: Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """A PETSC KSP linear solvers library wrapper."""
+
 from __future__ import annotations
 
 import logging
