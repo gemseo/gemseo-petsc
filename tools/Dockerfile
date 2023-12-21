@@ -1,14 +1,16 @@
 FROM condaforge/miniforge3:latest
 
-ARG TOX_VERSION=3.25.1
-
 RUN  apt-get update \
   && apt-get install \
-  &&     --no-install-recommends \
-  &&     --yes \
-  &&     curl \
-  &&     graphviz \
+             --no-install-recommends \
+             --yes \
+             curl \
+             graphviz \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install tox==$TOX_VERSION
+RUN python -m pip install "tox<4"
+
+RUN  curl -Os https://cli.codecov.io/latest/linux/codecov \
+  && chmod +x codecov \
+  && mv codecov /usr/bin
