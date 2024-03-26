@@ -224,9 +224,8 @@ def _convert_ndarray_to_mat_or_vec(
     """
     n_dim = np_arr.ndim
     if n_dim > 2:
-        raise ValueError(
-            f"The dimension of the input array ({n_dim}) is not supported."
-        )
+        msg = f"The dimension of the input array ({n_dim}) is not supported."
+        raise ValueError(msg)
 
     if issparse(np_arr):
         if not isinstance(np_arr, csr_matrix):
