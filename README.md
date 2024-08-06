@@ -7,21 +7,30 @@ http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
 Commons, PO Box 1866, Mountain View, CA 94042, USA.
 -->
 
+# gemseo-petsc
+
+[![PyPI - License](https://img.shields.io/pypi/l/gemseo)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/gemseo-petsc)](https://pypi.org/project/gemseo-petsc/)
+[![PyPI](https://img.shields.io/pypi/v/gemseo-petsc)](https://pypi.org/project/gemseo-petsc/)
+[![Codecov branch](https://img.shields.io/codecov/c/gitlab/gemseo:dev/gemseo-petsc/develop)](https://app.codecov.io/gl/gemseo:dev/gemseo-petsc)
+
+## Overview
+
 PETSc GEMSEO interface.
 
 This plugin provides an interface to the PETSc linear solvers. They can
 be used for direct and adjoint linear system resolution in GEMSEO.
 
-# Installation
+## Installation
 
 **gemseo-petsc** relies on **petsc4py**, the Python bindings for
 **PETSc**. **PETSc** and **petsc4py** are available on pypi, but no
 wheel are available. Hence, depending on the initial situation, here are
 our recommendations:
 
-## Linux environment
+### Linux environment
 
-### Using Conda
+#### Using Conda
 
 **PETSc** and **petsc4py** are available on the conda-forge repository.
 If you start from scratch of if you want to install the plugin in a
@@ -32,7 +41,7 @@ your current conda environment before installing gemseo-petsc:
 conda install -c conda-forge petsc4py
 ```
 
-### Using pip
+#### Using pip
 
 **PETSc** and **petsc4py** can be build from their sources by using pip.
 To do so, use the following commands in your Python environment.
@@ -41,14 +50,14 @@ To do so, use the following commands in your Python environment.
 pip install petsc petsc4py
 ```
 
-### By building PETSc and petsc4py from sources
+#### By building PETSc and petsc4py from sources
 
 It is also possible to build **PETSc** and **petsc4py** from the PETSc
 sources. To do so, please follow the information provided in the [PETSc
 installation manual](https://petsc.org/release/install/), and do not
 forget to enable the compilation of **petsc4py**.
 
-## Windows environment
+### Windows environment
 
 Although it has not be tested, it is possible to build **PETSc** and
 **petsc4py** under a Windows environment, and hence to have the
@@ -56,29 +65,16 @@ Although it has not be tested, it is possible to build **PETSc** and
 these dependencies can be found
 [here](https://openmdao.readthedocs.io/en/1.7.3/getting-started/mpi_windows.html)
 
-# Bugs/Questions
+## Bugs and questions
 
-Please use the gitlab issue tracker at
-<https://gitlab.com/gemseo/dev/gemseo-petsc/-/issues>
+Please use the [gitlab issue tracker](https://gitlab.com/gemseo/dev/gemseo-petsc/-/issues)
 to submit bugs or questions.
 
-# License
+## Contributing
 
-The **gemseo-petsc** source code is distributed under the GNU LGPL v3.0 license.
-A copy of it can be found in the LICENSE.txt file.
-The GNU LGPL v3.0 license is an exception to the GNU GPL v3.0 license.
-A copy of the GNU GPL v3.0 license can be found in the LICENSES folder.
+See the [contributing section of GEMSEO](https://gemseo.readthedocs.io/en/stable/software/developing.html#dev).
 
-The **gemseo-petsc** examples are distributed under the BSD 0-Clause, a permissive
-license that allows to copy paste the code of examples without preserving the
-copyright mentions.
-
-The **gemseo-petsc** documentation is distributed under the CC BY-SA 4.0 license.
-
-The **gemseo-petsc** product depends on other software which have various licenses.
-The list of dependencies with their licenses is given in the CREDITS.md file.
-
-# Contributors
+## Contributors
 
 - François Gallard
 - Jean-Christophe Giret

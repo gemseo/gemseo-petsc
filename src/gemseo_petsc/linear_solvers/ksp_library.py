@@ -22,12 +22,17 @@ from __future__ import annotations
 
 import logging
 import sys
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import ClassVar
 
 import petsc4py
-from gemseo.algos.linear_solvers.linear_solver_library import LinearSolverDescription
-from gemseo.algos.linear_solvers.linear_solver_library import LinearSolverLibrary
+from gemseo.algos.linear_solvers.base_linear_solver_library import (
+    BaseLinearSolverLibrary,
+)
+from gemseo.algos.linear_solvers.base_linear_solver_library import (
+    LinearSolverDescription,
+)
 from numpy import arange
 from numpy import array
 from numpy import ndarray
@@ -40,10 +45,13 @@ from scipy.sparse.base import issparse
 petsc4py.init(sys.argv)
 from petsc4py import PETSc  # noqa: E402
 
+if TYPE_CHECKING:
+    from gemseo.algos.linear_solvers.linear_problem import LinearProblem
+
 LOGGER = logging.getLogger(__name__)
 
 
-class PetscKSPAlgos(LinearSolverLibrary):
+class PetscKSPAlgos(BaseLinearSolverLibrary):
     """Interface to PETSC KSP.
 
     For further information, please read
@@ -53,22 +61,19 @@ class PetscKSPAlgos(LinearSolverLibrary):
     """
 
     OPTIONS_MAP: ClassVar[dict[str, str]] = {}
-
-    def __init__(self) -> None:  # noqa: D107
-        super().__init__()
-        self.descriptions = {
-            "PETSC_KSP": LinearSolverDescription(
-                lhs_must_be_linear_operator=True,
-                internal_algorithm_name="PETSC",
-                algorithm_name="PETSC",
-            )
-        }
+    ALGORITHM_INFOS: ClassVar[dict[str, LinearSolverDescription]] = {
+        "PETSC_KSP": LinearSolverDescription(
+            lhs_must_be_linear_operator=True,
+            internal_algorithm_name="PETSC",
+            algorithm_name="PETSC",
+        )
+    }
 
     def _get_options(
         self,
         solver_type: str = "gmres",
         max_iter: int = 100000,
-        tol: float = 1e-5,
+        rtol: float = 1e-5,
         atol: float = 1e-50,
         dtol: float = 1e5,
         preconditioner_type: str = "ilu",
@@ -88,7 +93,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
             solver_type: The KSP solver type.
                 See `https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType`_
             max_iter: The maximum number of iterations.
-            tol: The relative convergence tolerance,
+            rtol: The relative convergence tolerance,
                 relative decrease in the (possibly preconditioned) residual norm.
             atol: The absolute convergence tolerance of the
                 (possibly preconditioned) residual norm.
@@ -119,7 +124,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
             max_iter=max_iter,
             solver_type=solver_type,
             monitor_residuals=monitor_residuals,
-            tol=tol,
+            rtol=rtol,
             atol=atol,
             dtol=dtol,
             preconditioner_type=preconditioner_type,
@@ -129,25 +134,7 @@ class PetscKSPAlgos(LinearSolverLibrary):
             ksp_pre_processor=ksp_pre_processor,
         )
 
-    def __monitor(
-        self,
-        ksp: PETSc.KSP,
-        its: int,
-        rnorm: float,
-    ) -> None:
-        """Add the normed residual value to the problem residual history.
-
-        This method is aimed to be passed to petsc4py as a reference.
-        This is the reason why some of its arguments are not used.
-
-        Args:
-             ksp: The KSP PETSc solver.
-             its: The current iteration.
-             rnorm: The normed residual.
-        """
-        self.problem.residuals_history.append(rnorm)
-
-    def _run(self, **options: Any) -> ndarray:
+    def _run(self, problem: LinearProblem, **options: Any) -> ndarray:
         """Run the algorithm.
 
         Args:
@@ -156,9 +143,9 @@ class PetscKSPAlgos(LinearSolverLibrary):
         Returns:
             The solution of the problem.
         """
-        rhs = self.problem.rhs
+        rhs = problem.rhs
         if issparse(rhs):
-            rhs = self.problem.rhs.toarray()
+            rhs = problem.rhs.toarray()
 
         # Initialize the KSP solver.
         # Create the options database
@@ -170,10 +157,10 @@ class PetscKSPAlgos(LinearSolverLibrary):
         ksp = PETSc.KSP().create()
         ksp.setType(options["solver_type"])
         ksp.setTolerances(
-            options["tol"], options["atol"], options["dtol"], options["max_iter"]
+            options["rtol"], options["atol"], options["dtol"], options["max_iter"]
         )
         ksp.setConvergenceHistory()
-        a_mat = _convert_ndarray_to_mat_or_vec(self.problem.lhs)
+        a_mat = _convert_ndarray_to_mat_or_vec(problem.lhs)
         ksp.setOperators(a_mat)
         prec_type = options.get("preconditioner_type")
         if prec_type is not None:
@@ -190,22 +177,50 @@ class PetscKSPAlgos(LinearSolverLibrary):
         if ksp_pre_processor is not None:
             ksp_pre_processor(ksp, options)
 
-        self.problem.residuals_history = []
+        problem.residuals_history = []
         if options["monitor_residuals"]:
             LOGGER.warning(
                 "Petsc option monitor_residuals slows the process and"
                 " should be used only for testing or convergence studies."
             )
-            ksp.setMonitor(self.__monitor)
+            ksp.setMonitor(_Monitor(problem))
 
-        b_mat = _convert_ndarray_to_mat_or_vec(self.problem.rhs)
+        b_mat = _convert_ndarray_to_mat_or_vec(problem.rhs)
         solution = b_mat.duplicate()
         if options["view_config"]:
             ksp.view()
         ksp.solve(b_mat, solution)
-        self.problem.solution = solution.getArray().copy()
-        self.problem.convergence_info = ksp.reason
-        return self.problem.solution
+        problem.solution = solution.getArray().copy()
+        problem.convergence_info = ksp.reason
+        return problem.solution
+
+
+class _Monitor:
+    """A functor to monitor the residual history."""
+
+    __problem: LinearProblem
+    """The problem."""
+
+    def __init__(self, problem: LinearProblem) -> None:
+        self.__problem = problem
+
+    def __call__(
+        self,
+        ksp: PETSc.KSP,
+        its: int,
+        rnorm: float,
+    ) -> None:
+        """Add the normed residual value to the problem residual history.
+
+        This method is aimed to be passed to petsc4py as a reference.
+        This is the reason why some of its arguments are not used.
+
+        Args:
+            ksp: The KSP PETSc solver.
+            its: The current iteration.
+            rnorm: The normed residual.
+        """
+        self.__problem.residuals_history.append(rnorm)
 
 
 def _convert_ndarray_to_mat_or_vec(
