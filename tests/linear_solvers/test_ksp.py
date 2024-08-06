@@ -30,8 +30,8 @@ from typing import Any
 import pytest
 from gemseo import create_discipline
 from gemseo import create_mda
+from gemseo.algos.linear_solvers.factory import LinearSolverLibraryFactory
 from gemseo.algos.linear_solvers.linear_problem import LinearProblem
-from gemseo.algos.linear_solvers.linear_solvers_factory import LinearSolversFactory
 from numpy import eye
 from numpy import random
 from scipy.sparse import coo_matrix
@@ -48,7 +48,7 @@ if TYPE_CHECKING:
 
 def test_algo_list():
     """Tests the algo list detection at library creation."""
-    factory = LinearSolversFactory()
+    factory = LinearSolverLibraryFactory()
     assert factory.is_available("PetscKSPAlgos")
     assert factory.is_available("PETSC_KSP")
 
@@ -58,7 +58,7 @@ def test_basic():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         max_iter=100000,
@@ -81,7 +81,7 @@ def test_basic_using_hook():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         max_iter=100000,
@@ -98,7 +98,7 @@ def test_basic_with_options():
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
     petsc_options = {"ksp_type": "cg"}
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         max_iter=100000,
@@ -118,7 +118,7 @@ def test_basic_set_from_options():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         max_iter=100000,
@@ -135,7 +135,7 @@ def test_hard_conv(seed):
     rng = random.default_rng(seed)
     n = 300
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem, "PETSC_KSP", max_iter=100000, view_config=True
     )
     assert problem.compute_residuals(True) < 1e-10
@@ -148,7 +148,7 @@ def test_options(solver_type, preconditioner_type):
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         solver_type=solver_type,
@@ -163,7 +163,7 @@ def test_residuals_history():
     rng = random.default_rng(1)
     n = 3000
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         max_iter=100000,
@@ -180,11 +180,11 @@ def test_hard_pb1():
     with open(join(dirname(__file__), "data", "b_vec.pkl"), "rb") as f:
         rhs = pickle.load(f)
     problem = LinearProblem(lhs, rhs)
-    LinearSolversFactory().execute(
+    LinearSolverLibraryFactory().execute(
         problem,
         "PETSC_KSP",
         solver_type="gmres",
-        tol=1e-13,
+        rtol=1e-13,
         atol=1e-50,
         max_iter=100,
         preconditioner_type="ilu",
@@ -193,7 +193,7 @@ def test_hard_pb1():
     assert problem.compute_residuals(True) < 1e-3
 
 
-@pytest.fixture()
+@pytest.fixture
 def sobieski_disciplines() -> list[MDODiscipline]:
     """Return the Sobieski disciplines.
 
