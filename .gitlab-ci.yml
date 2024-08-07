@@ -20,7 +20,7 @@ pages:
     - git fetch origin $MIKE_BRANCH --depth=1 || true
     - config_git_push
     - alias mike='conda run --prefix .tox/doc --live-stream mike'
-    - conda run --name .tox/doc mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
+    - mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
     - |
       # When there is no doc yet, redirect to the docs of the develop branch.
       if [[ $(mike list --remote origin --branch $MIKE_BRANCH) == $CI_DEFAULT_BRANCH ]]; then
