@@ -14,14 +14,13 @@ variables:
 pages:
   script:
     - $TOX_EXE -e doc --notest
-    - conda init bash
-    - conda activate .tox/doc
     # By default gitlab does not fetch all branches,
     # this could fail when $MIKE_BRANCH is not yet existing
     # but mike will create it.
     - git fetch origin $MIKE_BRANCH --depth=1 || true
     - config_git_push
-    - mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
+    - alias mike='conda run --prefix .tox/doc --live-stream mike'
+    - conda run --name .tox/doc mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
     - |
       # When there is no doc yet, redirect to the docs of the develop branch.
       if [[ $(mike list --remote origin --branch $MIKE_BRANCH) == $CI_DEFAULT_BRANCH ]]; then
