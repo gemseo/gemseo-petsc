@@ -19,6 +19,7 @@ pages:
     # but mike will create it.
     - git fetch origin $MIKE_BRANCH --depth=1 || true
     - config_git_push
+    - shopt -s expand_aliases
     - alias mike='conda run --prefix .tox/doc --live-stream mike'
     - mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
     - |
