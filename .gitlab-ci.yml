@@ -14,6 +14,7 @@ variables:
 pages:
   script:
     - $TOX_EXE -e doc --notest
+    - conda init bash
     - conda activate .tox/doc
     # By default gitlab does not fetch all branches,
     # this could fail when $MIKE_BRANCH is not yet existing
