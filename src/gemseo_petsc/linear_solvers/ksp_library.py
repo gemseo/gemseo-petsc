@@ -55,9 +55,9 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
     """Interface to PETSC KSP.
 
     For further information, please read
-    https://petsc4py.readthedocs.io/en/stable/manual/ksp/
-
-    https://petsc.org/release/docs/manualpages/KSP/KSP.html#KSP
+    [https://petsc4py.readthedocs.io/en/stable/manual/ksp/]
+    and
+    https://petsc.org/release/docs/manualpages/KSP/KSP.html#KSP].
     """
 
     OPTIONS_MAP: ClassVar[dict[str, str]] = {}
@@ -91,7 +91,7 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
 
         Args:
             solver_type: The KSP solver type.
-                See `https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType`_
+                See [https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType]
             max_iter: The maximum number of iterations.
             rtol: The relative convergence tolerance,
                 relative decrease in the (possibly preconditioned) residual norm.
@@ -100,7 +100,7 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
             dtol: The divergence tolerance,
                 e.g. the amount the (possibly preconditioned) residual norm can increase.
             preconditioner_type: The type of the precondtioner,
-                see `https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html`_
+                see [https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html]
             view_config: Whether to call ksp.view() to view the configuration
                 of the solver before run.
             ksp_pre_processor: A callback function that is called with (KSP problem,
@@ -196,7 +196,7 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
 
 
 class _Monitor:
-    """A functor to monitor the residual history."""
+    """A functor to allow monitoring the residual history."""
 
     __problem: LinearProblem
     """The problem."""
