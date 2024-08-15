@@ -49,7 +49,7 @@ griffe==0.49.0
     # via
     #   griffe-inherited-docstrings
     #   mkdocstrings-python
-griffe-inherited-docstrings==1.0.0
+griffe-inherited-docstrings==1.0.1
     # via gemseo-petsc (pyproject.toml)
 h5py==3.11.0
     # via gemseo
