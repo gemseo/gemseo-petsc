@@ -55,7 +55,7 @@ h5py==3.11.0
     # via gemseo
 idna==3.7
     # via requests
-importlib-metadata==8.2.0
+importlib-metadata==8.3.0
     # via
     #   markdown
     #   mike
@@ -128,7 +128,7 @@ mkdocs-include-markdown-plugin==6.2.2
     # via gemseo-petsc (pyproject.toml)
 mkdocs-literate-nav==0.6.1
     # via gemseo-petsc (pyproject.toml)
-mkdocs-material==9.5.31
+mkdocs-material==9.5.32
     # via
     #   gemseo-petsc (pyproject.toml)
     #   mkdocs-gallery
@@ -260,7 +260,7 @@ scipy==1.13.1
     #   gemseo
     #   pydoe3
     #   scikit-learn
-setuptools==72.2.0
+setuptools==73.0.0
     # via mkdocs-bibtex
 six==1.16.0
     # via
