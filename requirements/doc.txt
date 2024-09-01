@@ -114,11 +114,11 @@ mkdocs==1.6.1
     #   mkdocs-material
     #   mkdocs-section-index
     #   mkdocstrings
-mkdocs-autorefs==1.1.0
+mkdocs-autorefs==1.2.0
     # via
     #   mkdocstrings
     #   mkdocstrings-python
-mkdocs-bibtex==2.16.1
+mkdocs-bibtex==2.16.2
     # via gemseo-petsc (pyproject.toml)
 mkdocs-gallery==0.10.1
     # via gemseo-petsc (pyproject.toml)
