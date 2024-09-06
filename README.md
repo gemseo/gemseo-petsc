@@ -9,7 +9,7 @@ Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 # gemseo-petsc
 
-[![PyPI - License](https://img.shields.io/pypi/l/gemseo)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
+[![PyPI - License](https://img.shields.io/pypi/l/gemseo-petsc)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/gemseo-petsc)](https://pypi.org/project/gemseo-petsc/)
 [![PyPI](https://img.shields.io/pypi/v/gemseo-petsc)](https://pypi.org/project/gemseo-petsc/)
 [![Codecov branch](https://img.shields.io/codecov/c/gitlab/gemseo:dev/gemseo-petsc/develop)](https://app.codecov.io/gl/gemseo:dev/gemseo-petsc)
