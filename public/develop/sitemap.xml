@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/changelog/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/credits/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/licenses/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/reference/SUMMARY/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/linear_solvers/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/linear_solvers/ksp_library/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-petsc/latest/user_guide/</loc>
-         <lastmod>2024-09-08</lastmod>
+         <lastmod>2024-09-09</lastmod>
     </url>
 </urlset>
