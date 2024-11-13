@@ -1,7 +1,7 @@
 [project]
 name = "gemseo-petsc"
 authors = [
-    {name = "François Gallard", email = "contact@gemseo.org"}
+    {name = "GEMSEO developers", email = "contact@gemseo.org"}
 ]
 description = "PETSc GEMSEO interface."
 license = {text = "GNU Lesser General Public License v3"}
@@ -21,7 +21,7 @@ classifiers = [
 dynamic = ["version"]
 requires-python = ">=3.9, <3.13"
 dependencies = [
-    "gemseo[all] >=5,<6",
+    "gemseo[all] >=6,<7",
     "numpy",
     "petsc4py >=3,<3.21",
     "scipy",
@@ -59,7 +59,7 @@ file = "README.md"
 content-type = "text/markdown"
 
 [project.entry-points]
-gemseo_plugins = { gemseo-petsc = "gemseo_petsc"}
+gemseo_plugins = { gemseo-petsc = "gemseo_petsc" }
 
 [build-system]
 requires = [
