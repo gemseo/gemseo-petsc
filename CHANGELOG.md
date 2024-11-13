@@ -26,28 +26,42 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# Version 3.0.1 (December 2023)
+## Version 4.0.0 (November 2024)
 
-## Added
+### Added
+
+- Support GEMSEO v6.
+- Support for Python 3.12.
+
+### Changed
+
+- Renamed `ksp_library.py` to `petsc_ksp.py`
+- Switched from JSON schema to Pydantic model for options validation.
+- Each solver now has a dedicated GEMSEO algo, named `PETSC_...`. This replaces the
+  `solver_type` option.
+
+## Version 3.0.1 (December 2023)
+
+### Added
 
 - Support for Python 3.11.
 
-## Removed
+### Removed
 
 - Support for Python 3.8.
 
-# Version 3.0.0 (June 2023)
+## Version 3.0.0 (June 2023)
 
 Update to GEMSEO 5.0.0.
 
-## Changed
+### Changed
 
 Renamed `ksp_lib.py` to `ksp_library.py`.
 
-# Version 2.0.0 (November 2021)
+## Version 2.0.0 (November 2021)
 
 Update to GEMSEO 4.0.0.
 
-# Version 1.0.0 (November 2021)
+## Version 1.0.0 (November 2021)
 
 First release.
