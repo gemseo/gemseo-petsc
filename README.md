@@ -57,8 +57,6 @@ sources. To do so, please follow the information provided in the [PETSc
 installation manual](https://petsc.org/release/install/), and do not
 forget to enable the compilation of **petsc4py**.
 
-### Windows environment
-
 Although it has not be tested, it is possible to build **PETSc** and
 **petsc4py** under a Windows environment, and hence to have the
 **gemseo-petsc** plugin working. A description of the procedure to build

@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import logging
 import sys
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 from typing import Any
 from typing import ClassVar
@@ -40,6 +41,9 @@ from scipy.sparse import csr_matrix
 from scipy.sparse import find
 from scipy.sparse.base import issparse
 
+from gemseo_petsc.linear_solvers.settings.petsc_ksp_settings import BasePetscKSPSettings
+from gemseo_petsc.linear_solvers.settings.petsc_ksp_settings import PreconditionerType
+
 # Must be done before from petsc4py import PETSc, this loads the options from
 # command args in the options database.
 petsc4py.init(sys.argv)
@@ -51,7 +55,18 @@ if TYPE_CHECKING:
 LOGGER = logging.getLogger(__name__)
 
 
-class PetscKSPAlgos(BaseLinearSolverLibrary):
+@dataclass
+class PetscKSPAlgorithmDescription(LinearSolverDescription):
+    """The description of the PETSc KSP linear algebra library."""
+
+    library_name: str = "PETSc KSP"
+    """The library name."""
+
+    lhs_must_be_linear_operator: bool = True
+    """Whether the left-hand side matrix must be a linear operator."""
+
+
+class PetscKSP(BaseLinearSolverLibrary):
     """Interface to PETSC KSP.
 
     For further information, please read
@@ -60,81 +75,72 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
     https://petsc.org/release/docs/manualpages/KSP/KSP.html#KSP].
     """
 
-    OPTIONS_MAP: ClassVar[dict[str, str]] = {}
-    ALGORITHM_INFOS: ClassVar[dict[str, LinearSolverDescription]] = {
-        "PETSC_KSP": LinearSolverDescription(
-            lhs_must_be_linear_operator=True,
-            internal_algorithm_name="PETSC",
-            algorithm_name="PETSC",
+    PreconditionerType = PreconditionerType
+
+    __SOLVER_LIST: tuple[str] = (
+        "RICHARDSON",
+        "CHEBYSHEV",
+        "CG",
+        "GROPPCG",
+        "PIPECG",
+        "PIPECGRR",
+        "PIPELCG",
+        "PIPEPRCG",
+        "PIPECG2",
+        "CGNE",
+        "NASH",
+        "STCG",
+        "GLTR",
+        "FCG",
+        "PIPEFCG",
+        "GMRES",
+        "PIPEFGMRES",
+        "FGMRES",
+        "LGMRES",
+        "DGMRES",
+        "PGMRES",
+        "TCQMR",
+        "BCGS",
+        "IBCGS",
+        "FBCGS",
+        "FBCGSR",
+        "BCGSL",
+        "PIPEBCGS",
+        "CGS",
+        "TFQMR",
+        "CR",
+        "PIPECR",
+        "LSQR",
+        "PREONLY",
+        "QCG",
+        "BICG",
+        "MINRES",
+        "SYMMLQ",
+        "LCD",
+        "GCR",
+        "PIPEGCR",
+        "TSIRM",
+        "CGLS",
+        "FETIDP",
+        "HPDDM",
+    )
+    """The available linear algebra solvers."""
+
+    ALGORITHM_INFOS: ClassVar[dict[str, PetscKSPAlgorithmDescription]] = {
+        f"PETSC_{solver_name}": PetscKSPAlgorithmDescription(
+            algorithm_name=solver_name,
+            internal_algorithm_name=solver_name.lower(),
+            website=f"https://petsc.org/release/manualpages/KSP/KSP{solver_name}/",
+            Settings=type(
+                f"PETSC_{solver_name}_Settings",
+                (BasePetscKSPSettings,),
+                {"_TARGET_CLASS_NAME": f"PETSC_{solver_name}"},
+            ),
         )
+        for solver_name in __SOLVER_LIST
     }
 
-    def _get_options(
-        self,
-        solver_type: str = "gmres",
-        max_iter: int = 100000,
-        rtol: float = 1e-5,
-        atol: float = 1e-50,
-        dtol: float = 1e5,
-        preconditioner_type: str = "ilu",
-        view_config: bool = False,
-        ksp_pre_processor: bool | None = None,
-        options_cmd: dict[str, Any] | None = None,
-        set_from_options: bool = False,
-        monitor_residuals: bool = False,
-    ) -> dict[str, Any]:
-        """Return the algorithm options.
-
-        This method returns the algoritms options after having done some checks,
-        and if necessary,
-        set the default values.
-
-        Args:
-            solver_type: The KSP solver type.
-                See [https://petsc.org/release/docs/manualpages/KSP/KSPType.html#KSPType]
-            max_iter: The maximum number of iterations.
-            rtol: The relative convergence tolerance,
-                relative decrease in the (possibly preconditioned) residual norm.
-            atol: The absolute convergence tolerance of the
-                (possibly preconditioned) residual norm.
-            dtol: The divergence tolerance,
-                e.g. the amount the (possibly preconditioned) residual norm can increase.
-            preconditioner_type: The type of the precondtioner,
-                see [https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html]
-            view_config: Whether to call ksp.view() to view the configuration
-                of the solver before run.
-            ksp_pre_processor: A callback function that is called with (KSP problem,
-                options dict) as arguments before calling ksp.solve().
-                It allows the user to obtain an advanced configuration that is not
-                supported by the current wrapper.
-                If None, do not perform any call.
-            options_cmd: The options to pass to the PETSc KSP solver.
-                If None, use the default options.
-            set_from_options: Whether the options are set from sys.argv,
-                a classical Petsc configuration mode.
-            monitor_residuals: Whether to store the residuals during convergence.
-                WARNING: as said in Petsc documentation,
-                 "the routine is slow and should be used only for
-                 testing or convergence studies, not for timing."
-
-        Returns:
-            The algorithm options.
-        """  # noqa: E501
-        return self._process_options(
-            max_iter=max_iter,
-            solver_type=solver_type,
-            monitor_residuals=monitor_residuals,
-            rtol=rtol,
-            atol=atol,
-            dtol=dtol,
-            preconditioner_type=preconditioner_type,
-            view_config=view_config,
-            options_cmd=options_cmd,
-            set_from_options=set_from_options,
-            ksp_pre_processor=ksp_pre_processor,
-        )
-
-    def _run(self, problem: LinearProblem, **options: Any) -> ndarray:
+    def _run(self, problem: LinearProblem, **settings: Any) -> ndarray:
         """Run the algorithm.
 
         Args:
@@ -149,20 +155,20 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
 
         # Initialize the KSP solver.
         # Create the options database
-        options_cmd = options.get("options_cmd")
+        options_cmd = settings["options_cmd"]
         if options_cmd is not None:
             petsc4py.init(options_cmd)
         else:
             petsc4py.init()
         ksp = PETSc.KSP().create()
-        ksp.setType(options["solver_type"])
+        ksp.setType(self.ALGORITHM_INFOS[self._algo_name].internal_algorithm_name)
         ksp.setTolerances(
-            options["rtol"], options["atol"], options["dtol"], options["max_iter"]
+            settings["rtol"], settings["atol"], settings["dtol"], settings["maxiter"]
         )
         ksp.setConvergenceHistory()
         a_mat = _convert_ndarray_to_mat_or_vec(problem.lhs)
         ksp.setOperators(a_mat)
-        prec_type = options.get("preconditioner_type")
+        prec_type = settings["preconditioner_type"]
         if prec_type is not None:
             pc = ksp.getPC()
             pc.setType(prec_type)
@@ -170,15 +176,15 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
 
         # Allow for solver choice to be set from command line with -ksp_type <solver>.
         # Recommended option: -ksp_type preonly -pc_type lu
-        if options["set_from_options"]:
+        if settings["set_from_options"]:
             ksp.setFromOptions()
 
-        ksp_pre_processor = options.get("ksp_pre_processor")
+        ksp_pre_processor = settings["ksp_pre_processor"]
         if ksp_pre_processor is not None:
-            ksp_pre_processor(ksp, options)
+            ksp_pre_processor(ksp, settings)
 
         problem.residuals_history = []
-        if options["monitor_residuals"]:
+        if settings["monitor_residuals"]:
             LOGGER.warning(
                 "Petsc option monitor_residuals slows the process and"
                 " should be used only for testing or convergence studies."
@@ -187,7 +193,7 @@ class PetscKSPAlgos(BaseLinearSolverLibrary):
 
         b_mat = _convert_ndarray_to_mat_or_vec(problem.rhs)
         solution = b_mat.duplicate()
-        if options["view_config"]:
+        if settings["view_config"]:
             ksp.view()
         ksp.solve(b_mat, solution)
         problem.solution = solution.getArray().copy()

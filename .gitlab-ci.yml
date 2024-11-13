@@ -1,35 +1,13 @@
 include:
-  - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/py311/plugin.yml"
+  - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/main/plugin.yml"
 
 variables:
+  TOX_OPTIONS:
+    value: ""
   TEST_DOCKER_IMAGE:
     value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
   UPDATE_DOCKER_IMAGE:
     value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
 
 .test-tags:
-  - docker
-
-# Build with mkdocs and publish on gitlab pages the documentation.
-pages:
-  script:
-    - $TOX_EXE -e doc --notest
-    # By default gitlab does not fetch all branches,
-    # this could fail when $MIKE_BRANCH is not yet existing
-    # but mike will create it.
-    - git fetch origin $MIKE_BRANCH --depth=1 || true
-    - config_git_push
-    - shopt -s expand_aliases
-    - alias mike='conda run --prefix .tox/doc --live-stream mike'
-    - mike deploy --branch $MIKE_BRANCH --push $MIKE_ARGS
-    - |
-      # When there is no doc yet, redirect to the docs of the develop branch.
-      if [[ $(mike list --remote origin --branch $MIKE_BRANCH) == $CI_DEFAULT_BRANCH ]]; then
-        mike set-default --branch $MIKE_BRANCH --push $CI_DEFAULT_BRANCH;
-      fi
-    - |
-      # For release versions, redirect to them.
-      if [[ -n $CI_COMMIT_TAG ]]; then
-        mike set-default --branch $MIKE_BRANCH --push latest;
-      fi
-    - git checkout $MIKE_BRANCH
+  - saas-linux-small-amd64

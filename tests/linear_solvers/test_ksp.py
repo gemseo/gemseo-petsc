@@ -37,7 +37,8 @@ from numpy import random
 from scipy.sparse import coo_matrix
 from scipy.sparse import load_npz
 
-from gemseo_petsc.linear_solvers.ksp_library import _convert_ndarray_to_mat_or_vec
+from gemseo_petsc.linear_solvers.petsc_ksp import PetscKSP
+from gemseo_petsc.linear_solvers.petsc_ksp import _convert_ndarray_to_mat_or_vec
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -47,10 +48,11 @@ if TYPE_CHECKING:
 
 
 def test_algo_list():
-    """Tests the algo list detection at library creation."""
+    """Tests the algo list detection and the algo settings at library creation."""
     factory = LinearSolverLibraryFactory()
-    assert factory.is_available("PetscKSPAlgos")
-    assert factory.is_available("PETSC_KSP")
+    for solver, infos in PetscKSP.ALGORITHM_INFOS.items():
+        assert factory.is_available(solver)
+        assert solver == infos.Settings._TARGET_CLASS_NAME
 
 
 def test_basic():
@@ -60,8 +62,8 @@ def test_basic():
     problem = LinearProblem(eye(n), rng.random(n))
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        max_iter=100000,
+        algo_name="PETSC_GMRES",
+        maxiter=100_000,
         view_config=True,
         preconditioner_type=None,
     )
@@ -83,8 +85,8 @@ def test_basic_using_hook():
     problem = LinearProblem(eye(n), rng.random(n))
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        max_iter=100000,
+        algo_name="PETSC_GMRES",
+        maxiter=100_000,
         view_config=True,
         preconditioner_type=None,
         ksp_pre_processor=func,
@@ -100,8 +102,8 @@ def test_basic_with_options():
     petsc_options = {"ksp_type": "cg"}
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        max_iter=100000,
+        algo_name="PETSC_GMRES",
+        maxiter=100_000,
         view_config=True,
         preconditioner_type=None,
         options_cmd=petsc_options,
@@ -120,8 +122,8 @@ def test_basic_set_from_options():
     problem = LinearProblem(eye(n), rng.random(n))
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        max_iter=100000,
+        algo_name="PETSC_GMRES",
+        maxiter=100_000,
         view_config=True,
         preconditioner_type=None,
         set_from_options=True,
@@ -136,12 +138,12 @@ def test_hard_conv(seed):
     n = 300
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolverLibraryFactory().execute(
-        problem, "PETSC_KSP", max_iter=100000, view_config=True
+        problem, algo_name="PETSC_GMRES", maxiter=100_000, view_config=True
     )
     assert problem.compute_residuals(True) < 1e-10
 
 
-@pytest.mark.parametrize("solver_type", ["gmres", "lgmres", "fgmres", "bcgs"])
+@pytest.mark.parametrize("solver_type", ["GMRES", "LGMRES", "FGMRES", "BCGS"])
 @pytest.mark.parametrize("preconditioner_type", ["ilu", "jacobi"])
 def test_options(solver_type, preconditioner_type):
     """Test the options to be passed to PETSc."""
@@ -150,23 +152,22 @@ def test_options(solver_type, preconditioner_type):
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        solver_type=solver_type,
-        max_iter=100000,
+        algo_name=f"PETSC_{solver_type}",
+        maxiter=100_000,
         preconditioner_type=preconditioner_type,
     )
     assert problem.compute_residuals(True) < 1e-10
 
 
 def test_residuals_history():
-    """Test that the residual history is correctly cmputed."""
+    """Test that the residual history is correctly computed."""
     rng = random.default_rng(1)
     n = 3000
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        max_iter=100000,
+        algo_name="PETSC_GMRES",
+        maxiter=100_000,
         preconditioner_type="ilu",
         monitor_residuals=True,
     )
@@ -182,11 +183,10 @@ def test_hard_pb1():
     problem = LinearProblem(lhs, rhs)
     LinearSolverLibraryFactory().execute(
         problem,
-        "PETSC_KSP",
-        solver_type="gmres",
+        algo_name="PETSC_GMRES",
         rtol=1e-13,
         atol=1e-50,
-        max_iter=100,
+        maxiter=100,
         preconditioner_type="ilu",
         monitor_residuals=False,
     )
@@ -210,24 +210,23 @@ def sobieski_disciplines() -> list[MDODiscipline]:
 
 def test_mda_adjoint(sobieski_disciplines):
     """Test with a MDA with total derivatives computed with adjoint."""
-    linear_solver_options = {
-        "solver_type": "gmres",
-        "max_iter": 100000,
+    linear_solver_settings = {
+        "maxiter": 100_000,
+    }
+    inner_mda_settings = {
+        "linear_solver": "PETSC_GMRES",
+        "linear_solver_settings": linear_solver_settings,
     }
     mda = create_mda(
-        "MDAChain",
-        sobieski_disciplines,
-        linear_solver="PETSC_KSP",
-        linear_solver_options=linear_solver_options,
+        "MDAChain", sobieski_disciplines, inner_mda_settings=inner_mda_settings
     )
     assert mda.check_jacobian(threshold=1e-4)
 
 
 def test_mda_newton(sobieski_disciplines):
     """Test a Newton MDA."""
-    linear_solver_options = {
-        "solver_type": "gmres",
-        "max_iter": 100000,
+    linear_solver_settings = {
+        "maxiter": 100_000,
     }
 
     tolerance = 1e-13
@@ -235,8 +234,8 @@ def test_mda_newton(sobieski_disciplines):
         "MDANewtonRaphson",
         sobieski_disciplines[:3],
         tolerance=tolerance,
-        linear_solver="PETSC_KSP",
-        linear_solver_options=linear_solver_options,
+        newton_linear_solver_name="PETSC_GMRES",
+        newton_linear_solver_settings=linear_solver_settings,
     )
 
     mda.execute()
