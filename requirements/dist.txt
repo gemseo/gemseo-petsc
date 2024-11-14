@@ -4,6 +4,8 @@ annotated-types==0.7.0
     # via pydantic
 attrs==24.2.0
     # via check-wheel-contents
+backports-tarfile==1.2.0
+    # via jaraco-context
 build==1.2.2.post1
     # via -r requirements/dist.in
 certifi==2024.8.30
@@ -23,7 +25,9 @@ docutils==0.21.2
 idna==3.10
     # via requests
 importlib-metadata==8.5.0
-    # via twine
+    # via
+    #   keyring
+    #   twine
 jaraco-classes==3.4.0
     # via keyring
 jaraco-context==6.0.1
@@ -46,7 +50,7 @@ more-itertools==10.5.0
     #   jaraco-functools
 nh3==0.2.18
     # via readme-renderer
-packaging==24.1
+packaging==24.2
     # via
     #   build
     #   check-wheel-contents
@@ -78,17 +82,22 @@ rich==13.9.4
     # via twine
 secretstorage==3.3.3
     # via keyring
+tomli==2.1.0
+    # via
+    #   build
+    #   check-wheel-contents
 twine==5.1.1
     # via -r requirements/dist.in
 typing-extensions==4.12.2
     # via
     #   pydantic
     #   pydantic-core
+    #   rich
 urllib3==2.2.3
     # via
     #   requests
     #   twine
 wheel-filename==1.4.1
     # via check-wheel-contents
-zipp==3.20.2
+zipp==3.21.0
     # via importlib-metadata
