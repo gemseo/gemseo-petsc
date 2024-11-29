@@ -18,7 +18,7 @@ check-wheel-contents==0.6.0
     # via -r requirements/dist.in
 click==8.1.7
     # via check-wheel-contents
-cryptography==43.0.3
+cryptography==44.0.0
     # via secretstorage
 docutils==0.21.2
     # via readme-renderer
@@ -48,7 +48,7 @@ more-itertools==10.5.0
     # via
     #   jaraco-classes
     #   jaraco-functools
-nh3==0.2.18
+nh3==0.2.19
     # via readme-renderer
 packaging==24.2
     # via
@@ -82,7 +82,7 @@ rich==13.9.4
     # via twine
 secretstorage==3.3.3
     # via keyring
-tomli==2.1.0
+tomli==2.2.1
     # via
     #   build
     #   check-wheel-contents
