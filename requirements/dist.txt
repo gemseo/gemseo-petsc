@@ -14,7 +14,7 @@ cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.0
     # via requests
-check-wheel-contents==0.6.0
+check-wheel-contents==0.6.1
     # via -r requirements/dist.in
 click==8.1.7
     # via check-wheel-contents
@@ -25,9 +25,7 @@ docutils==0.21.2
 idna==3.10
     # via requests
 importlib-metadata==8.5.0
-    # via
-    #   keyring
-    #   twine
+    # via keyring
 jaraco-classes==3.4.0
     # via keyring
 jaraco-context==6.0.1
@@ -54,11 +52,12 @@ packaging==24.2
     # via
     #   build
     #   check-wheel-contents
-pkginfo==1.10.0
+    #   twine
+pkginfo==1.12.0
     # via twine
 pycparser==2.22
     # via cffi
-pydantic==2.10.2
+pydantic==2.10.3
     # via check-wheel-contents
 pydantic-core==2.27.1
     # via pydantic
@@ -86,7 +85,7 @@ tomli==2.2.1
     # via
     #   build
     #   check-wheel-contents
-twine==5.1.1
+twine==6.0.1
     # via -r requirements/dist.in
 typing-extensions==4.12.2
     # via
@@ -97,7 +96,7 @@ urllib3==2.2.3
     # via
     #   requests
     #   twine
-wheel-filename==1.4.1
+wheel-filename==1.4.2
     # via check-wheel-contents
 zipp==3.21.0
     # via importlib-metadata
