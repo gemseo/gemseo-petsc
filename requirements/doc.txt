@@ -35,9 +35,9 @@ eval-type-backport==0.2.0
     # via gemseo
 fastjsonschema==2.20.0
     # via gemseo
-fonttools==4.55.1
+fonttools==4.55.2
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@f50d1507bc35919b714a46c8613456e070c4b659
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@3469d79dc1d183a78b2efef96bb7f62ced0d692a
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-petsc (pyproject.toml)
@@ -89,7 +89,7 @@ markdown==3.7
     #   mkdocs-material
     #   mkdocstrings
     #   pymdown-extensions
-markdown-exec==1.9.3
+markdown-exec==1.10.0
     # via gemseo-petsc (pyproject.toml)
 markupsafe==3.0.2
     # via
