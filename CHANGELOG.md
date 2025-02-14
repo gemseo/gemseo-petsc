@@ -26,6 +26,12 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## In development
+
+## Added
+
+- Implementation of the interface between PETSc.TS and Gemseo for the solution of Ordinary Differential Equations and computation of the adjoint.
+
 ## Version 4.0.0 (November 2024)
 
 ### Added
