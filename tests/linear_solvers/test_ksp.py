@@ -209,7 +209,7 @@ def sobieski_disciplines() -> list[MDODiscipline]:
 
 
 def test_mda_adjoint(sobieski_disciplines):
-    """Test with a MDA with total derivatives computed with adjoint."""
+    """Test with an MDA with total derivatives computed with adjoint."""
     linear_solver_settings = {
         "maxiter": 100_000,
     }

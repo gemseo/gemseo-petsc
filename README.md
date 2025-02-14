@@ -18,8 +18,10 @@ Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 PETSc GEMSEO interface.
 
-This plugin provides an interface to the PETSc linear solvers. They can
-be used for direct and adjoint linear system resolution in GEMSEO.
+This plugin provides an interface to the PETSc linear solvers and Ordinary Differential Equations (ODE) solvers.
+Linear solvers can be used for direct and adjoint linear system resolution in GEMSEO.
+The ODE solver provides the computation of the adjoints with respect to the initial conditions of the ODE and with
+respect to the design variables.
 
 ## Installation
 
