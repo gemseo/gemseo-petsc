@@ -26,7 +26,6 @@ from typing import TYPE_CHECKING
 import pytest
 from gemseo.algos.ode.factory import ODESolverLibraryFactory
 from gemseo.algos.ode.ode_problem import ODEProblem
-from gemseo.typing import RealArray
 from numpy import allclose
 from numpy import arange
 from numpy import array
@@ -35,10 +34,9 @@ from numpy import isclose
 from numpy import ndarray
 from numpy import sqrt
 from numpy import zeros
+from src.gemseo_petsc.problems.smooth_ode import SmoothODE
 
 from gemseo_petsc.ode.ts_library import PetscOdeAlgo
-
-from src.gemseo_petsc.problems.smooth_ode import SmoothODE
 
 if TYPE_CHECKING:
     from numpy.typing import NDArray
@@ -340,8 +338,8 @@ def test_failure_snes():
     )
     assert not problem.result.algorithm_has_converged
 
-def test_check_final_state():
 
+def test_check_final_state():
     def create_smooth_ode(initial_state=1.0):
         return SmoothODE(is_k_design_var=True, initial_state=initial_state)
 
