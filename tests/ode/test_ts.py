@@ -31,8 +31,10 @@ from numpy import arange
 from numpy import array
 from numpy import exp
 from numpy import isclose
+from numpy import ndarray
 from numpy import sqrt
 from numpy import zeros
+from src.gemseo_petsc.problems.smooth_ode import SmoothODE
 
 from gemseo_petsc.ode.ts_library import PetscOdeAlgo
 
@@ -335,3 +337,26 @@ def test_failure_snes():
         atol=1e-8,
     )
     assert not problem.result.algorithm_has_converged
+
+
+def test_check_final_state():
+    def create_smooth_ode(initial_state=1.0):
+        return SmoothODE(is_k_design_var=True, initial_state=initial_state)
+
+    problem = create_smooth_ode(1.0)
+
+    ODESolverLibraryFactory().execute(
+        problem,
+        algo_name="PETSC_ODE_RK",
+        time_step=0.01,
+        maximum_steps=1000,
+        compute_adjoint=True,
+        use_jacobian=True,
+        atol=1e-5,
+        rtol=1e-5,
+        use_memory_checkpoints=True,
+        max_disk_checkpoints=100,
+        max_memory_checkpoints=100,
+    )
+
+    assert isinstance(problem.result.final_state, ndarray)

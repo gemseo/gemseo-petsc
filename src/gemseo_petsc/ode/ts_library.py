@@ -451,7 +451,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         if not self._problem.result.algorithm_has_converged:
             LOGGER.warning(self._problem.result.algorithm_termination_message)  # OK
 
-        self._problem.result.final_state = time_stepper.getSolution()
+        self._problem.result.final_state = time_stepper.vec_sol.array
 
         LOGGER.info("TS steps : %s", time_stepper.getStepNumber())
         LOGGER.info("TS non linear iterations : %s", time_stepper.getSNESIterations())
