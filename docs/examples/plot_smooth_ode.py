@@ -17,7 +17,7 @@
 
 Let us consider an Initial Value Problem (IVP),
 consisting of an Ordinary Differential Equation (ODE),
-potentially depending from a set of design variables,
+potentially depending on a set of design variables,
 a time interval,
 and a set of initial conditions for the state of the system.
 """
