@@ -30,7 +30,6 @@ from numpy import array
 from numpy import atleast_1d
 from numpy import linspace
 from numpy import zeros
-from src.gemseo_petsc.problems.smooth_ode import SmoothODE
 
 # %%
 # Let us consider the following IVP:
@@ -128,7 +127,7 @@ ODESolverLibraryFactory().execute(
     problem,
     algo_name="PETSC_ODE_BEULER",
     time_step=1e-3,
-    maximum_steps=1000,
+    maximum_steps=100000,
     atol=1e-4,
     use_jacobian=True,
 )
@@ -145,20 +144,3 @@ error = abs(analytical_sol - problem.result.state_trajectories[0])
 plt.semilogy(times, error)
 plt.title("Integration error")
 plt.show()
-
-# %%
-# The `ODEProblem` describing the above ODE is available
-# using the shortcut class `SmoothODE`
-
-shortcut_problem = SmoothODE(
-    initial_state=init_state, times=times, k=k, is_k_design_var=False
-)
-
-ODESolverLibraryFactory().execute(
-    shortcut_problem,
-    algo_name="PETSC_ODE_BEULER",
-    time_step=1e-3,
-    maximum_steps=1000,
-    atol=1e-4,
-    use_jacobian=True,
-)

@@ -24,8 +24,6 @@ from numpy import atleast_1d
 from numpy import linspace
 from numpy import zeros
 
-_times = linspace(0, 1.0, 100)
-
 
 class SmoothODE(ODEProblem):
     """Smooth ODE dy/dt = k.t.y²."""
@@ -40,17 +38,12 @@ class SmoothODE(ODEProblem):
     """The parameter of the smooth ODE."""
 
     def __init__(
-        self,
-        initial_state: float = 1.0,
-        times: RealArray = _times,
-        k: float = 1.0,
-        is_k_design_var: bool = False,
+        self, initial_state: float = 1.0, k: float = 1.0, is_k_design_var: bool = False
     ) -> None:  # noqa: D107
         """Initialize state and ODE functions.
 
         Args:
             initial_state: The initial condition.
-            times: The time interval.
             k: A coefficient in the ODE.
             is_k_design_var: If True, k becomes a design variable
                 otherwise, there is no dependency to k in the gradient.
@@ -64,7 +57,7 @@ class SmoothODE(ODEProblem):
             if is_k_design_var
             else None,
             initial_state=atleast_1d(initial_state),
-            times=times,
+            times=linspace(0, 1.0, 100),
         )
 
         self.__jac_wrt_desvar = zeros((1, 1))
