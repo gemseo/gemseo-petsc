@@ -33,15 +33,17 @@ from numpy import zeros
 
 # %%
 # Let us consider the following IVP:
+#
 # $$
 #     \frac{dy(t)}{dt} = k t y^2
 # $$
-# where :math:`t` denotes the time, :math:`y` is the state variable,
-# and :math:`k` is a design parameter.
+#
+# where $t$ denotes the time, $y$ is the state variable,
+# and $k$ is a design parameter.
 
 # %%
 # We define an initial state and a time interval for the IVP,
-# as well as a design parameter :math:`k`.
+# as well as a design parameter $k$.
 
 init_state = 1.0
 times = linspace(0.0, 0.5, 51)
@@ -100,16 +102,14 @@ class SmoothODEProblem(ODEProblem):
         self.__jac_wrt_desvar = zeros((1, 1))
 
     def __compute_rhs_func(self, time, state):  # noqa:U100
-        st_dot = state.copy()
-        st_dot[0] = self.__k * time * state[0] ** 2
-        return st_dot
+        return rhs_func(time, state, self.__k)
 
     def __compute_jac_wrt_state(self, time, state):  # noqa:U100
-        self.__jac_wrt_state[0, 0] = self.__k * 2 * time * state[0]
+        self.__jac_wrt_state[0, 0] = compute_jac_wrt_state(time, state, self.__k)
         return self.__jac_wrt_state
 
     def __compute_jac_wrt_desvar(self, time, state):  # noqa:U100
-        self.__jac_wrt_desvar[0, 0] = time * state[0] ** 2
+        self.__jac_wrt_desvar[0, 0] = compute_jac_wrt_desvar(time, state, self.__k)
         return self.__jac_wrt_desvar
 
 
@@ -117,28 +117,28 @@ problem = SmoothODEProblem()
 
 # %%
 # The IVP can be solved using the algorithms provided by `gemseo-petsc`.
-# As an example, here the solution to the IVP is found using the backwards
-# Euler algorithm.
-#
-# The list of all available algorithms is available at (?????)
+# As an example, here the solution to the IVP is found using
+# the Runge-Kutta algorithm.
 
 
 ODESolverLibraryFactory().execute(
     problem,
-    algo_name="PETSC_ODE_BEULER",
-    time_step=1e-3,
-    maximum_steps=100000,
-    atol=1e-4,
+    algo_name="PETSC_ODE_RK",
+    time_step=1e-2,
+    maximum_steps=1000,
+    rtol=1e-3,
     use_jacobian=True,
 )
 
 # %%
 # The numerical solution can be compared with the analytical solution of the ODE.
+#
 # $$
-#     y(t) = \frac{y_0}{1 - k t y_0}.
+#     y(t) = \frac{ 2 y_0}{2 - k t^2 y_0}.
 # $$
+#
 
-analytical_sol = init_state / (1.0 - k * times * init_state)
+analytical_sol = 2.0 * init_state / (2.0 - k * times * times * init_state)
 error = abs(analytical_sol - problem.result.state_trajectories[0])
 
 plt.semilogy(times, error)
