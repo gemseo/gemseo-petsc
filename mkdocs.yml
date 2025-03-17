@@ -86,7 +86,7 @@ nav:
   - Licenses: licenses.md
 - User guide: user_guide/
 - Examples:
-  - Smooth DOE: generated/examples/smooth_doe
+  - Smooth ODE: generated/examples/smooth_ode
 - API documentation: reference/gemseo_petsc/
 
 markdown_extensions:
