@@ -60,8 +60,7 @@ def rhs_func(t: float, y: RealArray, k: float) -> RealArray:  # noqa:U100
 
 
 # %%
-# We define the Jacobian of the dynamics with respect to the state
-# and to the design variables.
+# We define the Jacobian of the dynamics with respect to the state.
 
 
 def compute_jac_wrt_state(
@@ -71,15 +70,6 @@ def compute_jac_wrt_state(
 ) -> RealArray:  # noqa:U100
     jac_wrt_state = k * 2 * t * y[0]
     return array([[jac_wrt_state]])
-
-
-def compute_jac_wrt_desvar(
-    t: float,
-    y: RealArray,
-    k: float,
-) -> RealArray:  # noqa:U100
-    jac_wrt_desvar = t * y[0] ** 2
-    return array([[jac_wrt_desvar]])
 
 
 # %%
@@ -94,7 +84,6 @@ class SmoothODEProblem(ODEProblem):
         super().__init__(
             self.__compute_rhs_func,
             jac_function_wrt_state=self.__compute_jac_wrt_state,
-            jac_function_wrt_desvar=self.__compute_jac_wrt_desvar,
             initial_state=atleast_1d(init_state),
             times=times,
         )
@@ -107,10 +96,6 @@ class SmoothODEProblem(ODEProblem):
     def __compute_jac_wrt_state(self, time, state):  # noqa:U100
         self.__jac_wrt_state[0, 0] = compute_jac_wrt_state(time, state, self.__k)
         return self.__jac_wrt_state
-
-    def __compute_jac_wrt_desvar(self, time, state):  # noqa:U100
-        self.__jac_wrt_desvar[0, 0] = compute_jac_wrt_desvar(time, state, self.__k)
-        return self.__jac_wrt_desvar
 
 
 problem = SmoothODEProblem()
