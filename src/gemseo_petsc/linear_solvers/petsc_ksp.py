@@ -77,7 +77,7 @@ class PetscKSP(BaseLinearSolverLibrary):
 
     PreconditionerType = PreconditionerType
 
-    __SOLVER_LIST: tuple[str] = (
+    __SOLVER_LIST: tuple[str, ...] = (
         "RICHARDSON",
         "CHEBYSHEV",
         "CG",

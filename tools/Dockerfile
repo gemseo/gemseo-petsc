@@ -1,16 +1,5 @@
-FROM condaforge/miniforge3:latest
+FROM registry.gitlab.com/gemseo/dev/gemseo/multi-python:latest
 
-RUN  apt-get update \
-  && apt-get install \
-             --no-install-recommends \
-             --yes \
-             curl \
-             graphviz \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN python -m pip install "tox<4"
-
-RUN  curl -Os https://cli.codecov.io/latest/linux/codecov \
-  && chmod +x codecov \
-  && mv codecov /usr/bin
+RUN  dnf -y install petsc \
+  && dnf clean all \
+  && rm -rf /var/cache/dnf

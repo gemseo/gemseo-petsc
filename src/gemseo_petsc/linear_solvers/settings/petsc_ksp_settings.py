@@ -16,13 +16,13 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable  # noqa: TCH003
+from collections.abc import Callable  # noqa: TC003
 from typing import Annotated
 
 from gemseo.algos.linear_solvers.base_linear_solver_settings import (
     BaseLinearSolverSettings,
 )
-from gemseo.typing import StrKeyMapping  # noqa: TCH002
+from gemseo.typing import StrKeyMapping  # noqa: TC002
 from pydantic import AliasChoices
 from pydantic import Field
 from pydantic import NonNegativeFloat

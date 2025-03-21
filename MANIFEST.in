@@ -1,1 +1,0 @@
-include src/gemseo_petsc/linear_solvers/options/*.json

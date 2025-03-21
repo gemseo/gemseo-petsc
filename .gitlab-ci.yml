@@ -1,13 +1,9 @@
 include:
-  - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/main/plugin.yml"
+  - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/test/plugin.yml"
 
 variables:
-  TOX_OPTIONS:
-    value: ""
-  TEST_DOCKER_IMAGE:
-    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
-  UPDATE_DOCKER_IMAGE:
-    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-miniforge
+  TEST_IMAGE:
+    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc
 
 .test-tags:
   - saas-linux-small-amd64
