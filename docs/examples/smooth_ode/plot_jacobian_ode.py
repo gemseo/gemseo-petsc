@@ -29,8 +29,6 @@ present in the expression of the ODE.
 from gemseo.algos.ode.factory import ODESolverLibraryFactory
 from gemseo.algos.ode.ode_problem import ODEProblem
 from gemseo.typing import RealArray
-from matplotlib import pyplot as plt
-from numpy import array
 from numpy import atleast_1d
 from numpy import linspace
 from numpy import zeros
@@ -140,7 +138,7 @@ ODESolverLibraryFactory().execute(
     rtol=1e-3,
     use_jacobian=True,
     compute_adjoint=True,
-    use_memory_checkpoints=True
+    use_memory_checkpoints=True,
 )
 
 # %%
@@ -164,22 +162,25 @@ ODESolverLibraryFactory().execute(
 # $$
 #
 
-analytical_jac_initial_state = 4.0 / (2 - k * final_time ** 2 * init_state) ** 2
-analytical_jac_desvar = (2 * init_state ** 2 * final_time ** 2
-                         / (2 - k * final_time ** 2 * init_state) ** 2)
+analytical_jac_initial_state = 4.0 / (2 - k * final_time**2 * init_state) ** 2
+analytical_jac_desvar = (
+    2 * init_state**2 * final_time**2 / (2 - k * final_time**2 * init_state) ** 2
+)
 
 error_jac_initial_state = abs(
     analytical_jac_initial_state - problem.result.jac_wrt_initial_state[0, 0]
 )
 
-error_jac_desvar = abs(
-    analytical_jac_desvar - problem.result.jac_wrt_desvar[0, 0]
+error_jac_desvar = abs(analytical_jac_desvar - problem.result.jac_wrt_desvar[0, 0])
+
+print(
+    f"Jacobian with respect to the initial state: \n"
+    f"     absolute error = {error_jac_initial_state}, "
+    f"     relative error = {error_jac_initial_state / analytical_jac_initial_state}"
 )
 
-print(f"Jacobian with respect to the initial state: \n"
-      f"     absolute error = {error_jac_initial_state}, "
-      f"     relative error = {error_jac_initial_state / analytical_jac_initial_state}")
-
-print(f"Jacobian with respect to the design variable: \n"
-      f"     absolute error = {error_jac_desvar}, "
-      f"     relative error = {error_jac_desvar / analytical_jac_desvar}")
+print(
+    f"Jacobian with respect to the design variable: \n"
+    f"     absolute error = {error_jac_desvar}, "
+    f"     relative error = {error_jac_desvar / analytical_jac_desvar}"
+)
