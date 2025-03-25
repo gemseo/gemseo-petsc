@@ -37,7 +37,7 @@ from numpy import zeros
 
 # %%
 # Let us consider the same IVP presented in the example about the
-# [Solution of an Initial Value Problem](../plot_smooth_ode.py):
+# [Solution of an Initial Value Problem](../plot_smooth_ode):
 #
 # $$
 #     \frac{dy(t)}{dt} = k t y^2
