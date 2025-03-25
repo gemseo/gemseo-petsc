@@ -85,7 +85,9 @@ nav:
   - Credits: credits.md
   - Licenses: licenses.md
 - User guide: user_guide/
-# - Examples:
+- Examples:
+  - Solution of an ODE: generated/examples/smooth_ode
+  - Jacobian of the solution of the ODE: generated/examples/jacobian_ode
 - API documentation: reference/gemseo_petsc/
 
 markdown_extensions:
