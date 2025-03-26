@@ -16,7 +16,7 @@ function clearOutput(element) {
 }
 
 async function evaluatePython(pyodide, editor, output, session) {
-    pyodide.setStdout({ batched: (string) => { writeOutput(output, new Option(string).innerHTML); } });
+    pyodide.setStdout({ batched: (string) => { writeOutput(output, string); } });
     let result, code = editor.getValue();
     clearOutput(output);
     try {
@@ -101,8 +101,6 @@ async function setupPyodide(idPrefix, install = null, themeLight = 'tomorrow', t
             writeOutput(output, `Could not install one or more packages: ${install.join(", ")}\n`);
             writeOutput(output, new Option(error.toString()).innerHTML);
         }
-    } else {
-        clearOutput(output);
     }
     run.onclick = () => evaluatePython(pyodide, editor, output, session);
     clear.onclick = () => clearOutput(output);

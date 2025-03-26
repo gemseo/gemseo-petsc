@@ -8,11 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/utils/conversion/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/generated/examples/smooth_ode/plot_jacobian_ode/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../plot_smooth_ode/">
       
+      
+        <link rel="next" href="../../../../reference/gemseo_petsc/">
       
       
       <link rel="icon" href="../../../../images/favicon.ico">
@@ -20,7 +22,7 @@
     
     
       
-        <title>Conversion - gemseo-petsc</title>
+        <title>Compute the Jacobian of the solution of an ODE - gemseo-petsc</title>
       
     
     
@@ -86,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gemseo_petsc.utils.conversion" class="md-skip">
+        <a href="#compute-the-jacobian-of-the-solution-of-an-ode" class="md-skip">
           Skip to content
         </a>
       
@@ -124,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Conversion
+              Compute the Jacobian of the solution of an ODE
             
           </span>
         </div>
@@ -266,17 +268,21 @@
         
   
   
+    
+  
   
     
     
       
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../../generated/examples/smooth_ode/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
     
@@ -295,11 +301,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="../../" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../../../reference/gemseo_petsc/" class="md-tabs__link">
         
   
     
@@ -515,8 +519,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -525,17 +531,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -547,7 +556,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Examples
@@ -558,6 +567,8 @@
                 
   
   
+    
+  
   
   
     
@@ -577,16 +588,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../generated/examples/smooth_ode/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -604,7 +615,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_1">
             <span class="md-nav__icon md-icon"></span>
             Solution of an ODE
@@ -620,7 +631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../generated/examples/smooth_ode/plot_smooth_ode/" class="md-nav__link">
+      <a href="../plot_smooth_ode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -639,10 +650,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../generated/examples/smooth_ode/plot_jacobian_ode/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -652,13 +672,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -671,12 +684,18 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
   
-  
-    
   
   
   
@@ -702,22 +721,19 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -729,13 +745,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             API documentation
@@ -772,7 +788,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear_solvers/" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/linear_solvers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -804,7 +820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear_solvers/petsc_ksp/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/linear_solvers/petsc_ksp/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -845,7 +861,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear_solvers/settings/" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/linear_solvers/settings/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -877,7 +893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear_solvers/settings/petsc_ksp_settings/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/linear_solvers/settings/petsc_ksp_settings/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -938,7 +954,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../ode/" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/ode/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -970,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/ts_library/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/ode/ts_library/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1011,7 +1027,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../ode/settings/" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/ode/settings/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1043,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/settings/petsc_ts_settings/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/ode/settings/petsc_ts_settings/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1102,7 +1118,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../problems/" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/problems/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1134,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../problems/smooth_ode/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/problems/smooth_ode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1156,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../problems/vanderpol/" class="md-nav__link">
+      <a href="../../../../reference/gemseo_petsc/problems/vanderpol/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1183,8 +1199,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1198,16 +1212,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../../reference/gemseo_petsc/utils/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1225,7 +1239,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_4">
             <span class="md-nav__icon md-icon"></span>
             Utils
@@ -1236,29 +1250,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Conversion
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../../reference/gemseo_petsc/utils/conversion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1268,63 +1263,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;conversion
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" conversion">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Functions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion.convert_ndarray_to_mat_or_vec" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;convert_ndarray_to_mat_or_vec
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1362,53 +1300,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;conversion
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" conversion">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Functions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_petsc.utils.conversion.convert_ndarray_to_mat_or_vec" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;convert_ndarray_to_mat_or_vec
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1427,198 +1320,205 @@
   
 
 
-  <h1>Conversion</h1>
+<!--
+ DO NOT EDIT.
+ THIS FILE WAS AUTOMATICALLY GENERATED BY mkdocs-gallery.
+ TO MAKE CHANGES, EDIT THE SOURCE PYTHON FILE:
+ "docs/examples/smooth_ode/plot_jacobian_ode.py"
+ LINE NUMBERS ARE GIVEN BELOW.
+-->
 
-<div class="doc doc-object doc-module">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a href="#download_links">here</a>
+to download the full example code</p>
+</div>
+<h1 id="compute-the-jacobian-of-the-solution-of-an-ode">Compute the Jacobian of the solution of an ODE<a class="headerlink" href="#compute-the-jacobian-of-the-solution-of-an-ode" title="Permanent link">&para;</a></h1>
+<p>Let us consider an Initial Value Problem (IVP),
+consisting of an Ordinary Differential Equation (ODE),
+potentially depending on a set of design variables,
+a time interval,
+and a set of initial conditions for the state of the system.</p>
+<p>We are interested in computing the sensitivity of the solution
+with respect to the initial conditions and eventual design variables
+present in the expression of the ODE.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 28-36 -->
 
-
-
-<h2 id="gemseo_petsc.utils.conversion" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">conversion</span>
-
-
-<a href="#gemseo_petsc.utils.conversion" class="headerlink" title="Permanent link">&para;</a></h2>
-
-    <div class="doc doc-contents first">
-
-        <p>Conversion functions.</p>
-<p>Utilities for converting objects between those used by SciPy and those used by PETSc.</p>
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<h3 id="gemseo_petsc.utils.conversion-functions">Functions<a href="#gemseo_petsc.utils.conversion-functions" class="headerlink" title="Permanent link">&para;</a></h3>
-
-<div class="doc doc-object doc-function">
-
-
-<h4 id="gemseo_petsc.utils.conversion.convert_ndarray_to_mat_or_vec" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">convert_ndarray_to_mat_or_vec</span>
-
-
-<a href="#gemseo_petsc.utils.conversion.convert_ndarray_to_mat_or_vec" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">convert_ndarray_to_mat_or_vec</span><span class="p">(</span>
-    <span class="n">np_arr</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="petsc4py.PETSc.Mat">Mat</span></span> <span class="o">|</span> <span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODESolverLibraryFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.ode_problem</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODEProblem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">atleast_1d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">zeros</span>
 </code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 37-46 -->
 
-    <div class="doc doc-contents ">
+<p>Let us consider the same IVP presented in the example about the
+<a href="../plot_smooth_ode">Solution of an Initial Value Problem</a>:</p>
+<div class="arithmatex">\[
+    \frac{dy(t)}{dt} = k t y^2
+\]</div>
+<p>where <span class="arithmatex">\(t\)</span> denotes the time, <span class="arithmatex">\(y\)</span> is the state variable,
+and <span class="arithmatex">\(k\)</span> is a design parameter.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 46-52 -->
 
-        <p>Convert a Numpy array to a PETSc Mat or Vec.</p>
+<div class="highlight"><pre><span></span><code><span class="n">init_state</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">final_time</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">final_time</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>
+</code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 53-54 -->
 
+<p>The function defining the dynamics of the ODE is the following:</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 54-62 -->
 
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>np_arr</code></b>
-              (<code><a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>)
-          –
-          <div class="doc-md-description">
-            <p>The input Numpy array.</p>
-          </div>
-        </li>
-    </ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">rhs_func</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">RealArray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealArray</span><span class="p">:</span>  <span class="c1"># noqa:U100</span>
+    <span class="n">st_dot</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">st_dot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">st_dot</span>
+</code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 63-65 -->
 
+<p>We provide the Jacobian of the dynamics with respect to the state
+and to the design variables.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 65-83 -->
 
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="petsc4py.PETSc.Mat">Mat</span> | <span title="petsc4py.PETSc.Vec">Vec</span></code>
-          –
-          <div class="doc-md-description">
-            <p>A PETSc Mat or Vec, depending on the input dimension.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code>
-            –
-          <div class="doc-md-description">
-            <p>If the dimension of the input vector is greater than 2.</p>
-          </div>
-        </li>
-    </ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute_jac_wrt_state</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">RealArray</span><span class="p">,</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealArray</span><span class="p">:</span>  <span class="c1"># noqa:U100</span>
+    <span class="k">return</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-            <details class="quote">
-              <summary>Source code in <code>src/gemseo_petsc/utils/conversion.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">convert_ndarray_to_mat_or_vec</span><span class="p">(</span>
-    <span class="n">np_arr</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Mat</span> <span class="o">|</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Vec</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a Numpy array to a PETSc Mat or Vec.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_jac_wrt_desvar</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">RealArray</span><span class="p">,</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealArray</span><span class="p">:</span>  <span class="c1"># noqa:U100</span>
+    <span class="k">return</span> <span class="n">t</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+</code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 84-86 -->
 
-<span class="sd">    Args:</span>
-<span class="sd">         np_arr: The input Numpy array.</span>
+<p>These functions are assembled into an
+<a class="autorefs autorefs-external" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.ode_problem.html#gemseo.algos.ode.ode_problem.ODEProblem">ODEProblem</a>.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 86-116 -->
 
-<span class="sd">    Returns:</span>
-<span class="sd">        A PETSc Mat or Vec, depending on the input dimension.</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SmoothODEProblem</span><span class="p">(</span><span class="n">ODEProblem</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_state</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__compute_rhs_func</span><span class="p">,</span>
+            <span class="n">jac_function_wrt_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__compute_jac_wrt_state</span><span class="p">,</span>
+            <span class="n">jac_function_wrt_desvar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__compute_jac_wrt_desvar</span><span class="p">,</span>
+            <span class="n">initial_state</span><span class="o">=</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">init_state</span><span class="p">),</span>
+            <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
+        <span class="p">)</span>
 
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the dimension of the input vector is greater than 2.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n_dim</span> <span class="o">=</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">ndim</span>
-    <span class="k">if</span> <span class="n">n_dim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The dimension of the input array (</span><span class="si">{</span><span class="n">n_dim</span><span class="si">}</span><span class="s2">) is not supported.&quot;</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_desvar</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">issparse</span><span class="p">(</span><span class="n">np_arr</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">np_arr</span><span class="p">,</span> <span class="n">csr_matrix</span><span class="p">):</span>
-            <span class="n">np_arr</span> <span class="o">=</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">n_dim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">petsc_arr</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Mat</span><span class="p">()</span><span class="o">.</span><span class="n">createAIJ</span><span class="p">(</span>
-                <span class="n">size</span><span class="o">=</span><span class="n">np_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">csr</span><span class="o">=</span><span class="p">(</span><span class="n">np_arr</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">petsc_arr</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Vec</span><span class="p">()</span><span class="o">.</span><span class="n">createSeq</span><span class="p">(</span><span class="n">np_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">petsc_arr</span><span class="o">.</span><span class="n">setArray</span><span class="p">(</span><span class="n">np_arr</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">n_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">np_arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">)</span>
-            <span class="n">petsc_arr</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Vec</span><span class="p">()</span><span class="o">.</span><span class="n">createWithArray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">petsc_arr</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Mat</span><span class="p">()</span><span class="o">.</span><span class="n">createDense</span><span class="p">(</span><span class="n">np_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="n">np_arr</span><span class="p">)</span>
-            <span class="c1"># a_shape = np_arr.shape</span>
-            <span class="c1"># petsc_arr.setUp()</span>
-            <span class="c1"># petsc_arr.setValues(</span>
-            <span class="c1">#     arange(a_shape[0], dtype=&quot;int32&quot;),</span>
-            <span class="c1">#     arange(a_shape[1], dtype=&quot;int32&quot;),</span>
-            <span class="c1">#     np_arr,</span>
-            <span class="c1"># )</span>
-    <span class="n">petsc_arr</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">petsc_arr</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__compute_rhs_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>  <span class="c1"># noqa:U100</span>
+        <span class="k">return</span> <span class="n">rhs_func</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__k</span><span class="p">)</span>
 
-</div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__compute_jac_wrt_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>  <span class="c1"># noqa:U100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_state</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_jac_wrt_state</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_state</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__compute_jac_wrt_desvar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>  <span class="c1"># noqa:U100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_desvar</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_jac_wrt_desvar</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_desvar</span>
 
 
+<span class="n">problem</span> <span class="o">=</span> <span class="n">SmoothODEProblem</span><span class="p">()</span>
+</code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 117-122 -->
 
-  </div>
+<p>By setting the parameter <code>compute_adjoint</code> to <code>True</code>
+in <code>ODESolverLibraryFactory().execute()</code>,
+the PETSc solver computes the sensitivity of the solution of the ODE with respect
+to the initial conditions of the IVP and to the design variables
+by solving a suitable adjoint problem.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 124-132 -->
 
-    </div>
+<p>In order to solve the adjoint problem backwards in time,
+PETSc stores some intermediary values of the state under a checkpoint system.
+The checkpoints can be stored either on disk or on RAM.
+The storage of checkpoints on the RAM can be enabled by setting the optional parameter
+<code>use_memory_checkpoints</code> to <code>True</code>.
+The maximal number of checkpoints to be stored on disk or on the RAM
+can be controlled by the optional parameters <code>max_disk_checkpoints</code>
+and <code>max_memory_checkpoints</code>.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 132-144 -->
 
-</div>
+<div class="highlight"><pre><span></span><code><span class="n">ODESolverLibraryFactory</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="n">problem</span><span class="p">,</span>
+    <span class="n">algo_name</span><span class="o">=</span><span class="s2">&quot;PETSC_ODE_RK&quot;</span><span class="p">,</span>
+    <span class="n">time_step</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+    <span class="n">maximum_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">use_jacobian</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">compute_adjoint</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_memory_checkpoints</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p class="mkd-glr-script-out">Out:</p>
+<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code>TS<span class="w"> </span>rejected<span class="w"> </span>steps<span class="w"> </span>SNES<span class="w"> </span>:<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 145-148 -->
+
+<p>The Jacobian of the solution of the IVP with respect to the initial conditions
+and the design variables can be found respectively in the attributes
+<code>jac_wrt_initial_state</code> and <code>jac_wrt_desvar</code> of <code>problem.result</code>.</p>
+<!-- GENERATED FROM PYTHON SOURCE LINES 151-164 -->
+
+<p>The Jacobians computed by PETSc can be compared with their analytical counterparts.
+By knowing that the exact solution of the IVP is
+<span class="arithmatex">\(y(t) = \frac{ 2 y_0}{2 - k t^2 y_0}\)</span>, the Jacobians of the solution with respect to
+<span class="arithmatex">\(y_0\)</span> and <span class="arithmatex">\(k\)</span> are:</p>
+<div class="arithmatex">\[
+J_{y_0} = \left[\frac{4}{(2 - k t^2 y_0)^2}\right]
+\]</div>
+<div class="arithmatex">\[
+J_{k} = \left[\frac{2 y_0^2 t^2}{(2 - k t^2 y_0)^2}\right]
+\]</div>
+<!-- GENERATED FROM PYTHON SOURCE LINES 164-187 -->
+
+<div class="highlight"><pre><span></span><code><span class="n">analytical_jac_initial_state</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">final_time</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">init_state</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">analytical_jac_desvar</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">2</span> <span class="o">*</span> <span class="n">init_state</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">final_time</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">final_time</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">init_state</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="n">error_jac_initial_state</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span>
+    <span class="n">analytical_jac_initial_state</span> <span class="o">-</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">jac_wrt_initial_state</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">error_jac_desvar</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">analytical_jac_desvar</span> <span class="o">-</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">jac_wrt_desvar</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Jacobian with respect to the initial state: </span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;     absolute error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="si">}</span><span class="s2">, &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;     relative error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_initial_state</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Jacobian with respect to the design variable: </span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;     absolute error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="si">}</span><span class="s2">, &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;     relative error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_desvar</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p class="mkd-glr-script-out">Out:</p>
+<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code>Jacobian<span class="w"> </span>with<span class="w"> </span>respect<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>initial<span class="w"> </span>state:<span class="w"> </span>
+<span class="w">     </span>absolute<span class="w"> </span><span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.00042108898775672365,<span class="w">      </span>relative<span class="w"> </span><span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.00032239625625124155
+Jacobian<span class="w"> </span>with<span class="w"> </span>respect<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>design<span class="w"> </span>variable:<span class="w"> </span>
+<span class="w">     </span>absolute<span class="w"> </span><span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.00032624203083669867,<span class="w">      </span>relative<span class="w"> </span><span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.0019982324388747794
+</code></pre></div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.005 seconds)</p>
+<div id="download_links"></div>
+
+<p><a class="md-button center" href="../plot_jacobian_ode.py"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v242.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48"/></svg></span> Download Python source code: plot_jacobian_ode.py</a></p>
+<p><a class="md-button center" href="../plot_jacobian_ode.ipynb"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v242.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48"/></svg></span> Download Jupyter notebook: plot_jacobian_ode.ipynb</a></p>
+<p><a class="mkd-glr-signature" href="https://smarie.github.io/mkdocs-gallery">Gallery generated by mkdocs-gallery</a></p>
 
 
 
