@@ -35,13 +35,13 @@ docstring-inheritance==2.2.2
     # via gemseo
 et-xmlfile==2.0.0
     # via openpyxl
-eval-type-backport==0.2.2
+eval-type-backport==0.2.0
     # via gemseo
 fastjsonschema==2.21.1
     # via gemseo
 fonttools==4.56.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@d9e96a3cb58a397e293b48abcc5c9ccf5439e2f6
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@13d857fbfa4d3d50aba0c5e3a49d8bb6b75c7c66
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-petsc (pyproject.toml)
@@ -73,7 +73,7 @@ importlib-resources==6.5.2
     # via
     #   matplotlib
     #   mike
-jinja2==3.1.6
+jinja2==3.1.5
     # via
     #   gemseo
     #   mike
@@ -93,7 +93,7 @@ markdown==3.7
     #   mkdocs-material
     #   mkdocstrings
     #   pymdown-extensions
-markdown-exec==1.10.3
+markdown-exec==1.10.2
     # via gemseo-petsc (pyproject.toml)
 markupsafe==3.0.2
     # via
@@ -149,7 +149,7 @@ mkdocstrings==0.29.0
     # via
     #   gemseo-petsc (pyproject.toml)
     #   mkdocstrings-python
-mkdocstrings-python==1.16.8
+mkdocstrings-python==1.16.7
     # via mkdocstrings
 mpmath==1.3.0
     # via sympy
@@ -205,7 +205,7 @@ platformdirs==4.3.7
     #   mkdocs-get-deps
 plotly==5.24.1
     # via gemseo
-prettytable==3.15.1
+prettytable==3.14.0
     # via gemseo
 psutil==7.0.0
     # via openturns
@@ -230,7 +230,7 @@ pymdown-extensions==10.14.3
     #   mkdocstrings
 pypandoc==1.15
     # via mkdocs-bibtex
-pyparsing==3.2.3
+pyparsing==3.2.1
     # via
     #   matplotlib
     #   mike
@@ -239,7 +239,7 @@ python-dateutil==2.9.0.post0
     #   ghp-import
     #   matplotlib
     #   pandas
-pytz==2025.2
+pytz==2025.1
     # via pandas
 pyxdsm==2.3.1
     # via gemseo
@@ -272,7 +272,7 @@ scipy==1.13.1
     #   gemseo
     #   pydoe3
     #   scikit-learn
-setuptools==78.0.2
+setuptools==77.0.3
     # via mkdocs-bibtex
 six==1.17.0
     # via
@@ -300,7 +300,7 @@ typing-extensions==4.12.2
     #   mkdocstrings-python
     #   pydantic
     #   pydantic-core
-tzdata==2025.2
+tzdata==2025.1
     # via pandas
 urllib3==2.3.0
     # via
