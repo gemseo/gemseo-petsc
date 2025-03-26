@@ -50,7 +50,7 @@ times = linspace(0.0, final_time, 51)
 k = 1.0
 
 # %%
-# The function defining the dynamics of the ODE is the following.
+# The function defining the dynamics of the ODE is the following:
 
 
 def rhs_func(t: float, y: RealArray, k: float) -> RealArray:  # noqa:U100
