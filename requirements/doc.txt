@@ -137,7 +137,7 @@ mkdocs-include-markdown-plugin==7.1.5
     # via gemseo-petsc (pyproject.toml)
 mkdocs-literate-nav==0.6.2
     # via gemseo-petsc (pyproject.toml)
-mkdocs-material==9.6.9
+mkdocs-material==9.6.10
     # via
     #   gemseo-petsc (pyproject.toml)
     #   mkdocs-gallery
