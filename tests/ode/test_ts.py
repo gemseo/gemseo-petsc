@@ -60,7 +60,7 @@ def test_solver_1d_problem_fixed_times():
     """Test the PETSc solver on a 1-D problem with a known analytical solution
     for a given set of times."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy()
 
     times = arange(0, 1, 0.1)
@@ -81,7 +81,7 @@ def test_solver_1d_problem_algo_times():
     """Test the PETSc solver on a 1-D problem with a known analytical solution
     for a set of times chosen by the quadrature algorithm."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy()
 
     times = array((0, 1))
@@ -103,10 +103,10 @@ def test_solver_1d_problem_final_time():
     """Test the PETSc solver on a 1-D problem with a known analytical solution
     at final time."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy()
 
-    def _jac(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _jac(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([[1.0, 0.0], [0.0, 1.0]])
 
     times = array((0, 1))
@@ -132,7 +132,7 @@ def test_vanderpol_problem():
 
     st_dot = zeros(2)
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         st_dot[0] = state[1]
         st_dot[1] = mu * ((1.0 - state[0] * state[0]) * state[1] - state[0])
         return st_dot
@@ -166,7 +166,7 @@ def test_vanderpol_problem():
 def test_error_providing_jac():
     """Test the error message when no Jacobian function is provided while required."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy()
 
     problem = ODEProblem(
@@ -202,16 +202,16 @@ def test_error_providing_jac():
 def test_error_jacobian_shape():
     """Test the error message when the Jacobian has not the right shape."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([state[0], -state[1]])
 
-    def _jac_1(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _jac_1(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([1, -1])
 
-    def _jac_2(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _jac_2(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([[1, -1]])
 
-    def _jac_3(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _jac_3(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([[1], [-1]])
 
     for _ii, _jac in enumerate([_jac_1, _jac_2, _jac_3]):
@@ -238,7 +238,7 @@ def test_error_jacobian_shape():
 def test_non_convergence():
     """Test the error message when the quadrature algorithm does not converge."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         state_1_dot = (1 - time**2) / time**2 * state[0] - state[1] / time
         return array([state[1], state_1_dot])
 
@@ -257,10 +257,10 @@ def test_non_convergence():
 def test_one_termination_event():
     """Test the termination event."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([state[1], -10.0])
 
-    def _termination(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _termination(time: float, state: NDArray[float]) -> NDArray[float]:
         return state[0]
 
     problem = ODEProblem(
@@ -281,13 +281,13 @@ def test_one_termination_event():
 def test_multiple_termination_events():
     """Test the case when multiple termination events are present."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([state[1], -10.0])
 
-    def _termination1(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _termination1(time: float, state: NDArray[float]) -> NDArray[float]:
         return state[0]
 
-    def _termination2(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _termination2(time: float, state: NDArray[float]) -> NDArray[float]:
         return 20.0 - state[0]
 
     problem1 = ODEProblem(
@@ -322,7 +322,7 @@ def test_multiple_termination_events():
 def test_failure_snes():
     """Test the failure of the SNES solver."""
 
-    def _func(time: float, state: NDArray[float]) -> NDArray[float]:  # noqa:U100
+    def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy() ** 2
 
     times = array((0, 1))

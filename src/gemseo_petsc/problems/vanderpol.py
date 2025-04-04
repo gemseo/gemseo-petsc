@@ -58,7 +58,7 @@ class VanderPol(ODEProblem):
             jac_function_wrt_desvar=self.__compute_jac_wrt_desvar,
         )
 
-    def __func(self, time: float, state: RealArray) -> RealArray:  # noqa:U100
+    def __func(self, time: float, state: RealArray) -> RealArray:
         """The function defining the right-hand side of the ODE.
 
         Args:
@@ -77,7 +77,7 @@ class VanderPol(ODEProblem):
         self,
         time: float,
         state: RealArray,
-    ) -> RealArray:  # noqa:U100
+    ) -> RealArray:
         """The Jacobian of the right-hand side of the ODE with respect to the state.
 
         Args:
@@ -97,7 +97,7 @@ class VanderPol(ODEProblem):
         self,
         time: float,
         state: RealArray,
-    ) -> RealArray:  # noqa:U100
+    ) -> RealArray:
         """The Jacobian of the right-hand side of the ODE with respect to ``k``.
 
         Args:

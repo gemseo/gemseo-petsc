@@ -53,7 +53,7 @@ k = 1.0
 # The function defining the dynamics of the ODE is the following:
 
 
-def rhs_func(t: float, y: RealArray, k: float) -> RealArray:  # noqa:U100
+def rhs_func(t: float, y: RealArray, k: float) -> RealArray:
     st_dot = y.copy()
     st_dot[0] = k * t * y[0] ** 2
     return st_dot
@@ -67,7 +67,7 @@ def compute_jac_wrt_state(
     t: float,
     y: RealArray,
     k: float,
-) -> RealArray:  # noqa:U100
+) -> RealArray:
     jac_wrt_state = k * 2 * t * y[0]
     return array([[jac_wrt_state]])
 
@@ -90,10 +90,10 @@ class SmoothODEProblem(ODEProblem):
 
         self.__jac_wrt_desvar = zeros((1, 1))
 
-    def __compute_rhs_func(self, time, state):  # noqa:U100
+    def __compute_rhs_func(self, time, state):
         return rhs_func(time, state, self.__k)
 
-    def __compute_jac_wrt_state(self, time, state):  # noqa:U100
+    def __compute_jac_wrt_state(self, time, state):
         self.__jac_wrt_state[0, 0] = compute_jac_wrt_state(time, state, self.__k)
         return self.__jac_wrt_state
 

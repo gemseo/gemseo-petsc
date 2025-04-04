@@ -62,7 +62,7 @@ class SmoothODE(ODEProblem):
 
         self.__jac_wrt_desvar = zeros((1, 1))
 
-    def __compute_rhs_func(self, time: float, state: RealArray) -> RealArray:  # noqa:U100
+    def __compute_rhs_func(self, time: float, state: RealArray) -> RealArray:
         """The function defining the right-hand side of the ODE.
 
         Args:
@@ -80,7 +80,7 @@ class SmoothODE(ODEProblem):
         self,
         time: float,
         state: RealArray,
-    ) -> RealArray:  # noqa:U100
+    ) -> RealArray:
         """The Jacobian of the right-hand side of the ODE with respect to the state.
 
         Args:
@@ -97,7 +97,7 @@ class SmoothODE(ODEProblem):
         self,
         time: float,
         state: RealArray,
-    ) -> RealArray:  # noqa:U100
+    ) -> RealArray:
         """The Jacobian of the right-hand side of the ODE with respect to ``k``.
 
         Args:
