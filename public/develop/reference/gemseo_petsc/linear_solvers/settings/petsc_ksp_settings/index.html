@@ -8,24 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/SUMMARY.html">
+        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/linear_solvers/settings/petsc_ksp_settings/">
       
       
+        <link rel="prev" href="../">
       
       
-      <link rel="icon" href="../images/favicon.ico">
+        <link rel="next" href="../../../ode/">
+      
+      
+      <link rel="icon" href="../../../../../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
-        <title>SUMMARY - gemseo-petsc</title>
+        <title>Petsc ksp settings - gemseo-petsc</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,21 +48,21 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../../../../../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../assets/_markdown_exec_ansi.css">
+      <link rel="stylesheet" href="../../../../../assets/_markdown_exec_ansi.css">
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-binder.css">
     
-      <link rel="stylesheet" href="../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery.css">
     
-      <link rel="stylesheet" href="../sg_gallery-rendered-html.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-dataframe.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,6 +87,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -97,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="gemseo-petsc" class="md-header__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
+    <a href="../../../../.." title="gemseo-petsc" class="md-header__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -117,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SUMMARY
+              Petsc ksp settings
             
           </span>
         </div>
@@ -230,7 +239,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../index.html" class="md-tabs__link">
+        <a href="../../../../.." class="md-tabs__link">
           
   
   
@@ -250,7 +259,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../user_guide/index.html" class="md-tabs__link">
+      <a href="../../../../../user_guide/" class="md-tabs__link">
         
   
   
@@ -278,7 +287,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../generated/examples/smooth_ode/index.html" class="md-tabs__link">
+        <a href="../../../../../generated/examples/smooth_ode/" class="md-tabs__link">
           
   
   
@@ -299,9 +308,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="gemseo_petsc/index.html" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="../../../" class="md-tabs__link">
         
   
   
@@ -336,7 +347,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="gemseo-petsc" class="md-nav__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
+    <a href="../../../../.." title="gemseo-petsc" class="md-nav__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -393,7 +404,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../index.html" class="md-nav__link ">
+            <a href="../../../../.." class="md-nav__link ">
               
   
   
@@ -428,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog.html" class="md-nav__link">
+      <a href="../../../../../changelog/" class="md-nav__link">
         
   
   
@@ -451,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../credits.html" class="md-nav__link">
+      <a href="../../../../../credits/" class="md-nav__link">
         
   
   
@@ -474,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../licenses.html" class="md-nav__link">
+      <a href="../../../../../licenses/" class="md-nav__link">
         
   
   
@@ -504,7 +515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user_guide/index.html" class="md-nav__link">
+      <a href="../../../../../user_guide/" class="md-nav__link">
         
   
   
@@ -596,7 +607,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../generated/examples/smooth_ode/index.html" class="md-nav__link ">
+            <a href="../../../../../generated/examples/smooth_ode/" class="md-nav__link ">
               
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/examples/smooth_ode/plot_smooth_ode.html" class="md-nav__link">
+      <a href="../../../../../generated/examples/smooth_ode/plot_smooth_ode/" class="md-nav__link">
         
   
   
@@ -654,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/examples/smooth_ode/plot_jacobian_ode.html" class="md-nav__link">
+      <a href="../../../../../generated/examples/smooth_ode/plot_jacobian_ode/" class="md-nav__link">
         
   
   
@@ -689,8 +700,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -706,18 +719,21 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/index.html" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   
@@ -730,13 +746,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             API documentation
@@ -747,8 +763,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -763,15 +781,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/linear_solvers/index.html" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -790,7 +808,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             Linear solvers
@@ -804,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/linear_solvers/petsc_ksp.html" class="md-nav__link">
+      <a href="../../petsc_ksp/" class="md-nav__link">
         
   
   
@@ -824,8 +842,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -838,15 +858,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/linear_solvers/settings/index.html" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -865,7 +885,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1_2">
             <span class="md-nav__icon md-icon"></span>
             Settings
@@ -876,10 +896,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="gemseo_petsc/linear_solvers/settings/petsc_ksp_settings.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Petsc ksp settings
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -890,6 +930,72 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;petsc_ksp_settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" petsc_ksp_settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.BasePetscKSPSettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;BasePetscKSPSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.PreconditionerType" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PreconditionerType
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -939,7 +1045,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/ode/index.html" class="md-nav__link ">
+            <a href="../../../ode/" class="md-nav__link ">
               
   
   
@@ -972,7 +1078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/ode/ts_library.html" class="md-nav__link">
+      <a href="../../../ode/ts_library/" class="md-nav__link">
         
   
   
@@ -1014,7 +1120,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/ode/settings/index.html" class="md-nav__link ">
+            <a href="../../../ode/settings/" class="md-nav__link ">
               
   
   
@@ -1047,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/ode/settings/petsc_ts_settings.html" class="md-nav__link">
+      <a href="../../../ode/settings/petsc_ts_settings/" class="md-nav__link">
         
   
   
@@ -1107,7 +1213,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/problems/index.html" class="md-nav__link ">
+            <a href="../../../problems/" class="md-nav__link ">
               
   
   
@@ -1140,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/problems/smooth_ode.html" class="md-nav__link">
+      <a href="../../../problems/smooth_ode/" class="md-nav__link">
         
   
   
@@ -1163,7 +1269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/problems/vanderpol.html" class="md-nav__link">
+      <a href="../../../problems/vanderpol/" class="md-nav__link">
         
   
   
@@ -1213,7 +1319,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="gemseo_petsc/utils/index.html" class="md-nav__link ">
+            <a href="../../../utils/" class="md-nav__link ">
               
   
   
@@ -1246,7 +1352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gemseo_petsc/utils/conversion.html" class="md-nav__link">
+      <a href="../../../utils/conversion/" class="md-nav__link">
         
   
   
@@ -1295,6 +1401,62 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;petsc_ksp_settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" petsc_ksp_settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.BasePetscKSPSettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;BasePetscKSPSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.PreconditionerType" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PreconditionerType
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1308,39 +1470,144 @@
                   
 
 
+  
+  
 
-  <h1>SUMMARY</h1>
 
-<ul>
-<li><a href="gemseo_petsc/index.html">gemseo_petsc</a><ul>
-<li><a href="gemseo_petsc/linear_solvers/index.html">linear_solvers</a><ul>
-<li><a href="gemseo_petsc/linear_solvers/petsc_ksp.html">petsc_ksp</a></li>
-<li><a href="gemseo_petsc/linear_solvers/settings/index.html">settings</a><ul>
-<li><a href="gemseo_petsc/linear_solvers/settings/petsc_ksp_settings.html">petsc_ksp_settings</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="gemseo_petsc/ode/index.html">ode</a><ul>
-<li><a href="gemseo_petsc/ode/settings/index.html">settings</a><ul>
-<li><a href="gemseo_petsc/ode/settings/petsc_ts_settings.html">petsc_ts_settings</a></li>
-</ul>
-</li>
-<li><a href="gemseo_petsc/ode/ts_library.html">ts_library</a></li>
-</ul>
-</li>
-<li><a href="gemseo_petsc/problems/index.html">problems</a><ul>
-<li><a href="gemseo_petsc/problems/smooth_ode.html">smooth_ode</a></li>
-<li><a href="gemseo_petsc/problems/vanderpol.html">vanderpol</a></li>
-</ul>
-</li>
-<li><a href="gemseo_petsc/utils/index.html">utils</a><ul>
-<li><a href="gemseo_petsc/utils/conversion.html">conversion</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+  <h1>Petsc ksp settings</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="gemseo_petsc.linear_solvers.settings.petsc_ksp_settings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">petsc_ksp_settings</span>
+
+
+<a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Settings for the PETSc KSP linear solvers.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+<h3 id="gemseo_petsc.linear_solvers.settings.petsc_ksp_settings-classes">Classes<a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings-classes" class="headerlink" title="Permanent link">&para;</a></h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.BasePetscKSPSettings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">BasePetscKSPSettings</span>
+
+
+<a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.BasePetscKSPSettings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-external" title="gemseo.algos.linear_solvers.base_linear_solver_settings.BaseLinearSolverSettings" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.linear_solvers.base_linear_solver_settings.html#gemseo.algos.linear_solvers.base_linear_solver_settings.BaseLinearSolverSettings">BaseLinearSolverSettings</a></code></p>
+
+
+        <p>The base settings of the PETSc KSP algorithms.</p>
+<p><code>_TARGET_CLASS_NAME</code> will be overloaded for each algorithm.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.PreconditionerType" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">PreconditionerType</span>
+
+
+<a href="#gemseo_petsc.linear_solvers.settings.petsc_ksp_settings.PreconditionerType" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="strenum.StrEnum">StrEnum</span></code></p>
+
+
+        <p>The type of the precondtioner.</p>
+<p>See
+[https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html].</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
 
 
 
@@ -1389,14 +1656,14 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.50899def.min.js"></script>
       
-        <script src="../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../../../../../assets/_markdown_exec_pyodide.js"></script>
       
-        <script src="../javascripts/mathjax.js"></script>
+        <script src="../../../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

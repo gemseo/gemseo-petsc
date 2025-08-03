@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/problems/vanderpol.html">
+        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/ode/settings/petsc_ts_settings/">
       
       
-        <link rel="prev" href="smooth_ode.html">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../utils/index.html">
+        <link rel="next" href="../../../problems/">
       
       
-      <link rel="icon" href="../../../images/favicon.ico">
+      <link rel="icon" href="../../../../../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
-        <title>Vanderpol - gemseo-petsc</title>
+        <title>Petsc ts settings - gemseo-petsc</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,21 +48,21 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../../../../../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+      <link rel="stylesheet" href="../../../../../assets/_markdown_exec_ansi.css">
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-binder.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-rendered-html.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../../sg_gallery-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gemseo_petsc.problems.vanderpol" class="md-skip">
+        <a href="#gemseo_petsc.ode.settings.petsc_ts_settings" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="gemseo-petsc" class="md-header__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
+    <a href="../../../../.." title="gemseo-petsc" class="md-header__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -126,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Vanderpol
+              Petsc ts settings
             
           </span>
         </div>
@@ -239,7 +239,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../index.html" class="md-tabs__link">
+        <a href="../../../../.." class="md-tabs__link">
           
   
   
@@ -259,7 +259,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../user_guide/index.html" class="md-tabs__link">
+      <a href="../../../../../user_guide/" class="md-tabs__link">
         
   
   
@@ -287,7 +287,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../generated/examples/smooth_ode/index.html" class="md-tabs__link">
+        <a href="../../../../../generated/examples/smooth_ode/" class="md-tabs__link">
           
   
   
@@ -312,7 +312,7 @@
   
   
     <li class="md-tabs__item md-tabs__item--active">
-      <a href="../index.html" class="md-tabs__link">
+      <a href="../../../" class="md-tabs__link">
         
   
   
@@ -347,7 +347,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="gemseo-petsc" class="md-nav__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
+    <a href="../../../../.." title="gemseo-petsc" class="md-nav__button md-logo" aria-label="gemseo-petsc" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -404,7 +404,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../index.html" class="md-nav__link ">
+            <a href="../../../../.." class="md-nav__link ">
               
   
   
@@ -439,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../changelog.html" class="md-nav__link">
+      <a href="../../../../../changelog/" class="md-nav__link">
         
   
   
@@ -462,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../credits.html" class="md-nav__link">
+      <a href="../../../../../credits/" class="md-nav__link">
         
   
   
@@ -485,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../licenses.html" class="md-nav__link">
+      <a href="../../../../../licenses/" class="md-nav__link">
         
   
   
@@ -515,7 +515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../user_guide/index.html" class="md-nav__link">
+      <a href="../../../../../user_guide/" class="md-nav__link">
         
   
   
@@ -607,7 +607,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../generated/examples/smooth_ode/index.html" class="md-nav__link ">
+            <a href="../../../../../generated/examples/smooth_ode/" class="md-nav__link ">
               
   
   
@@ -642,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generated/examples/smooth_ode/plot_smooth_ode.html" class="md-nav__link">
+      <a href="../../../../../generated/examples/smooth_ode/plot_smooth_ode/" class="md-nav__link">
         
   
   
@@ -665,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generated/examples/smooth_ode/plot_jacobian_ode.html" class="md-nav__link">
+      <a href="../../../../../generated/examples/smooth_ode/plot_jacobian_ode/" class="md-nav__link">
         
   
   
@@ -733,7 +733,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../index.html" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   
@@ -787,7 +787,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../linear_solvers/index.html" class="md-nav__link ">
+            <a href="../../../linear_solvers/" class="md-nav__link ">
               
   
   
@@ -820,7 +820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linear_solvers/petsc_ksp.html" class="md-nav__link">
+      <a href="../../../linear_solvers/petsc_ksp/" class="md-nav__link">
         
   
   
@@ -862,7 +862,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../linear_solvers/settings/index.html" class="md-nav__link ">
+            <a href="../../../linear_solvers/settings/" class="md-nav__link ">
               
   
   
@@ -895,180 +895,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../linear_solvers/settings/petsc_ksp_settings.html" class="md-nav__link">
+      <a href="../../../linear_solvers/settings/petsc_ksp_settings/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Petsc ksp settings
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../ode/index.html" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Ode
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            Ode
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ode/ts_library.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Ts library
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../ode/settings/index.html" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Settings
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            Settings
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ode/settings/petsc_ts_settings.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Petsc ts settings
     
   </span>
   
@@ -1121,16 +953,16 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="index.html" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
   <span class="md-ellipsis">
-    Problems
+    Ode
     
   </span>
   
@@ -1138,16 +970,16 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
-            Problems
+            Ode
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1158,12 +990,12 @@
   
   
     <li class="md-nav__item">
-      <a href="smooth_ode.html" class="md-nav__link">
+      <a href="../../ts_library/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Smooth ode
+    Ts library
     
   </span>
   
@@ -1173,6 +1005,60 @@
   
 
               
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Settings
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -1193,7 +1079,7 @@
   
   
   <span class="md-ellipsis">
-    Vanderpol
+    Petsc ts settings
     
   </span>
   
@@ -1201,12 +1087,12 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="vanderpol.html" class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Vanderpol
+    Petsc ts settings
     
   </span>
   
@@ -1227,17 +1113,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;vanderpol
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;petsc_ts_settings
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" vanderpol">
+    <nav class="md-nav" aria-label=" petsc_ts_settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol-classes" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
     </span>
@@ -1247,9 +1133,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol.VanderPol" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.FinalTimeBehavior" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;VanderPol
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;FinalTimeBehavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.ODESolverType" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ODESolverType
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PetscTSSettings
     </span>
   </a>
   
@@ -1269,6 +1173,122 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../problems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Problems
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Problems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../problems/smooth_ode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smooth ode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../problems/vanderpol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vanderpol
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1308,7 +1328,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../utils/index.html" class="md-nav__link ">
+            <a href="../../../utils/" class="md-nav__link ">
               
   
   
@@ -1341,7 +1361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/conversion.html" class="md-nav__link">
+      <a href="../../../utils/conversion/" class="md-nav__link">
         
   
   
@@ -1397,17 +1417,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;vanderpol
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;petsc_ts_settings
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" vanderpol">
+    <nav class="md-nav" aria-label=" petsc_ts_settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol-classes" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
     </span>
@@ -1417,9 +1437,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.problems.vanderpol.VanderPol" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.FinalTimeBehavior" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;VanderPol
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;FinalTimeBehavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.ODESolverType" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ODESolverType
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PetscTSSettings
     </span>
   </a>
   
@@ -1454,21 +1492,21 @@
   
 
 
-  <h1>Vanderpol</h1>
+  <h1>Petsc ts settings</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<h2 id="gemseo_petsc.problems.vanderpol" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">vanderpol</span>
+<h2 id="gemseo_petsc.ode.settings.petsc_ts_settings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">petsc_ts_settings</span>
 
 
-<a href="#gemseo_petsc.problems.vanderpol" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#gemseo_petsc.ode.settings.petsc_ts_settings" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents first">
 
-        <p>Van der Pol ODE.</p>
+        <p>Settings for the PETSc ordinary differential equation solver. solvers.</p>
 
 
 
@@ -1485,67 +1523,25 @@
 
 
 
-<h3 id="gemseo_petsc.problems.vanderpol-classes">Classes<a href="#gemseo_petsc.problems.vanderpol-classes" class="headerlink" title="Permanent link">&para;</a></h3>
+<h3 id="gemseo_petsc.ode.settings.petsc_ts_settings-classes">Classes<a href="#gemseo_petsc.ode.settings.petsc_ts_settings-classes" class="headerlink" title="Permanent link">&para;</a></h3>
 
 <div class="doc doc-object doc-class">
 
 
 
-<h4 id="gemseo_petsc.problems.vanderpol.VanderPol" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">VanderPol</span>
+<h4 id="gemseo_petsc.ode.settings.petsc_ts_settings.FinalTimeBehavior" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">FinalTimeBehavior</span>
 
 
-<a href="#gemseo_petsc.problems.vanderpol.VanderPol" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">VanderPol</span><span class="p">(</span>
-    <span class="n">mu</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">final_time</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
-    <span class="n">n_pts_time_vector</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
+<a href="#gemseo_petsc.ode.settings.petsc_ts_settings.FinalTimeBehavior" class="headerlink" title="Permanent link">&para;</a></h4>
+
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-external" title="gemseo.algos.ode.ode_problem.ODEProblem" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.ode_problem.html#gemseo.algos.ode.ode_problem.ODEProblem">ODEProblem</a></code></p>
+              Bases: <code><span title="strenum.StrEnum">StrEnum</span></code></p>
 
 
-        <p>Van der Pol ODE.</p>
-
-        <p>Initialize state and ODE functions.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>mu</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>, default:
-                  <code>0.5</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The mu coefficient in the ODE</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>final_time</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></code>, default:
-                  <code>2.0</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The final time of the ODE resolution.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>n_pts_time_vector</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>, default:
-                  <code>1000</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>The number of points in the time_vector.</p>
-          </div>
-        </li>
-    </ul>
+        <p>The behavior at the end of the resolution.</p>
 
 
 
@@ -1553,49 +1549,98 @@
 
 
 
-                  <details class="quote">
-                    <summary>Source code in <code>src/gemseo_petsc/problems/vanderpol.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">final_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">n_pts_time_vector</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize state and ODE functions.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        mu: The mu coefficient in the ODE</span>
-<span class="sd">        final_time: The final time of the ODE resolution.</span>
-<span class="sd">        n_pts_time_vector: The number of points in the time_vector.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_state</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__jac_wrt_desvar</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__mu</span> <span class="o">=</span> <span class="n">mu</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__func</span><span class="p">,</span>
-        <span class="n">initial_state</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">]),</span>
-        <span class="n">times</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">final_time</span><span class="p">,</span> <span class="n">n_pts_time_vector</span><span class="p">),</span>
-        <span class="n">jac_function_wrt_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__compute_jac_wrt_state</span><span class="p">,</span>
-        <span class="n">jac_function_wrt_desvar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__compute_jac_wrt_desvar</span><span class="p">,</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-                  </details>
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="gemseo_petsc.ode.settings.petsc_ts_settings.ODESolverType" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">ODESolverType</span>
+
+
+<a href="#gemseo_petsc.ode.settings.petsc_ts_settings.ODESolverType" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="strenum.StrEnum">StrEnum</span></code></p>
+
+
+        <p>The type of ODE Solver.</p>
+<p>See
+[https://www.mcs.anl.gov/petsc/petsc4py-current/docs/apiref/petsc4py.PETSc.PC.Type-class.html].</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">PetscTSSettings</span>
+
+
+<a href="#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-external" title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.base_ode_solver_settings.html#gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</a></code></p>
+
+
+        <p>The base settings of the PETSc TS algorithms.</p>
+
+
+
+
+
+
+
 
 
 
@@ -1673,14 +1718,14 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.50899def.min.js"></script>
       
-        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../../../../../assets/_markdown_exec_pyodide.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
