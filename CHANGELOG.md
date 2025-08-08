@@ -26,6 +26,12 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Version 4.1.1 (August 2025)
+
+## Fixed
+
+- Initialisation of PETSc.
+
 ## Version 4.1.0 (March 2025)
 
 ## Added
