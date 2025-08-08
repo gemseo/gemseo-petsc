@@ -37,9 +37,11 @@ et-xmlfile==2.0.0
     # via openpyxl
 fastjsonschema==2.21.1
     # via gemseo
+fieldz==0.1.2
+    # via griffe-fieldz
 fonttools==4.59.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@70ab4206507a9048c1016678e4dac78bbf68507a
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@59e8308d539ebbd324d22cde53f0359e8f6a8398
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-petsc (pyproject.toml)
@@ -51,8 +53,11 @@ graphviz==0.21
     # via gemseo
 griffe==1.11.0
     # via
+    #   griffe-fieldz
     #   griffe-inherited-docstrings
     #   mkdocstrings-python
+griffe-fieldz==0.3.0
+    # via gemseo-petsc (pyproject.toml:doc)
 griffe-inherited-docstrings==1.1.1
     # via gemseo-petsc (pyproject.toml:doc)
 h5py==3.14.0
@@ -254,7 +259,7 @@ requests==2.32.4
     #   mkdocs-bibtex
     #   mkdocs-material
     #   responses
-responses==0.25.7
+responses==0.25.8
     # via mkdocs-bibtex
 scikit-learn==1.7.0
     # via gemseo
@@ -282,6 +287,7 @@ tqdm==4.67.1
     #   mkdocs-gallery
 typing-extensions==4.14.1
     # via
+    #   fieldz
     #   gemseo
     #   pydantic
     #   pydantic-core
