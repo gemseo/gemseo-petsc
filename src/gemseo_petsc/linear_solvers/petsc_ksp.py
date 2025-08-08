@@ -21,7 +21,6 @@
 from __future__ import annotations
 
 import logging
-import sys
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 from typing import Any
@@ -46,7 +45,7 @@ from gemseo_petsc.linear_solvers.settings.petsc_ksp_settings import Precondition
 
 # Must be done before from petsc4py import PETSc, this loads the options from
 # command args in the options database.
-petsc4py.init(sys.argv)
+petsc4py.init()
 from petsc4py import PETSc  # noqa: E402
 
 if TYPE_CHECKING:
