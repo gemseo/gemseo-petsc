@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -1690,6 +1690,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/</p>
 <p>About checkpoints:
 https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpointing</p>
 
+        <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1725,7 +1726,8 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 
                   <details class="quote">
                     <summary>Source code in <code>src/gemseo_petsc/ode/ts_library.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
@@ -1740,8 +1742,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 <span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algo_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algo_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 <span class="sd">        algo_name: The name of the algorithm solving the ODE.</span>
