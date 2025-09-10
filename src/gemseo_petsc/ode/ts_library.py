@@ -29,13 +29,11 @@ import logging
 import sys
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
-from typing import Any
 from typing import ClassVar
 from typing import Final
 
 from gemseo.algos.ode.base_ode_solver_library import BaseODESolverLibrary
 from gemseo.algos.ode.base_ode_solver_library import ODESolverDescription
-from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
 from numpy import arange
 from numpy import array
 from numpy import extract
@@ -54,6 +52,7 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Sequence
 
+    from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
     from gemseo.algos.ode.ode_problem import ODEProblem
     from gemseo.algos.ode.ode_result import ODEResult
     from gemseo.typing import RealArray
@@ -310,20 +309,15 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         """
         self._problem.result.terminal_event_index = events[0]
 
-    def _run(self, problem: ODEProblem, **settings: Any) -> ODEResult:
+    def _run(self, problem: ODEProblem) -> ODEResult:
         """Run the quadrature algorithm.
 
         Args:
             problem: The Initial Value Problem to be solved.
-            settings: The settings of the algorithm.
 
         Returns:
             The solution of the Initial Value Problem.
         """
-        settings_ = self._filter_settings(
-            settings, model_to_exclude=BaseODESolverSettings
-        )
-
         self._problem = problem
         self.__n_calls_jac = 0
 
@@ -333,13 +327,13 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         method = (self.algo_name.replace(self.PETSC_ODE_PREFIX, "")).lower()
         time_stepper.setType(method)
         time_stepper.setTime(self._problem.time_interval[0])
-        time_stepper.setTimeStep(settings_["time_step"])
+        time_stepper.setTimeStep(self._settings.time_step)
         time_stepper.setMaxTime(self._problem.time_interval[-1])
-        time_stepper.setMaxSteps(settings_["maximum_steps"])
-        time_stepper.setTolerances(settings_["atol"], settings_["rtol"])
+        time_stepper.setMaxSteps(self._settings.maximum_steps)
+        time_stepper.setTolerances(self._settings.atol, self._settings.rtol)
         time_stepper.setExactFinalTime(PETSc.TS.ExactFinalTime.MATCHSTEP)
 
-        self.__set_time_stepper_checkpoint_options(settings_)
+        self.__set_time_stepper_checkpoint_options(self._settings)
 
         time_stepper.setMonitor(self.__monitor)
         dim = self._problem.initial_state.shape[0]
@@ -348,7 +342,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         initial_state = convert_ndarray_to_mat_or_vec(self._problem.initial_state)
         state_dot = initial_state.duplicate()
         time_stepper.setRHSFunction(self._rhs_function, state_dot)
-        if self._problem.jac_function_wrt_state is None and settings_["use_jacobian"]:
+        if self._problem.jac_function_wrt_state is None and self._settings.use_jacobian:
             msg = (
                 "Jacobian of RHS function wrt state must be provided"
                 " when 'use_jacobian' setting is True"
@@ -357,19 +351,19 @@ class PetscOdeAlgo(BaseODESolverLibrary):
 
         if (
             self._problem.jac_function_wrt_state is not None
-            and settings_["use_jacobian"]
+            and self._settings.use_jacobian
         ):
             jac_mat = PETSc.Mat().createDense([dim, dim], comm=comm)
             jac_mat.setUp()
             time_stepper.setRHSJacobian(self._jac_function_wrt_state, jac_mat, jac_mat)
-        elif settings_["compute_adjoint"]:
+        elif self._settings.compute_adjoint:
             msg = (
                 "The 'use_jacobian' setting is mandatory "
                 "when 'compute_adjoint' is True."
             )
             raise ValueError(msg)
 
-        if settings_["compute_adjoint"]:
+        if self._settings.compute_adjoint:
             self.__init_adjoint(time_stepper, comm)
 
         ode_method = time_stepper.getType()
@@ -386,8 +380,8 @@ class PetscOdeAlgo(BaseODESolverLibrary):
                 postevent=self.__post_event,
             )
             time_stepper.setEventTolerances(
-                settings_.get("events_tol", 1e-6),
-                vtol=settings_.get("events_vtol", [1e-9] * self.__n_events),
+                self._settings.events_tol,
+                vtol=self._settings.events_vtol or [1e-9] * self.__n_events,
             )
 
         # allow an unlimited number of failures (step will be rejected and retried)
@@ -410,7 +404,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
 
         ########################################
         self._problem.result.algorithm_name = self._algo_name  # OK
-        self._problem.result.algorithm_settings = settings_  # OK
+        self._problem.result.algorithm_settings = self._settings.model_dump()  # OK
         self._problem.result.termination_time = time_stepper.getTime()
         self._problem.result.algorithm_has_converged = (
             time_stepper.getConvergedReason() >= 0
@@ -463,7 +457,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         if time_stepper.getSNESFailures():
             LOGGER.warning("SNES failed  : %s", time_stepper.getSNESFailures())
 
-        if settings_["compute_adjoint"]:
+        if self._settings.compute_adjoint:
             time_stepper.adjointSolve()
 
             if self.adjoint_wrt_desvar:
@@ -480,24 +474,24 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         return self._problem.result
 
     @staticmethod
-    def __set_time_stepper_checkpoint_options(settings_: dict[str, Any]) -> None:
+    def __set_time_stepper_checkpoint_options(settings_: PetscTSSettings) -> None:
         """Sets the checkpointing options in TS.
 
         Args:
             settings_: TS library settings.
         """
-        if not settings_["compute_adjoint"]:
+        if not settings_.compute_adjoint:
             return
 
         petsc_options = PETSc.Options()
-        if settings_["use_memory_checkpoints"]:
+        if settings_.use_memory_checkpoints:
             petsc_options.setValue("ts_trajectory_type", "memory")
 
-        max_disk_checkpoints = settings_["max_disk_checkpoints"]
+        max_disk_checkpoints = settings_.max_disk_checkpoints
         if max_disk_checkpoints:
             petsc_options.setValue("ts_trajectory_max_cps_disk", max_disk_checkpoints)
 
-        max_memory_checkpoints = settings_["max_memory_checkpoints"]
+        max_memory_checkpoints = settings_.max_memory_checkpoints
         if max_memory_checkpoints:
             petsc_options.setValue("ts_trajectory_max_cps_ram", max_disk_checkpoints)
 
