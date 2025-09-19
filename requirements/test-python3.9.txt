@@ -33,9 +33,9 @@ execnet==2.1.1
     # via pytest-xdist
 fastjsonschema==2.21.1
     # via gemseo
-fonttools==4.59.2
+fonttools==4.60.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@9be33cec53c2c836a6afc299437a11167c17b00e
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@1229874bfb02edf89307673e2576caec9f035be0
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-petsc (pyproject.toml)
@@ -85,6 +85,7 @@ numpy==2.0.2
     #   pyxdsm
     #   scikit-learn
     #   scipy
+    #   spgl1
 openpyxl==3.1.5
     # via gemseo
 openturns==1.25
@@ -111,24 +112,28 @@ pluggy==1.6.0
     #   pytest-cov
 prettytable==3.16.0
     # via gemseo
-psutil==7.0.0
+psutil==7.1.0
     # via openturns
 pydantic==2.11.7
-    # via gemseo
+    # via
+    #   gemseo
+    #   pydantic-settings
 pydantic-core==2.33.2
     # via pydantic
+pydantic-settings==2.9.1
+    # via gemseo
 pydoe3==1.0.5
     # via gemseo
 pygments==2.19.2
     # via pytest
-pyparsing==3.2.3
+pyparsing==3.2.4
     # via matplotlib
 pytest==8.4.2
     # via
     #   gemseo-petsc (pyproject.toml:dev)
     #   pytest-cov
     #   pytest-xdist
-pytest-cov==6.3.0
+pytest-cov==7.0.0
     # via gemseo-petsc (pyproject.toml:dev)
 pytest-xdist==3.8.0
     # via gemseo-petsc (pyproject.toml:dev)
@@ -136,6 +141,8 @@ python-dateutil==2.9.0.post0
     # via
     #   matplotlib
     #   pandas
+python-dotenv==1.1.1
+    # via pydantic-settings
 pytz==2025.2
     # via pandas
 pyxdsm==2.3.1
@@ -150,8 +157,11 @@ scipy==1.13.1
     #   gemseo
     #   pydoe3
     #   scikit-learn
+    #   spgl1
 six==1.17.0
     # via python-dateutil
+spgl1==0.0.3
+    # via gemseo
 strenum==0.4.15
     # via gemseo
 sympy==1.14.0
@@ -174,7 +184,9 @@ typing-extensions==4.15.0
     #   pydantic-core
     #   typing-inspection
 typing-inspection==0.4.1
-    # via pydantic
+    # via
+    #   pydantic
+    #   pydantic-settings
 tzdata==2025.2
     # via pandas
 urllib3==2.5.0
