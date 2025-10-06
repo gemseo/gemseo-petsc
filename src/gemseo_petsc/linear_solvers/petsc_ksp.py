@@ -34,7 +34,6 @@ from gemseo.algos.linear_solvers.base_linear_solver_library import (
 )
 from numpy import arange
 from numpy import array
-from numpy import ndarray
 from scipy.sparse import csr_matrix
 from scipy.sparse import find
 from scipy.sparse.base import issparse
@@ -49,6 +48,7 @@ from petsc4py import PETSc  # noqa: E402
 
 if TYPE_CHECKING:
     from gemseo.algos.linear_solvers.linear_problem import LinearProblem
+    from numpy import ndarray
 
 LOGGER = logging.getLogger(__name__)
 

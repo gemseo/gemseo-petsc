@@ -79,3 +79,25 @@ See the [contributing section of GEMSEO](https://gemseo.readthedocs.io/en/stable
 - François Gallard
 - Jean-Christophe Giret
 - Antoine Dechaume
+
+## Building petsc4py
+
+From the container
+`registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc`,
+get the sources of petsc4py corresponding to the version of petsc
+currently installed in the system (currently 3.20.5).
+
+Install the following dependencies with dnf:
+
+- redhat-rpm-config
+- python3.13-devel
+- hdf5-devel
+
+then `export NUMPY_INCLUDE=<path to numpy includes>`
+then
+`PETSC_DIR=$(pwd)/petsc-includes uv build --wheel -p python3.13 .`
+where `petsc-includes` contains the symbolic links to:
+
+- include -> /usr/include/petsc/
+- lib -> lib64/
+- lib64 -> /usr/lib64/
