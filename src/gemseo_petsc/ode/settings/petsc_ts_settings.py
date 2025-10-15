@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
+from gemseo.utils.pydantic_ndarray import NDArrayPydantic  # noqa: TC002
 from pydantic import Field
 from pydantic import NonNegativeFloat
 from pydantic import NonNegativeInt
@@ -129,4 +130,22 @@ Set tolerance for local truncation error when using an adaptive controller. See:
         description="""Behaviour to adopt near the final time.
             For more information, see
             https://petsc.org/release/manualpages/TS/TSExactFinalTimeOption/""",
+    )
+
+    events_tol: NonNegativeFloat = Field(
+        default=1e-6,
+        alias="tol",
+        description="""Tolerance for event (indicator function) zero crossings.
+           For more information, see
+           https://petsc.org/release/manualpages/TS/TSSetEventTolerances/""",
+    )
+
+    events_vtol: NDArrayPydantic[NonNegativeFloat] | None = Field(
+        default=None,
+        alias="vtol",
+        description="""Array of tolerances, used in preference to  ``events_tol``
+           if present. The size of vtol should be equal to the number of events on
+           the given process.
+           For more information, see
+           https://petsc.org/release/manualpages/TS/TSSetEventTolerances/""",
     )

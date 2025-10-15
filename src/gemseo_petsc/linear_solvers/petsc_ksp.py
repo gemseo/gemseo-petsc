@@ -23,7 +23,6 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
-from typing import Any
 from typing import ClassVar
 
 import petsc4py
@@ -35,7 +34,6 @@ from gemseo.algos.linear_solvers.base_linear_solver_library import (
 )
 from numpy import arange
 from numpy import array
-from numpy import ndarray
 from scipy.sparse import csr_matrix
 from scipy.sparse import find
 from scipy.sparse.base import issparse
@@ -50,6 +48,7 @@ from petsc4py import PETSc  # noqa: E402
 
 if TYPE_CHECKING:
     from gemseo.algos.linear_solvers.linear_problem import LinearProblem
+    from numpy import ndarray
 
 LOGGER = logging.getLogger(__name__)
 
@@ -65,7 +64,7 @@ class PetscKSPAlgorithmDescription(LinearSolverDescription):
     """Whether the left-hand side matrix must be a linear operator."""
 
 
-class PetscKSP(BaseLinearSolverLibrary):
+class PetscKSP(BaseLinearSolverLibrary[BasePetscKSPSettings]):
     """Interface to PETSC KSP.
 
     For further information, please read
@@ -139,11 +138,8 @@ class PetscKSP(BaseLinearSolverLibrary):
         for solver_name in __SOLVER_LIST
     }
 
-    def _run(self, problem: LinearProblem, **settings: Any) -> ndarray:
+    def _run(self, problem: LinearProblem) -> ndarray:
         """Run the algorithm.
-
-        Args:
-            **options: The algorithm options.
 
         Returns:
             The solution of the problem.
@@ -154,7 +150,7 @@ class PetscKSP(BaseLinearSolverLibrary):
 
         # Initialize the KSP solver.
         # Create the options database
-        options_cmd = settings["options_cmd"]
+        options_cmd = self._settings.options_cmd
         if options_cmd is not None:
             petsc4py.init(options_cmd)
         else:
@@ -162,12 +158,15 @@ class PetscKSP(BaseLinearSolverLibrary):
         ksp = PETSc.KSP().create()
         ksp.setType(self.ALGORITHM_INFOS[self._algo_name].internal_algorithm_name)
         ksp.setTolerances(
-            settings["rtol"], settings["atol"], settings["dtol"], settings["maxiter"]
+            self._settings.rtol,
+            self._settings.atol,
+            self._settings.dtol,
+            self._settings.maxiter,
         )
         ksp.setConvergenceHistory()
         a_mat = _convert_ndarray_to_mat_or_vec(problem.lhs)
         ksp.setOperators(a_mat)
-        prec_type = settings["preconditioner_type"]
+        prec_type = self._settings.preconditioner_type
         if prec_type is not None:
             pc = ksp.getPC()
             pc.setType(prec_type)
@@ -175,15 +174,15 @@ class PetscKSP(BaseLinearSolverLibrary):
 
         # Allow for solver choice to be set from command line with -ksp_type <solver>.
         # Recommended option: -ksp_type preonly -pc_type lu
-        if settings["set_from_options"]:
+        if self._settings.set_from_options:
             ksp.setFromOptions()
 
-        ksp_pre_processor = settings["ksp_pre_processor"]
+        ksp_pre_processor = self._settings.ksp_pre_processor
         if ksp_pre_processor is not None:
-            ksp_pre_processor(ksp, settings)
+            ksp_pre_processor(ksp, self._settings.model_dump())
 
         problem.residuals_history = []
-        if settings["monitor_residuals"]:
+        if self._settings.monitor_residuals:
             LOGGER.warning(
                 "Petsc option monitor_residuals slows the process and"
                 " should be used only for testing or convergence studies."
@@ -192,7 +191,7 @@ class PetscKSP(BaseLinearSolverLibrary):
 
         b_mat = _convert_ndarray_to_mat_or_vec(problem.rhs)
         solution = b_mat.duplicate()
-        if settings["view_config"]:
+        if self._settings.view_config:
             ksp.view()
         ksp.solve(b_mat, solution)
         problem.solution = solution.getArray().copy()
