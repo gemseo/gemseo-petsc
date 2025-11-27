@@ -1876,12 +1876,12 @@
 
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscOdeAlgo</span><span class="p">(</span><span class="n">algo_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscOdeAlgo</span><span class="p">(</span><span class="n">algo_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-external" title="gemseo.algos.ode.base_ode_solver_library.BaseODESolverLibrary" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.base_ode_solver_library.html#gemseo.algos.ode.base_ode_solver_library.BaseODESolverLibrary">BaseODESolverLibrary</a></code></p>
+              Bases: <code><span title="gemseo.algos.ode.base_ode_solver_library.BaseODESolverLibrary">BaseODESolverLibrary</span></code></p>
 
 
 
@@ -1901,7 +1901,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
     <ul>
         <li class="doc-section-item field-body">
             <b><code>algo_name</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
+              (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
             <p>The name of the algorithm solving the ODE.</p>
@@ -1913,7 +1913,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 <p><span class="doc-section-title">Raises:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#KeyError">KeyError</a></code>
+              <code><span title="KeyError">KeyError</span></code>
             –
           <div class="doc-md-description">
             <p>When the algorithm is not in the library.</p>
@@ -1989,7 +1989,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
   </span>
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo.adjoint_wrt_desvar" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_desvar</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_desvar</span><span class="p">:</span> <span class="n"><span title="list">list</span></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2013,7 +2013,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
   </span>
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo.adjoint_wrt_state" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_state</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_state</span><span class="p">:</span> <span class="n"><span title="list">list</span></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2049,13 +2049,13 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 
 <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription" class="headerlink" title="Permanent link">&para;</a></h4>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscTSAlgorithmDescription</span><span class="p">(</span>
-    <span class="n">Settings</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#type">type</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.base_ode_solver_settings.html#gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span><span class="p">,</span>
+    <span class="n">Settings</span><span class="p">:</span> <span class="n"><span title="type">type</span></span><span class="p">[</span><span class="n"><span title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-external" title="gemseo.algos.ode.base_ode_solver_library.ODESolverDescription" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.base_ode_solver_library.html#gemseo.algos.ode.base_ode_solver_library.ODESolverDescription">ODESolverDescription</a></code></p>
+              Bases: <code><span title="gemseo.algos.ode.base_ode_solver_library.ODESolverDescription">ODESolverDescription</span></code></p>
 
 
 
@@ -2093,7 +2093,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
   </span>
 
 <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.Settings" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">Settings</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#type">type</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings" href="https://gemseo.readthedocs.io/en/stable/modules/gemseo.algos.ode.base_ode_solver_settings.html#gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">Settings</span><span class="p">:</span> <span class="n"><span title="type">type</span></span><span class="p">[</span><span class="n"><span title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
