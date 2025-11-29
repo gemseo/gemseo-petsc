@@ -214,12 +214,12 @@ def test_error_jacobian_shape():
     def _jac_3(time: float, state: NDArray[float]) -> NDArray[float]:
         return array([[1], [-1]])
 
-    for _ii, _jac in enumerate([_jac_1, _jac_2, _jac_3]):
+    for _ii, jac in enumerate([_jac_1, _jac_2, _jac_3]):
         problem = ODEProblem(
             _func,
             initial_state=array([1, 1]),
             times=arange(0, 1, 0.1),
-            jac_function_wrt_state=_jac,
+            jac_function_wrt_state=jac,
         )
 
         with pytest.raises(
