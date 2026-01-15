@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING
 from gemseo.algos.ode.ode_problem import ODEProblem
 from numpy import array
 from numpy import linspace
+from numpy import ndarray
 from numpy import zeros
 
 if TYPE_CHECKING:
@@ -55,7 +56,7 @@ class VanderPol(ODEProblem):
         """
         self.__jac_wrt_state = zeros((2, 2))
         self.__jac_wrt_desvar = zeros((2, 1))
-        self.__mu = mu
+        self.__mu = float(mu[0, ...]) if isinstance(mu, ndarray) else mu
         super().__init__(
             self.__func,
             initial_state=array([2.0, -2.0 / 3.0]),
