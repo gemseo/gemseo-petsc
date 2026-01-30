@@ -41,7 +41,7 @@ fieldz==0.1.3
     # via griffe-fieldz
 fonttools==4.61.1
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@eb0c111277e2bf94da19f257367dad5b5980111e
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@9afbe86bb3a04c5700e811d7000b0f208abfd881
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-petsc (pyproject.toml)
@@ -245,7 +245,7 @@ python-dateutil==2.9.0.post0
     #   pandas
 python-dotenv==1.2.1
     # via pydantic-settings
-pytokens==0.4.0
+pytokens==0.4.1
     # via black
 pytz==2025.2
     # via pandas
