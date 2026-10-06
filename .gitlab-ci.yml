@@ -4,6 +4,12 @@ include:
 variables:
   TEST_IMAGE:
     value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc
+  __PY_VERSION_MIN: 311
 
 .test-all-tags:
   - saas-linux-small-amd64
+
+.test-all-py-versions:
+  - 311
+  - 312
+  - 313
