@@ -23,7 +23,7 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
-from gemseo.algos.ode.factory import ODESolverLibraryFactory
+from gemseo.ode.factory import ODESolverLibraryFactory
 
 from gemseo_petsc.problems.smooth_ode import SmoothODE
 from gemseo_petsc.problems.vanderpol import VanderPol

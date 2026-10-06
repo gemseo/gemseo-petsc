@@ -22,14 +22,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from gemseo.algos.ode.ode_problem import ODEProblem
+from gemseo.ode import ODEProblem
 from numpy import array
 from numpy import linspace
 from numpy import ndarray
 from numpy import zeros
 
 if TYPE_CHECKING:
-    from gemseo.typing import RealArray
+    from gemseo.util.typing import RealArray
 
 
 class VanderPol(ODEProblem):

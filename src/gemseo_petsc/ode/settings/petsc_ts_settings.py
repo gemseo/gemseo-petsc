@@ -16,14 +16,15 @@
 
 from __future__ import annotations
 
-from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
-from gemseo.utils.pydantic_ndarray import NDArrayPydantic  # noqa: TC002
+from gemseo.ode.core.base_ode_solver_settings import BaseODESolverSettings
+from gemseo.util.pydantic_ndarray import NDArrayPydantic  # noqa: TC002
 from pydantic import Field
 from pydantic import NonNegativeFloat
 from pydantic import NonNegativeInt
 from pydantic import PositiveFloat
 from pydantic import PositiveInt
-from strenum import StrEnum
+# TODO(bump-gemseo): strenum.StrEnum: enum.StrEnum gives auto() the lower-cased member name (MC = auto() was "MC", is now "mc"), so write MC = "MC" to keep the values, or keep strenum as a dependency of your own  # noqa: E501
+from enum import StrEnum
 
 
 class ODESolverType(StrEnum):

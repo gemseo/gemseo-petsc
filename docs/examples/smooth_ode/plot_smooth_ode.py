@@ -26,8 +26,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from gemseo.algos.ode.factory import ODESolverLibraryFactory
-from gemseo.algos.ode.ode_problem import ODEProblem
+from gemseo.ode.factory import ODESolverLibraryFactory
+from gemseo.ode import ODEProblem
 from matplotlib import pyplot as plt
 from numpy import array
 from numpy import atleast_1d
@@ -35,7 +35,7 @@ from numpy import linspace
 from numpy import zeros
 
 if TYPE_CHECKING:
-    from gemseo.typing import RealArray
+    from gemseo.util.typing import RealArray
 
 # %%
 # Let us consider the following IVP:

@@ -26,10 +26,10 @@ from typing import TYPE_CHECKING
 from typing import ClassVar
 
 import petsc4py
-from gemseo.algos.linear_solvers.base_linear_solver_library import (
+from gemseo.linear.core.base_linear_solver_library import (
     BaseLinearSolverLibrary,
 )
-from gemseo.algos.linear_solvers.base_linear_solver_library import (
+from gemseo.linear.core.base_linear_solver_library import (
     LinearSolverDescription,
 )
 from numpy import arange
@@ -47,7 +47,7 @@ petsc4py.init()
 from petsc4py import PETSc  # noqa: E402
 
 if TYPE_CHECKING:
-    from gemseo.algos.linear_solvers.linear_problem import LinearProblem
+    from gemseo.linear import LinearProblem
     from numpy import ndarray
 
 LOGGER = logging.getLogger(__name__)

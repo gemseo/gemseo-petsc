@@ -19,16 +19,17 @@ from __future__ import annotations
 from collections.abc import Callable  # noqa: TC003
 from typing import Annotated
 
-from gemseo.algos.linear_solvers.base_linear_solver_settings import (
+from gemseo.linear.core.base_linear_solver_settings import (
     BaseLinearSolverSettings,
 )
-from gemseo.typing import StrKeyMapping  # noqa: TC002
+from gemseo.util.typing import StrKeyMapping  # noqa: TC002
 from pydantic import AliasChoices
 from pydantic import Field
 from pydantic import NonNegativeFloat
 from pydantic import PositiveInt
 from pydantic import WithJsonSchema
-from strenum import StrEnum
+# TODO(bump-gemseo): strenum.StrEnum: enum.StrEnum gives auto() the lower-cased member name (MC = auto() was "MC", is now "mc"), so write MC = "MC" to keep the values, or keep strenum as a dependency of your own  # noqa: E501
+from enum import StrEnum
 
 
 class PreconditionerType(StrEnum):

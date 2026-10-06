@@ -24,8 +24,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-from gemseo.algos.ode.factory import ODESolverLibraryFactory
-from gemseo.algos.ode.ode_problem import ODEProblem
+from gemseo.ode.factory import ODESolverLibraryFactory
+from gemseo.ode import ODEProblem
 from numpy import allclose
 from numpy import arange
 from numpy import array
@@ -53,6 +53,7 @@ def test_algo_list_full():
     factory = ODESolverLibraryFactory()
     for solver, infos in PetscOdeAlgo.ALGORITHM_INFOS.items():
         assert factory.is_available(solver)
+        # TODO(bump-gemseo): cannot transform: the type of infos.Settings could not be inferred; if it is an instance of BaseSettings, read it with the target_class_name property of a settings instance; in a settings class, remove the assignment, as the value is now derived from the name of the class (X_Settings targets X)  # noqa: E501
         assert solver == infos.Settings._TARGET_CLASS_NAME
 
 

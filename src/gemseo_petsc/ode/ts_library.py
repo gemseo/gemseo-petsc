@@ -32,8 +32,8 @@ from typing import TYPE_CHECKING
 from typing import ClassVar
 from typing import Final
 
-from gemseo.algos.ode.base_ode_solver_library import BaseODESolverLibrary
-from gemseo.algos.ode.base_ode_solver_library import ODESolverDescription
+from gemseo.ode.core.base_ode_solver_library import BaseODESolverLibrary
+from gemseo.ode.core.base_ode_solver_library import ODESolverDescription
 from numpy import arange
 from numpy import array
 from numpy import extract
@@ -52,10 +52,10 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Sequence
 
-    from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
-    from gemseo.algos.ode.ode_problem import ODEProblem
-    from gemseo.algos.ode.ode_result import ODEResult
-    from gemseo.typing import RealArray
+    from gemseo.ode.core.base_ode_solver_settings import BaseODESolverSettings
+    from gemseo.ode import ODEProblem
+    from gemseo.ode.result import ODEResult
+    from gemseo.util.typing import RealArray
 
     FINAL_T_OPTION = PETSc.TS.TSExactFinalTimeOption
 
