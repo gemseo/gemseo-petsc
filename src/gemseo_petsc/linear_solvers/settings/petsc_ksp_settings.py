@@ -17,19 +17,16 @@
 from __future__ import annotations
 
 from collections.abc import Callable  # noqa: TC003
+from enum import StrEnum
 from typing import Annotated
 
-from gemseo.linear.core.base_linear_solver_settings import (
-    BaseLinearSolverSettings,
-)
+from gemseo.linear.core.base_linear_solver_settings import BaseLinearSolverSettings
 from gemseo.util.typing import StrKeyMapping  # noqa: TC002
 from pydantic import AliasChoices
 from pydantic import Field
 from pydantic import NonNegativeFloat
 from pydantic import PositiveInt
 from pydantic import WithJsonSchema
-# TODO(bump-gemseo): strenum.StrEnum: enum.StrEnum gives auto() the lower-cased member name (MC = auto() was "MC", is now "mc"), so write MC = "MC" to keep the values, or keep strenum as a dependency of your own  # noqa: E501
-from enum import StrEnum
 
 
 class PreconditionerType(StrEnum):
@@ -58,12 +55,7 @@ class PreconditionerType(StrEnum):
 
 
 class BasePetscKSPSettings(BaseLinearSolverSettings):
-    """The base settings of the PETSc KSP algorithms.
-
-    `_TARGET_CLASS_NAME` will be overloaded for each algorithm.
-    """
-
-    _TARGET_CLASS_NAME = ""
+    """The base settings of the PETSc KSP algorithms."""
 
     atol: NonNegativeFloat = Field(
         default=1e-50,

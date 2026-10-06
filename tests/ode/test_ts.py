@@ -22,10 +22,11 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from typing import Any
 
 import pytest
-from gemseo.ode.factory import ODESolverLibraryFactory
 from gemseo.ode import ODEProblem
+from gemseo.ode.factory import ODESolverLibraryFactory
 from numpy import allclose
 from numpy import arange
 from numpy import array
@@ -34,12 +35,24 @@ from numpy import isclose
 from numpy import ndarray
 from numpy import sqrt
 from numpy import zeros
-from src.gemseo_petsc.problems.smooth_ode import SmoothODE
 
 from gemseo_petsc.ode.ts_library import PetscOdeAlgo
+from gemseo_petsc.problems.smooth_ode import SmoothODE
 
 if TYPE_CHECKING:
     from numpy.typing import NDArray
+
+
+def solve(problem: ODEProblem, algo_name: str, **settings: Any) -> None:
+    """Solve an ODE problem with a PETSc TS algorithm.
+
+    Args:
+        problem: The ODE problem.
+        algo_name: The name of the algorithm.
+        **settings: The settings of the algorithm.
+    """
+    factory = ODESolverLibraryFactory()
+    factory.execute(problem, factory.create_settings(algo_name, **settings))
 
 
 def test_algo_list():
@@ -53,8 +66,7 @@ def test_algo_list_full():
     factory = ODESolverLibraryFactory()
     for solver, infos in PetscOdeAlgo.ALGORITHM_INFOS.items():
         assert factory.is_available(solver)
-        # TODO(bump-gemseo): cannot transform: the type of infos.Settings could not be inferred; if it is an instance of BaseSettings, read it with the target_class_name property of a settings instance; in a settings class, remove the assignment, as the value is now derived from the name of the class (X_Settings targets X)  # noqa: E501
-        assert solver == infos.Settings._TARGET_CLASS_NAME
+        assert solver == infos.settings_class.model_construct().target_class_name
 
 
 def test_solver_1d_problem_fixed_times():
@@ -70,7 +82,7 @@ def test_solver_1d_problem_fixed_times():
         initial_state=array([1, 2]),
         times=times,
     )
-    ODESolverLibraryFactory().execute(
+    solve(
         problem, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000, atol=1e-8
     )
     assert problem.result.algorithm_has_converged
@@ -89,7 +101,7 @@ def test_solver_1d_problem_algo_times():
     problem = ODEProblem(
         _func, initial_state=array([1, 2]), times=times, solve_at_algorithm_times=True
     )
-    ODESolverLibraryFactory().execute(
+    solve(
         problem, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000, atol=1e-8
     )
     assert problem.result.algorithm_has_converged
@@ -114,7 +126,7 @@ def test_solver_1d_problem_final_time():
     problem = ODEProblem(
         _func, initial_state=array([1, 2]), times=times, jac_function_wrt_state=_jac
     )
-    ODESolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_ODE_BEULER",
         time_step=1e-3,
@@ -156,7 +168,7 @@ def test_vanderpol_problem():
     assert problem.result.n_jac_evaluations == 0
     assert problem.result.state_trajectories.size == 0
 
-    ODESolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_ODE_RK",
         time_step=time_step,
@@ -179,7 +191,7 @@ def test_error_providing_jac():
     with pytest.raises(
         ValueError, match=r"Jacobian of RHS function wrt state must be provided."
     ):
-        ODESolverLibraryFactory().execute(
+        solve(
             problem,
             algo_name="PETSC_ODE_BEULER",
             time_step=1e-3,
@@ -191,7 +203,7 @@ def test_error_providing_jac():
         ValueError,
         match=r"'use_jacobian' setting is mandatory when 'compute_adjoint' is True",
     ):
-        ODESolverLibraryFactory().execute(
+        solve(
             problem,
             algo_name="PETSC_ODE_BEULER",
             time_step=1e-3,
@@ -226,7 +238,7 @@ def test_error_jacobian_shape():
         with pytest.raises(
             ValueError, match=r"The Jacobian should be a square matrix with shape"
         ):
-            ODESolverLibraryFactory().execute(
+            solve(
                 problem,
                 algo_name="PETSC_ODE_BEULER",
                 time_step=1e-3,
@@ -248,9 +260,7 @@ def test_non_convergence():
         initial_state=array([1.0, 1.0]),
         times=arange(-1, 1, 0.1),
     )
-    ODESolverLibraryFactory().execute(
-        problem, algo_name="PETSC_ODE_RK", time_step=1e2, maximum_steps=10
-    )
+    solve(problem, algo_name="PETSC_ODE_RK", time_step=1e2, maximum_steps=10)
 
     assert problem.result.algorithm_has_converged is False
 
@@ -271,9 +281,7 @@ def test_one_termination_event():
         event_functions=(_termination,),
     )
 
-    ODESolverLibraryFactory().execute(
-        problem, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000
-    )
+    solve(problem, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000)
 
     assert isclose(problem.result.termination_time, sqrt(2.0))
     assert problem.result.terminal_event_index == 0
@@ -298,9 +306,7 @@ def test_multiple_termination_events():
         event_functions=(_termination1, _termination2),
     )
 
-    ODESolverLibraryFactory().execute(
-        problem1, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000
-    )
+    solve(problem1, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000)
 
     assert isclose(problem1.result.termination_time, sqrt(2.0))
     assert problem1.result.terminal_event_index == 0
@@ -312,9 +318,7 @@ def test_multiple_termination_events():
         event_functions=(_termination2, _termination1),
     )
 
-    ODESolverLibraryFactory().execute(
-        problem2, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000
-    )
+    solve(problem2, algo_name="PETSC_ODE_RK", time_step=1e-3, maximum_steps=1000)
 
     assert isclose(problem2.result.termination_time, sqrt(2.0))
     assert problem2.result.terminal_event_index == 1
@@ -330,7 +334,7 @@ def test_failure_snes():
     problem = ODEProblem(
         _func, initial_state=array([1]), times=times, solve_at_algorithm_times=True
     )
-    ODESolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_ODE_ALPHA",
         time_step=1e-3,
@@ -346,7 +350,7 @@ def test_check_final_state():
 
     problem = create_smooth_ode(1.0)
 
-    ODESolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_ODE_RK",
         time_step=0.01,

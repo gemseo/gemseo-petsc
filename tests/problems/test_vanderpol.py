@@ -18,6 +18,7 @@
 #                 Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 from gemseo.core.function.array_function import ArrayFunction
+from gemseo.util.derivative.check.function import FunctionJacobianChecker
 from numpy import array
 
 from gemseo_petsc.problems.vanderpol import VanderPol
@@ -35,8 +36,9 @@ def ode_jac_mu(mu):
 
 def test_ode_jac_desvars():
     func = ArrayFunction(ode_func_mu, "jac_desvars", jac=ode_jac_mu)
-    # TODO(bump-gemseo): cannot transform: the type of func could not be inferred; if it is an instance of MDOFunction, use gemseo.util.derivative.check.function.FunctionJacobianChecker instead  # noqa: E501
-    func.check_grad(array([0.5]), step=1e-7, error_max=1e-5)
+    assert FunctionJacobianChecker(func).check(
+        array([0.5]), step=1e-7, atol=1e-5, rtol=1e-5
+    )
 
 
 def test_ode_jac_state():
@@ -46,5 +48,6 @@ def test_ode_jac_state():
         "jac_state",
         jac=lambda x: problem.jac_function_wrt_state(0.0, x),
     )
-    # TODO(bump-gemseo): cannot transform: the type of func could not be inferred; if it is an instance of MDOFunction, use gemseo.util.derivative.check.function.FunctionJacobianChecker instead  # noqa: E501
-    func.check_grad(array([0.5, 0.5]), step=1e-7, error_max=1e-5)
+    assert FunctionJacobianChecker(func).check(
+        array([0.5, 0.5]), step=1e-7, atol=1e-5, rtol=1e-5
+    )

@@ -30,8 +30,12 @@ from typing import Any
 import pytest
 from gemseo import create_discipline
 from gemseo import create_mda
-from gemseo.linear.factory import LinearSolverLibraryFactory
 from gemseo.linear import LinearProblem
+from gemseo.linear.factory import LinearSolverLibraryFactory
+from gemseo.mda import MDAChain_Settings
+from gemseo.mda import MDAJacobi_Settings
+from gemseo.mda import MDANewtonRaphson_Settings
+from gemseo.util.derivative.check.mda import MDAJacobianChecker
 from numpy import eye
 from numpy import random
 from scipy.sparse import coo_matrix
@@ -39,15 +43,24 @@ from scipy.sparse import load_npz
 
 from gemseo_petsc.linear_solvers.petsc_ksp import PetscKSP
 from gemseo_petsc.linear_solvers.petsc_ksp import _convert_ndarray_to_mat_or_vec
-from gemseo.mda import MDAJacobi_Settings
-from gemseo.mda import MDAChain_Settings
-from gemseo.mda import MDANewtonRaphson_Settings
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from gemseo.core.discipline import MDODiscipline
+    from gemseo.core.discipline.discipline import Discipline
     from petsc4py import PETSc
+
+
+def solve(problem: LinearProblem, algo_name: str, **settings: Any) -> None:
+    """Solve a linear problem with a PETSc KSP algorithm.
+
+    Args:
+        problem: The linear problem.
+        algo_name: The name of the algorithm.
+        **settings: The settings of the algorithm.
+    """
+    factory = LinearSolverLibraryFactory()
+    factory.execute(problem, factory.create_settings(algo_name, **settings))
 
 
 def test_algo_list():
@@ -55,8 +68,7 @@ def test_algo_list():
     factory = LinearSolverLibraryFactory()
     for solver, infos in PetscKSP.ALGORITHM_INFOS.items():
         assert factory.is_available(solver)
-        # TODO(bump-gemseo): cannot transform: the type of infos.Settings could not be inferred; if it is an instance of BaseSettings, read it with the target_class_name property of a settings instance; in a settings class, remove the assignment, as the value is now derived from the name of the class (X_Settings targets X)  # noqa: E501
-        assert solver == infos.Settings._TARGET_CLASS_NAME
+        assert solver == infos.settings_class().target_class_name
 
 
 def test_basic():
@@ -64,7 +76,7 @@ def test_basic():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         maxiter=100_000,
@@ -87,7 +99,7 @@ def test_basic_using_hook():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         maxiter=100_000,
@@ -104,7 +116,7 @@ def test_basic_with_options():
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
     petsc_options = {"ksp_type": "cg"}
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         maxiter=100_000,
@@ -124,7 +136,7 @@ def test_basic_set_from_options():
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(eye(n), rng.random(n))
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         maxiter=100_000,
@@ -141,9 +153,7 @@ def test_hard_conv(seed):
     rng = random.default_rng(seed)
     n = 300
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolverLibraryFactory().execute(
-        problem, algo_name="PETSC_GMRES", maxiter=100_000, view_config=True
-    )
+    solve(problem, algo_name="PETSC_GMRES", maxiter=100_000, view_config=True)
     assert problem.compute_residuals(True) < 1e-10
 
 
@@ -154,7 +164,7 @@ def test_options(solver_type, preconditioner_type):
     rng = random.default_rng(1)
     n = 3
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name=f"PETSC_{solver_type}",
         maxiter=100_000,
@@ -168,7 +178,7 @@ def test_residuals_history():
     rng = random.default_rng(1)
     n = 3000
     problem = LinearProblem(rng.random((n, n)), rng.random(n))
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         maxiter=100_000,
@@ -185,7 +195,7 @@ def test_hard_pb1():
     with open(join(dirname(__file__), "data", "b_vec.pkl"), "rb") as f:
         rhs = pickle.load(f)
     problem = LinearProblem(lhs, rhs)
-    LinearSolverLibraryFactory().execute(
+    solve(
         problem,
         algo_name="PETSC_GMRES",
         rtol=1e-13,
@@ -198,7 +208,7 @@ def test_hard_pb1():
 
 
 @pytest.fixture
-def sobieski_disciplines() -> list[MDODiscipline]:
+def sobieski_disciplines() -> list[Discipline]:
     """Return the Sobieski disciplines.
 
     Returns:
@@ -214,36 +224,39 @@ def sobieski_disciplines() -> list[MDODiscipline]:
 
 def test_mda_adjoint(sobieski_disciplines):
     """Test with an MDA with total derivatives computed with adjoint."""
-    linear_solver_settings = {
-        "maxiter": 100_000,
-    }
-    inner_mda_settings = {
-        "linear_solver": "PETSC_GMRES",
-        "linear_solver_settings": linear_solver_settings,
-    }
-    # TODO(bump-gemseo): the keys of inner_mda_settings are fields of MDAJacobi_Settings, whose rules (linear_solver, linear_solver_tolerance, use_lu_fact) cannot be applied to them  # noqa: E501
+    linear_solver_settings = LinearSolverLibraryFactory().create_settings(
+        "PETSC_GMRES", maxiter=100_000
+    )
     mda = create_mda(
-        "MDAChain", sobieski_disciplines, settings_model=MDAChain_Settings(inner_mda_settings=MDAJacobi_Settings(**inner_mda_settings)))
-    # TODO(bump-gemseo): use gemseo.util.derivative.check.mda.MDAJacobianChecker instead  # noqa: E501
-    assert mda.check_jacobian(threshold=1e-4)
+        "MDAChain",
+        sobieski_disciplines,
+        settings_model=MDAChain_Settings(
+            inner_mda_settings=MDAJacobi_Settings(
+                linear_solver_settings=linear_solver_settings
+            )
+        ),
+    )
+    assert MDAJacobianChecker(mda).check(atol=1e-4, rtol=1e-4)
 
 
 def test_mda_newton(sobieski_disciplines):
     """Test a Newton MDA."""
-    linear_solver_settings = {
-        "maxiter": 100_000,
-    }
-
+    linear_solver_settings = LinearSolverLibraryFactory().create_settings(
+        "PETSC_GMRES", maxiter=100_000
+    )
     tolerance = 1e-13
-    # TODO(bump-gemseo): cannot transform: no Settings class PETSC_GMRES_Settings in the griffe dump to gather the settings into  # noqa: E501
     mda = create_mda(
         "MDANewtonRaphson",
-        sobieski_disciplines[:3], settings_model=MDANewtonRaphson_Settings(tolerance=tolerance, newton_linear_solver_name="PETSC_GMRES", newton_linear_solver_settings=linear_solver_settings))
+        sobieski_disciplines[:3],
+        settings_model=MDANewtonRaphson_Settings(
+            tolerance=tolerance,
+            newton_linear_solver_settings=linear_solver_settings,
+        ),
+    )
 
     mda.execute()
     assert mda.residual_history[-1] <= tolerance
-    # TODO(bump-gemseo): use gemseo.util.derivative.check.mda.MDAJacobianChecker instead  # noqa: E501
-    assert mda.check_jacobian(threshold=1e-3)
+    assert MDAJacobianChecker(mda).check(atol=1e-3, rtol=1e-3)
 
 
 def test_convert_ndarray_to_numpy():

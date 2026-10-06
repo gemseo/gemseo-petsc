@@ -52,8 +52,8 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Sequence
 
-    from gemseo.ode.core.base_ode_solver_settings import BaseODESolverSettings
     from gemseo.ode import ODEProblem
+    from gemseo.ode.core.base_ode_solver_settings import BaseODESolverSettings
     from gemseo.ode.result import ODEResult
     from gemseo.util.typing import RealArray
 
@@ -66,7 +66,7 @@ LOGGER = logging.getLogger(__name__)
 class PetscTSAlgorithmDescription(ODESolverDescription):
     """The description of the PETSc TS ODE library."""
 
-    Settings: type[BaseODESolverSettings] = PetscTSSettings
+    settings_class: type[BaseODESolverSettings] = PetscTSSettings
     """The settings validation model."""
 
 
@@ -140,11 +140,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
             algorithm_name=solver_name,
             internal_algorithm_name=solver_name.lower(),
             website="https://petsc.org/release/manualpages/TS/",
-            Settings=type(
-                f"{solver_name}_Settings",
-                (PetscTSSettings,),
-                {"_TARGET_CLASS_NAME": f"{solver_name}"},
-            ),
+            settings_class=type(f"{solver_name}_Settings", (PetscTSSettings,), {}),
         )
         for solver_name in ODESolverType
     }

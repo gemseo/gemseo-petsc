@@ -26,12 +26,8 @@ from typing import TYPE_CHECKING
 from typing import ClassVar
 
 import petsc4py
-from gemseo.linear.core.base_linear_solver_library import (
-    BaseLinearSolverLibrary,
-)
-from gemseo.linear.core.base_linear_solver_library import (
-    LinearSolverDescription,
-)
+from gemseo.linear.core.base_linear_solver_library import BaseLinearSolverLibrary
+from gemseo.linear.core.base_linear_solver_library import LinearSolverDescription
 from numpy import arange
 from numpy import array
 from scipy.sparse import csr_matrix
@@ -129,10 +125,8 @@ class PetscKSP(BaseLinearSolverLibrary[BasePetscKSPSettings]):
             algorithm_name=solver_name,
             internal_algorithm_name=solver_name.lower(),
             website=f"https://petsc.org/release/manualpages/KSP/KSP{solver_name}/",
-            Settings=type(
-                f"PETSC_{solver_name}_Settings",
-                (BasePetscKSPSettings,),
-                {"_TARGET_CLASS_NAME": f"PETSC_{solver_name}"},
+            settings_class=type(
+                f"PETSC_{solver_name}_Settings", (BasePetscKSPSettings,), {}
             ),
         )
         for solver_name in __SOLVER_LIST

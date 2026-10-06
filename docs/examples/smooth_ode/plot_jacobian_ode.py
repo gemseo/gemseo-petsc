@@ -30,8 +30,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from gemseo.ode.factory import ODESolverLibraryFactory
 from gemseo.ode import ODEProblem
+from gemseo.ode.factory import ODESolverLibraryFactory
 from numpy import atleast_1d
 from numpy import linspace
 from numpy import zeros
@@ -88,7 +88,7 @@ def compute_jac_wrt_desvar(
 
 # %%
 # These functions are assembled into an
-# [ODEProblem][gemseo.algos.ode.ode_problem.ODEProblem].
+# [ODEProblem][gemseo.ode.problem.ODEProblem].
 
 
 class SmoothODEProblem(ODEProblem):
@@ -136,9 +136,9 @@ problem = SmoothODEProblem()
 # can be controlled by the optional parameters `max_disk_checkpoints`
 # and `max_memory_checkpoints`.
 
-ODESolverLibraryFactory().execute(
-    problem,
-    algo_name="PETSC_ODE_RK",
+factory = ODESolverLibraryFactory()
+settings = factory.create_settings(
+    "PETSC_ODE_RK",
     time_step=1e-2,
     maximum_steps=1000,
     rtol=1e-3,
@@ -146,6 +146,7 @@ ODESolverLibraryFactory().execute(
     compute_adjoint=True,
     use_memory_checkpoints=True,
 )
+factory.execute(problem, settings)
 
 # %%
 # The Jacobian of the solution of the IVP with respect to the initial conditions

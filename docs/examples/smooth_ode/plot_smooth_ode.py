@@ -26,8 +26,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from gemseo.ode.factory import ODESolverLibraryFactory
 from gemseo.ode import ODEProblem
+from gemseo.ode.factory import ODESolverLibraryFactory
 from matplotlib import pyplot as plt
 from numpy import array
 from numpy import atleast_1d
@@ -80,7 +80,7 @@ def compute_jac_wrt_state(
 
 # %%
 # These functions are assembled into an
-# [ODEProblem][gemseo.algos.ode.ode_problem.ODEProblem].
+# [ODEProblem][gemseo.ode.problem.ODEProblem].
 
 
 class SmoothODEProblem(ODEProblem):
@@ -112,14 +112,15 @@ problem = SmoothODEProblem()
 # the Runge-Kutta algorithm.
 
 
-ODESolverLibraryFactory().execute(
-    problem,
-    algo_name="PETSC_ODE_RK",
+factory = ODESolverLibraryFactory()
+settings = factory.create_settings(
+    "PETSC_ODE_RK",
     time_step=1e-2,
     maximum_steps=1000,
     rtol=1e-3,
     use_jacobian=True,
 )
+factory.execute(problem, settings)
 
 # %%
 # The numerical solution can be compared with the analytical solution of the ODE.
