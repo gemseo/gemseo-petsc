@@ -324,13 +324,17 @@ def test_multiple_termination_events():
     assert problem2.result.terminal_event_index == 1
 
 
-def test_failure_snes():
-    """Test the failure of the SNES solver."""
+def test_maximum_steps_reached():
+    """Test an implicit solver stopping on the maximum number of steps.
+
+    The solution of the ODE, 1/(1-t), blows up at t=1; the integration stops well before
+    so that the Newton matrix of the implicit solver remains far from singular.
+    """
 
     def _func(time: float, state: NDArray[float]) -> NDArray[float]:
         return state.copy() ** 2
 
-    times = array((0, 1))
+    times = array((0, 0.5))
     problem = ODEProblem(
         _func, initial_state=array([1]), times=times, solve_at_algorithm_times=True
     )
@@ -338,10 +342,12 @@ def test_failure_snes():
         problem,
         algo_name="PETSC_ODE_ALPHA",
         time_step=1e-3,
-        maximum_steps=1000,
+        maximum_steps=100,
         atol=1e-8,
     )
     assert not problem.result.algorithm_has_converged
+    assert problem.result.termination_time == pytest.approx(0.1)
+    assert problem.result.final_state == pytest.approx(1 / 0.9, rel=1e-3)
 
 
 def test_check_final_state():
