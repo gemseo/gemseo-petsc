@@ -2,7 +2,8 @@ include:
   - component: gitlab.com/gemseo/dev/ci/pipeline@1.1.0
     inputs:
       # petsc4py is installed from the wheels of the package registry of this project,
+      # the image is built with tools/Dockerfile.just.
       # built for these Python versions on Linux against the PETSc of this image.
       py_versions: "3.11 3.12 3.13"
       test_tags: "saas-linux-small-amd64"
-      test_image: "registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc"
+      test_image: "registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc:just"
