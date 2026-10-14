@@ -17,6 +17,8 @@
 #        :author: Isabelle Santos
 #                 Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
+from __future__ import annotations
+
 from gemseo.core.function.array_function import ArrayFunction
 from gemseo.util.derivative.check.function import FunctionJacobianChecker
 from numpy import array

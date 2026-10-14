@@ -1,15 +1,8 @@
 include:
-  - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/4/main.yml"
-
-variables:
-  TEST_IMAGE:
-    value: registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc
-  __PY_VERSION_MIN: 311
-
-.test-all-tags:
-  - saas-linux-small-amd64
-
-.test-all-py-versions:
-  - 311
-  - 312
-  - 313
+  - component: gitlab.com/gemseo/dev/ci/pipeline@1.1.0
+    inputs:
+      # petsc4py is installed from the wheels of the package registry of this project,
+      # built for these Python versions on Linux against the PETSc of this image.
+      py_versions: "3.11 3.12 3.13"
+      test_tags: "saas-linux-small-amd64"
+      test_image: "registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc"
