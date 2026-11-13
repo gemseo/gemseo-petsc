@@ -17,18 +17,16 @@
 from __future__ import annotations
 
 from collections.abc import Callable  # noqa: TC003
+from enum import StrEnum
 from typing import Annotated
 
-from gemseo.algos.linear_solvers.base_linear_solver_settings import (
-    BaseLinearSolverSettings,
-)
-from gemseo.typing import StrKeyMapping  # noqa: TC002
+from gemseo.linear.core.base_linear_solver_settings import BaseLinearSolverSettings
+from gemseo.util.typing import StrKeyMapping  # noqa: TC002
 from pydantic import AliasChoices
 from pydantic import Field
 from pydantic import NonNegativeFloat
 from pydantic import PositiveInt
 from pydantic import WithJsonSchema
-from strenum import StrEnum
 
 
 class PreconditionerType(StrEnum):
@@ -57,12 +55,7 @@ class PreconditionerType(StrEnum):
 
 
 class BasePetscKSPSettings(BaseLinearSolverSettings):
-    """The base settings of the PETSc KSP algorithms.
-
-    `_TARGET_CLASS_NAME` will be overloaded for each algorithm.
-    """
-
-    _TARGET_CLASS_NAME = ""
+    """The base settings of the PETSc KSP algorithms."""
 
     atol: NonNegativeFloat = Field(
         default=1e-50,

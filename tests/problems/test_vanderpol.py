@@ -17,7 +17,10 @@
 #        :author: Isabelle Santos
 #                 Francois Gallard
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
-from gemseo.core.mdo_functions.mdo_function import MDOFunction
+from __future__ import annotations
+
+from gemseo.core.function.array_function import ArrayFunction
+from gemseo.util.derivative.check.function import FunctionJacobianChecker
 from numpy import array
 
 from gemseo_petsc.problems.vanderpol import VanderPol
@@ -34,15 +37,19 @@ def ode_jac_mu(mu):
 
 
 def test_ode_jac_desvars():
-    func = MDOFunction(ode_func_mu, "jac_desvars", jac=ode_jac_mu)
-    func.check_grad(array([0.5]), step=1e-7, error_max=1e-5)
+    func = ArrayFunction(ode_func_mu, "jac_desvars", jac=ode_jac_mu)
+    assert FunctionJacobianChecker(func).check(
+        array([0.5]), step=1e-7, atol=1e-5, rtol=1e-5
+    )
 
 
 def test_ode_jac_state():
     problem = VanderPol()
-    func = MDOFunction(
+    func = ArrayFunction(
         lambda x: problem.rhs_function(0.0, x),
         "jac_state",
         jac=lambda x: problem.jac_function_wrt_state(0.0, x),
     )
-    func.check_grad(array([0.5, 0.5]), step=1e-7, error_max=1e-5)
+    assert FunctionJacobianChecker(func).check(
+        array([0.5, 0.5]), step=1e-7, atol=1e-5, rtol=1e-5
+    )

@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/gemseo/dev/gemseo/multi-python:latest
+FROM registry.gitlab.com/gemseo/dev/gemseo/multi-python:8
 
 RUN  dnf -y install petsc \
   && dnf clean all \

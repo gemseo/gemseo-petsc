@@ -26,6 +26,20 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+- Support for GEMSEO 7:
+  the PETSc KSP and TS algorithms are executed with settings models,
+  e.g. `LinearSolverLibraryFactory().create_settings("PETSC_GMRES", maxiter=100)`
+  instead of passing `algo_name` and the settings as keyword arguments.
+- Support for petsc4py up to 3.23.
+
+### Removed
+
+- Support for Python 3.10.
+
 ## Version 4.1.2 (October 2025)
 
 ### Added
