@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/generated/examples/smooth_ode/plot_smooth_ode/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/dev/gemseo-petsc/latest/generated/examples/smooth_ode/plot_smooth_ode/">
       
       
         <link rel="prev" href="../">
@@ -20,8 +20,8 @@
         
       
       
-      <link rel="icon" href="../../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <link rel="icon" href="../../../../images/monogram.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -57,13 +57,13 @@
     
       <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
     
       <link rel="stylesheet" href="../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../sg_gallery.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1527,8 +1527,8 @@ and a set of initial conditions for the state of the system.</p>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODESolverLibraryFactory</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.ode_problem</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODEProblem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.ode</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODEProblem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.ode.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODESolverLibraryFactory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">array</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">atleast_1d</span>
@@ -1536,12 +1536,12 @@ and a set of initial conditions for the state of the system.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">zeros</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealArray</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.util.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealArray</span>
 </code></pre></div>
 <p class="mkd-glr-script-out">Out:</p>
-<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code>/builds/gemseo/dev/gemseo-petsc/src/gemseo_petsc/linear_solvers/petsc_ksp.py:39:<span class="w"> </span>DeprecationWarning:<span class="w"> </span>Please<span class="w"> </span>import<span class="w"> </span><span class="sb">`</span>issparse<span class="sb">`</span><span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse<span class="sb">`</span><span class="w"> </span>namespace<span class="p">;</span><span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse.base<span class="sb">`</span><span class="w"> </span>namespace<span class="w"> </span>is<span class="w"> </span>deprecated<span class="w"> </span>and<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span><span class="k">in</span><span class="w"> </span>SciPy<span class="w"> </span><span class="m">2</span>.0.0.
+<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code>/builds/gemseo/dev/gemseo-petsc/.venv/lib64/python3.13/site-packages/gemseo_petsc/linear_solvers/petsc_ksp.py:35:<span class="w"> </span>DeprecationWarning:<span class="w"> </span>Please<span class="w"> </span>import<span class="w"> </span><span class="sb">`</span>issparse<span class="sb">`</span><span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse<span class="sb">`</span><span class="w"> </span>namespace<span class="p">;</span><span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse.base<span class="sb">`</span><span class="w"> </span>namespace<span class="w"> </span>is<span class="w"> </span>deprecated<span class="w"> </span>and<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span><span class="k">in</span><span class="w"> </span>SciPy<span class="w"> </span><span class="m">2</span>.0.0.
 <span class="w">  </span>from<span class="w"> </span>scipy.sparse.base<span class="w"> </span>import<span class="w"> </span>issparse
-/builds/gemseo/dev/gemseo-petsc/src/gemseo_petsc/utils/conversion.py:32:<span class="w"> </span>DeprecationWarning:<span class="w"> </span>Please<span class="w"> </span>import<span class="w"> </span><span class="sb">`</span>issparse<span class="sb">`</span><span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse<span class="sb">`</span><span class="w"> </span>namespace<span class="p">;</span><span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse.base<span class="sb">`</span><span class="w"> </span>namespace<span class="w"> </span>is<span class="w"> </span>deprecated<span class="w"> </span>and<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span><span class="k">in</span><span class="w"> </span>SciPy<span class="w"> </span><span class="m">2</span>.0.0.
+/builds/gemseo/dev/gemseo-petsc/.venv/lib64/python3.13/site-packages/gemseo_petsc/utils/conversion.py:32:<span class="w"> </span>DeprecationWarning:<span class="w"> </span>Please<span class="w"> </span>import<span class="w"> </span><span class="sb">`</span>issparse<span class="sb">`</span><span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse<span class="sb">`</span><span class="w"> </span>namespace<span class="p">;</span><span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>scipy.sparse.base<span class="sb">`</span><span class="w"> </span>namespace<span class="w"> </span>is<span class="w"> </span>deprecated<span class="w"> </span>and<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span><span class="k">in</span><span class="w"> </span>SciPy<span class="w"> </span><span class="m">2</span>.0.0.
 <span class="w">  </span>from<span class="w"> </span>scipy.sparse.base<span class="w"> </span>import<span class="w"> </span>issparse
 </code></pre></div>
 <!-- GENERATED FROM PYTHON SOURCE LINES 41-49 -->
@@ -1588,7 +1588,7 @@ as well as a design parameter <span class="arithmatex">\(k\)</span>.</p>
 <!-- GENERATED FROM PYTHON SOURCE LINES 82-84 -->
 
 <p>These functions are assembled into an
-[ODEProblem][gemseo.algos.ode.ode_problem.ODEProblem].</p>
+[ODEProblem][gemseo.ode.problem.ODEProblem].</p>
 <!-- GENERATED FROM PYTHON SOURCE LINES 84-109 -->
 
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SmoothODEProblem</span><span class="p">(</span><span class="n">ODEProblem</span><span class="p">):</span>
@@ -1619,41 +1619,42 @@ as well as a design parameter <span class="arithmatex">\(k\)</span>.</p>
 <p>The IVP can be solved using the algorithms provided by <code>gemseo-petsc</code>.
 As an example, here the solution to the IVP is found using
 the Runge-Kutta algorithm.</p>
-<!-- GENERATED FROM PYTHON SOURCE LINES 113-124 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 113-125 -->
 
-<div class="highlight"><pre><span></span><code><span class="n">ODESolverLibraryFactory</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="n">problem</span><span class="p">,</span>
-    <span class="n">algo_name</span><span class="o">=</span><span class="s2">&quot;PETSC_ODE_RK&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">factory</span> <span class="o">=</span> <span class="n">ODESolverLibraryFactory</span><span class="p">()</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_settings</span><span class="p">(</span>
+    <span class="s2">"PETSC_ODE_RK"</span><span class="p">,</span>
     <span class="n">time_step</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
     <span class="n">maximum_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
     <span class="n">use_jacobian</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="n">factory</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
 </code></pre></div>
 <p class="mkd-glr-script-out">Out:</p>
-<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code><span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">21</span>:46:39:<span class="w"> </span>Petsc<span class="w"> </span>ODE<span class="w"> </span>method<span class="w"> </span>selected<span class="w"> </span>:<span class="w"> </span>rk/3bs
-<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">21</span>:46:39:<span class="w"> </span>TS<span class="w"> </span>steps<span class="w"> </span>:<span class="w"> </span><span class="m">4</span>
-<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">21</span>:46:39:<span class="w"> </span>TS<span class="w"> </span>non<span class="w"> </span>linear<span class="w"> </span>iterations<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>
-<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">21</span>:46:39:<span class="w"> </span>TS<span class="w"> </span>linear<span class="w"> </span>iterations<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>
-<span class="w"> </span>WARNING<span class="w"> </span>-<span class="w"> </span><span class="m">21</span>:46:39:<span class="w"> </span>TS<span class="w"> </span>rejected<span class="w"> </span>steps<span class="w"> </span>SNES<span class="w"> </span>:<span class="w"> </span><span class="m">1</span>
+<div class="mkd-glr-script-out-disp highlight"><pre><span></span><code><span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">16</span>:19:46:<span class="w"> </span>Petsc<span class="w"> </span>ODE<span class="w"> </span>method<span class="w"> </span>selected<span class="w"> </span>:<span class="w"> </span>rk/3bs
+<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">16</span>:19:46:<span class="w"> </span>TS<span class="w"> </span>steps<span class="w"> </span>:<span class="w"> </span><span class="m">4</span>
+<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">16</span>:19:46:<span class="w"> </span>TS<span class="w"> </span>non<span class="w"> </span>linear<span class="w"> </span>iterations<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span>INFO<span class="w"> </span>-<span class="w"> </span><span class="m">16</span>:19:46:<span class="w"> </span>TS<span class="w"> </span>linear<span class="w"> </span>iterations<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>
+<span class="w"> </span>WARNING<span class="w"> </span>-<span class="w"> </span><span class="m">16</span>:19:46:<span class="w"> </span>TS<span class="w"> </span>rejected<span class="w"> </span>steps<span class="w"> </span>SNES<span class="w"> </span>:<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-<!-- GENERATED FROM PYTHON SOURCE LINES 125-131 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 126-132 -->
 
 <p>The numerical solution can be compared with the analytical solution of the ODE.</p>
 <div class="arithmatex">\[
     y(t) = \frac{ 2 y_0}{2 - k t^2 y_0}.
 \]</div>
-<!-- GENERATED FROM PYTHON SOURCE LINES 131-138 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 132-139 -->
 
 <div class="highlight"><pre><span></span><code><span class="n">analytical_sol</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">init_state</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">times</span> <span class="o">*</span> <span class="n">times</span> <span class="o">*</span> <span class="n">init_state</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">analytical_sol</span> <span class="o">-</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">state_trajectories</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Integration error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Integration error"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="Integration error" class="mkd-glr-single-img" src="../images/mkd_glr_plot_smooth_ode_001.png" srcset="../images/mkd_glr_plot_smooth_ode_001.png" /></p>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  3.943 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  5.416 seconds)</p>
 <div id="download_links"></div>
 
 <p><a class="md-button center" href="../plot_smooth_ode.py"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v210.7l-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7zM64 320c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64h-46.9l-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48"/></svg></span> Download Python source code: plot_smooth_ode.py</a></p>
@@ -1711,12 +1712,11 @@ the Runge-Kutta algorithm.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
-      
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

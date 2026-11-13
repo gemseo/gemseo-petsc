@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/utils/conversion/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/dev/gemseo-petsc/latest/reference/gemseo_petsc/utils/conversion/">
       
       
         <link rel="prev" href="../">
@@ -18,8 +18,8 @@
         
       
       
-      <link rel="icon" href="../../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <link rel="icon" href="../../../../images/monogram.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -55,13 +55,13 @@
     
       <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
     
       <link rel="stylesheet" href="../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../sg_gallery.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1485,12 +1485,12 @@
   <a href="#gemseo_petsc.utils.conversion-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Functions
+        Functions:
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="Functions:">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1578,12 +1578,12 @@
   <a href="#gemseo_petsc.utils.conversion-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Functions
+        Functions:
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="Functions:">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1662,7 +1662,7 @@
 
 
 
-<h3 id="gemseo_petsc.utils.conversion-functions">Functions<a href="#gemseo_petsc.utils.conversion-functions" class="headerlink" title="Permanent link">&para;</a></h3>
+<h3 id="gemseo_petsc.utils.conversion-functions">Functions:<a href="#gemseo_petsc.utils.conversion-functions" class="headerlink" title="Permanent link">&para;</a></h3>
 
 <div class="doc doc-object doc-function">
 
@@ -1673,7 +1673,7 @@
 
 <a href="#gemseo_petsc.utils.conversion.convert_ndarray_to_mat_or_vec" class="headerlink" title="Permanent link">&para;</a></h4>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">convert_ndarray_to_mat_or_vec</span><span class="p">(</span>
-    <span class="n">np_arr</span><span class="p">:</span> <span class="n"><span title="numpy.typing.NDArray">NDArray</span></span><span class="p">[</span><span class="n"><span title="float">float</span></span><span class="p">],</span>
+    <span class="n">np_arr</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a></span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="petsc4py.PETSc.Mat">Mat</span></span> <span class="o">|</span> <span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span>
 </code></pre></div>
 
@@ -1686,7 +1686,7 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>np_arr</code></b>
-              (<code><span title="numpy.typing.NDArray">NDArray</span>[<span title="float">float</span>]</code>)
+              (<code><a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#float">float</a>]</code>)
           –
           <div class="doc-md-description">
             <p>The input Numpy array.</p>
@@ -1710,7 +1710,7 @@
 <p><span class="doc-section-title">Raises:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><span title="ValueError">ValueError</span></code>
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError">ValueError</a></code>
             –
           <div class="doc-md-description">
             <p>If the dimension of the input vector is greater than 2.</p>
@@ -1767,7 +1767,7 @@
 <span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">convert_ndarray_to_mat_or_vec</span><span class="p">(</span>
     <span class="n">np_arr</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Mat</span> <span class="o">|</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Vec</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a Numpy array to a PETSc Mat or Vec.</span>
+<span class="w">    </span><span class="sd">"""Convert a Numpy array to a PETSc Mat or Vec.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">         np_arr: The input Numpy array.</span>
@@ -1777,10 +1777,10 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If the dimension of the input vector is greater than 2.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n_dim</span> <span class="o">=</span> <span class="n">np_arr</span><span class="o">.</span><span class="n">ndim</span>
     <span class="k">if</span> <span class="n">n_dim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The dimension of the input array (</span><span class="si">{</span><span class="n">n_dim</span><span class="si">}</span><span class="s2">) is not supported.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"The dimension of the input array (</span><span class="si">{</span><span class="n">n_dim</span><span class="si">}</span><span class="s2">) is not supported."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">issparse</span><span class="p">(</span><span class="n">np_arr</span><span class="p">):</span>
@@ -1802,8 +1802,8 @@
             <span class="c1"># a_shape = np_arr.shape</span>
             <span class="c1"># petsc_arr.setUp()</span>
             <span class="c1"># petsc_arr.setValues(</span>
-            <span class="c1">#     arange(a_shape[0], dtype=&quot;int32&quot;),</span>
-            <span class="c1">#     arange(a_shape[1], dtype=&quot;int32&quot;),</span>
+            <span class="c1">#     arange(a_shape[0], dtype="int32"),</span>
+            <span class="c1">#     arange(a_shape[1], dtype="int32"),</span>
             <span class="c1">#     np_arr,</span>
             <span class="c1"># )</span>
     <span class="n">petsc_arr</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
@@ -1873,12 +1873,11 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
-      
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

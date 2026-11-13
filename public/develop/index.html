@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/dev/gemseo-petsc/latest/">
       
       
       
@@ -18,8 +18,8 @@
         
       
       
-      <link rel="icon" href="images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <link rel="icon" href="images/monogram.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
@@ -55,13 +55,13 @@
     
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="sg_gallery-binder.css">
+      <link rel="stylesheet" href="sg_gallery-dataframe.css">
     
-      <link rel="stylesheet" href="sg_gallery.css">
+      <link rel="stylesheet" href="sg_gallery-binder.css">
     
       <link rel="stylesheet" href="sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="sg_gallery.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1687,17 +1687,20 @@ to submit bugs or questions.</p>
 <p>From the container
 <code>registry.gitlab.com/gemseo/dev/gemseo-petsc/multi-python-petsc</code>,
 get the sources of petsc4py corresponding to the version of petsc
-currently installed in the system (currently 3.20.5).</p>
+currently installed in the system (currently 3.23.6).</p>
 <p>Install the following dependencies with dnf:</p>
 <ul>
+<li>petsc-devel</li>
+<li>gcc</li>
 <li>redhat-rpm-config</li>
 <li>python3.13-devel</li>
 <li>hdf5-devel</li>
 </ul>
-<p>then <code>export NUMPY_INCLUDE=&lt;path to numpy includes&gt;</code>
-then
-<code>PETSC_DIR=$(pwd)/petsc-includes uv build --wheel -p python3.13 .</code>
-where <code>petsc-includes</code> contains the symbolic links to:</p>
+<p>then
+<code>PETSC_DIR=$(pwd)/petsc-includes uv build --wheel -b constraints.txt -p python3.13 .</code>
+where <code>constraints.txt</code> contains <code>setuptools&lt;80</code>
+(the build script of petsc4py 3.23 does not support the most recent setuptools)
+and <code>petsc-includes</code> contains the symbolic links to:</p>
 <ul>
 <li>include -&gt; /usr/include/petsc/</li>
 <li>lib -&gt; lib64/</li>
@@ -1755,12 +1758,11 @@ where <code>petsc-includes</code> contains the symbolic links to:</p>
       <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="assets/_markdown_exec_pyodide.js"></script>
       
         <script src="javascripts/mathjax.js"></script>
-      
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

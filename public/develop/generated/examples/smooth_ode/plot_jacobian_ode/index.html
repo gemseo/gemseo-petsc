@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/generated/examples/smooth_ode/plot_jacobian_ode/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/dev/gemseo-petsc/latest/generated/examples/smooth_ode/plot_jacobian_ode/">
       
       
         <link rel="prev" href="../plot_smooth_ode/">
@@ -20,8 +20,8 @@
         
       
       
-      <link rel="icon" href="../../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <link rel="icon" href="../../../../images/monogram.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -57,13 +57,13 @@
     
       <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
     
       <link rel="stylesheet" href="../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../sg_gallery.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1530,14 +1530,14 @@ present in the expression of the ODE.</p>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODESolverLibraryFactory</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.algos.ode.ode_problem</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODEProblem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.ode</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODEProblem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.ode.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ODESolverLibraryFactory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">atleast_1d</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linspace</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">zeros</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealArray</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gemseo.util.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealArray</span>
 </code></pre></div>
 <!-- GENERATED FROM PYTHON SOURCE LINES 43-52 -->
 
@@ -1589,7 +1589,7 @@ and to the design variables.</p>
 <!-- GENERATED FROM PYTHON SOURCE LINES 90-92 -->
 
 <p>These functions are assembled into an
-[ODEProblem][gemseo.algos.ode.ode_problem.ODEProblem].</p>
+[ODEProblem][gemseo.ode.problem.ODEProblem].</p>
 <!-- GENERATED FROM PYTHON SOURCE LINES 92-122 -->
 
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SmoothODEProblem</span><span class="p">(</span><span class="n">ODEProblem</span><span class="p">):</span>
@@ -1637,11 +1637,11 @@ The storage of checkpoints on the RAM can be enabled by setting the optional par
 The maximal number of checkpoints to be stored on disk or on the RAM
 can be controlled by the optional parameters <code>max_disk_checkpoints</code>
 and <code>max_memory_checkpoints</code>.</p>
-<!-- GENERATED FROM PYTHON SOURCE LINES 138-150 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 138-151 -->
 
-<div class="highlight"><pre><span></span><code><span class="n">ODESolverLibraryFactory</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="n">problem</span><span class="p">,</span>
-    <span class="n">algo_name</span><span class="o">=</span><span class="s2">&quot;PETSC_ODE_RK&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">factory</span> <span class="o">=</span> <span class="n">ODESolverLibraryFactory</span><span class="p">()</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_settings</span><span class="p">(</span>
+    <span class="s2">"PETSC_ODE_RK"</span><span class="p">,</span>
     <span class="n">time_step</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
     <span class="n">maximum_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
     <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
@@ -1649,13 +1649,14 @@ and <code>max_memory_checkpoints</code>.</p>
     <span class="n">compute_adjoint</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">use_memory_checkpoints</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="n">factory</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
 </code></pre></div>
-<!-- GENERATED FROM PYTHON SOURCE LINES 151-154 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 152-155 -->
 
 <p>The Jacobian of the solution of the IVP with respect to the initial conditions
 and the design variables can be found respectively in the attributes
 <code>jac_wrt_initial_state</code> and <code>jac_wrt_desvar</code> of <code>problem.result</code>.</p>
-<!-- GENERATED FROM PYTHON SOURCE LINES 157-170 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 158-171 -->
 
 <p>The Jacobians computed by PETSc can be compared with their analytical counterparts.
 By knowing that the exact solution of the IVP is
@@ -1667,7 +1668,7 @@ J_{y_0} = \left[\frac{4}{(2 - k t^2 y_0)^2}\right]
 <div class="arithmatex">\[
 J_{k} = \left[\frac{2 y_0^2 t^2}{(2 - k t^2 y_0)^2}\right]
 \]</div>
-<!-- GENERATED FROM PYTHON SOURCE LINES 170-193 -->
+<!-- GENERATED FROM PYTHON SOURCE LINES 171-194 -->
 
 <div class="highlight"><pre><span></span><code><span class="n">analytical_jac_initial_state</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">final_time</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">init_state</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">analytical_jac_desvar</span> <span class="o">=</span> <span class="p">(</span>
@@ -1681,15 +1682,15 @@ J_{k} = \left[\frac{2 y_0^2 t^2}{(2 - k t^2 y_0)^2}\right]
 <span class="n">error_jac_desvar</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">analytical_jac_desvar</span> <span class="o">-</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">jac_wrt_desvar</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;Jacobian with respect to the initial state: </span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;     absolute error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="si">}</span><span class="s2">, &quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;     relative error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_initial_state</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">"Jacobian with respect to the initial state: </span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"     absolute error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="si">}</span><span class="s2">, "</span>
+    <span class="sa">f</span><span class="s2">"     relative error = </span><span class="si">{</span><span class="n">error_jac_initial_state</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_initial_state</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;Jacobian with respect to the design variable: </span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;     absolute error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="si">}</span><span class="s2">, &quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;     relative error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_desvar</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">"Jacobian with respect to the design variable: </span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"     absolute error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="si">}</span><span class="s2">, "</span>
+    <span class="sa">f</span><span class="s2">"     relative error = </span><span class="si">{</span><span class="n">error_jac_desvar</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">analytical_jac_desvar</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 </code></pre></div>
 <p class="mkd-glr-script-out">Out:</p>
@@ -1756,12 +1757,11 @@ Jacobian<span class="w"> </span>with<span class="w"> </span>respect<span class="
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
-      
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

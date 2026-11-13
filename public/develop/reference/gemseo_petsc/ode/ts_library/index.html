@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-petsc/latest/reference/gemseo_petsc/ode/ts_library/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/dev/gemseo-petsc/latest/reference/gemseo_petsc/ode/ts_library/">
       
       
         <link rel="prev" href="../">
@@ -20,8 +20,8 @@
         
       
       
-      <link rel="icon" href="../../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <link rel="icon" href="../../../../images/monogram.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -57,13 +57,13 @@
     
       <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
     
       <link rel="stylesheet" href="../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../sg_gallery.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1255,10 +1255,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.Settings" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.settings_class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;Settings
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;settings_class
       
     </span>
   </a>
@@ -1284,7 +1284,7 @@
   <a href="#gemseo_petsc.ode.ts_library-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Functions
+        Functions:
       
     </span>
   </a>
@@ -1770,10 +1770,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.Settings" class="md-nav__link">
+  <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.settings_class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;Settings
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;settings_class
       
     </span>
   </a>
@@ -1799,7 +1799,7 @@
   <a href="#gemseo_petsc.ode.ts_library-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Functions
+        Functions:
       
     </span>
   </a>
@@ -1876,12 +1876,12 @@
 
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscOdeAlgo</span><span class="p">(</span><span class="n">algo_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscOdeAlgo</span><span class="p">(</span><span class="n">algo_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="gemseo.algos.ode.base_ode_solver_library.BaseODESolverLibrary">BaseODESolverLibrary</span></code></p>
+              Bases: <code><span title="gemseo.ode.core.base_ode_solver_library.BaseODESolverLibrary">BaseODESolverLibrary</span></code></p>
 
 
 
@@ -1900,10 +1900,22 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
     <ul>
         <li class="doc-section-item field-body">
             <b><code>algo_name</code></b>
-              (<code><span title="str">str</span></code>)
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#str">str</a></code>)
           –
           <div class="doc-md-description">
             <p>The name of the algorithm solving the ODE.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError">KeyError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>When the algorithm is not in the library.</p>
           </div>
         </li>
     </ul>
@@ -1917,7 +1929,11 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 
                   <details class="mkdocstrings-source">
                     <summary>Source code in <code>src/gemseo_petsc/ode/ts_library.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
@@ -1929,15 +1945,11 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 <span class="normal">161</span>
 <span class="normal">162</span>
 <span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algo_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algo_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Args:</span>
 <span class="sd">        algo_name: The name of the algorithm solving the ODE.</span>
-<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa: D205, D212, D415</span>
+<span class="sd">    """</span>  <span class="c1"># noqa: D205, D212, D415</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">algo_name</span><span class="o">=</span><span class="n">algo_name</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">__rhs_indices</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># adjoint_wrt_state is adjoint for cost gradient wrt y at t0 (initial condition)</span>
@@ -1976,7 +1988,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
   </span>
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo.adjoint_wrt_desvar" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_desvar</span><span class="p">:</span> <span class="n"><span title="list">list</span></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_desvar</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2000,7 +2012,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
   </span>
 
 <a href="#gemseo_petsc.ode.ts_library.PetscOdeAlgo.adjoint_wrt_state" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_state</span><span class="p">:</span> <span class="n"><span title="list">list</span></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">adjoint_wrt_state</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><span title="petsc4py.PETSc.Vec">Vec</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2036,13 +2048,15 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 
 <a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription" class="headerlink" title="Permanent link">&para;</a></h4>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">PetscTSAlgorithmDescription</span><span class="p">(</span>
-    <span class="n">Settings</span><span class="p">:</span> <span class="n"><span title="type">type</span></span><span class="p">[</span><span class="n"><span title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span><span class="p">,</span>
+    <span class="n">settings_class</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#type">type</a></span><span class="p">[</span>
+        <span class="n"><span title="gemseo.ode.core.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="gemseo.algos.ode.base_ode_solver_library.ODESolverDescription">ODESolverDescription</span></code></p>
+              Bases: <code><span title="gemseo.ode.core.base_ode_solver_library.ODESolverDescription">ODESolverDescription</span></code></p>
 
 
 
@@ -2070,8 +2084,8 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
 
 
 
-<h6 id="gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.Settings" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">Settings</span>
+<h6 id="gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.settings_class" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">settings_class</span>
 
 
   <span class="doc doc-labels">
@@ -2079,8 +2093,10 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.Settings" class="headerlink" title="Permanent link">&para;</a></h6>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">Settings</span><span class="p">:</span> <span class="n"><span title="type">type</span></span><span class="p">[</span><span class="n"><span title="gemseo.algos.ode.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span>
+<a href="#gemseo_petsc.ode.ts_library.PetscTSAlgorithmDescription.settings_class" class="headerlink" title="Permanent link">&para;</a></h6>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">settings_class</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/builtins/functions.html#type">type</a></span><span class="p">[</span><span class="n"><span title="gemseo.ode.core.base_ode_solver_settings.BaseODESolverSettings">BaseODESolverSettings</span></span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n"><a class="autorefs autorefs-internal" title="            PetscTSSettings (gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings)" href="../settings/petsc_ts_settings/#gemseo_petsc.ode.settings.petsc_ts_settings.PetscTSSettings">PetscTSSettings</a></span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2101,7 +2117,7 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
     </div>
 
 </div>
-<h3 id="gemseo_petsc.ode.ts_library-functions">Functions<a href="#gemseo_petsc.ode.ts_library-functions" class="headerlink" title="Permanent link">&para;</a></h3>
+<h3 id="gemseo_petsc.ode.ts_library-functions">Functions:<a href="#gemseo_petsc.ode.ts_library-functions" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
 
@@ -2162,12 +2178,11 @@ https://petsc4py.readthedocs.io/en/stable/manual/sensitivity_analysis/#checkpoin
       <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
-      
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
