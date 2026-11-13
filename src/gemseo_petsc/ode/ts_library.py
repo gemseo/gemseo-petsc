@@ -32,8 +32,8 @@ from typing import TYPE_CHECKING
 from typing import ClassVar
 from typing import Final
 
-from gemseo.algos.ode.base_ode_solver_library import BaseODESolverLibrary
-from gemseo.algos.ode.base_ode_solver_library import ODESolverDescription
+from gemseo.ode.core.base_ode_solver_library import BaseODESolverLibrary
+from gemseo.ode.core.base_ode_solver_library import ODESolverDescription
 from numpy import arange
 from numpy import array
 from numpy import extract
@@ -52,10 +52,10 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
     from collections.abc import Sequence
 
-    from gemseo.algos.ode.base_ode_solver_settings import BaseODESolverSettings
-    from gemseo.algos.ode.ode_problem import ODEProblem
-    from gemseo.algos.ode.ode_result import ODEResult
-    from gemseo.typing import RealArray
+    from gemseo.ode import ODEProblem
+    from gemseo.ode.core.base_ode_solver_settings import BaseODESolverSettings
+    from gemseo.ode.result import ODEResult
+    from gemseo.util.typing import RealArray
 
     FINAL_T_OPTION = PETSc.TS.TSExactFinalTimeOption
 
@@ -66,7 +66,7 @@ LOGGER = logging.getLogger(__name__)
 class PetscTSAlgorithmDescription(ODESolverDescription):
     """The description of the PETSc TS ODE library."""
 
-    Settings: type[BaseODESolverSettings] = PetscTSSettings
+    settings_class: type[BaseODESolverSettings] = PetscTSSettings
     """The settings validation model."""
 
 
@@ -140,11 +140,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
             algorithm_name=solver_name,
             internal_algorithm_name=solver_name.lower(),
             website="https://petsc.org/release/manualpages/TS/",
-            Settings=type(
-                f"{solver_name}_Settings",
-                (PetscTSSettings,),
-                {"_TARGET_CLASS_NAME": f"{solver_name}"},
-            ),
+            settings_class=type(f"{solver_name}_Settings", (PetscTSSettings,), {}),
         )
         for solver_name in ODESolverType
     }
@@ -183,7 +179,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         """
         self._hist_iterations.append(i)
         self._hist_times.append(time)
-        self._hist_state.append(state.getArray().copy())
+        self._hist_state.append(state.getArray(readonly=True).copy())
 
     def _rhs_function(
         self,
@@ -200,7 +196,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
             state: The state of the problem.
             state_dot: The derivative of the state.
         """
-        state_converted = state.getArray()
+        state_converted = state.getArray(readonly=True)
         val = self._problem.rhs_function(time, state_converted)
         state_dot.setValues(self.__rhs_indices, val)
         state_dot.assemble()
@@ -225,7 +221,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         Returns:
             The successfulness of the operation.
         """
-        state_converted = state.getArray()
+        state_converted = state.getArray(readonly=True)
         numpy_jac = self._problem.jac_function_wrt_state(time, state_converted)
         np_jac_shape = numpy_jac.shape
 
@@ -265,7 +261,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         Returns:
             The success.
         """
-        state_converted = state.getArray()
+        state_converted = state.getArray(readonly=True)
         numpy_jac = self._problem.jac_function_wrt_desvar(time, state_converted)
         jacobian_p.setValues(self.__rhs_indices, self.__desvar_indices, numpy_jac)
         jacobian_p.assemble()
@@ -286,7 +282,7 @@ class PetscOdeAlgo(BaseODESolverLibrary):
             state: The state of the problem.
             fvalue: The output for the values of the event functions.
         """
-        state_converted = state.getArray()
+        state_converted = state.getArray(readonly=True)
         for i in range(self.__n_events):
             fvalue[i] = self._problem.event_functions[i](time, state_converted)
 
@@ -399,7 +395,14 @@ class PetscOdeAlgo(BaseODESolverLibrary):
         # Apply run-time options, e.g. -ts_adapt_monitor
         time_stepper.setFromOptions()
 
-        time_stepper.solve(initial_state)
+        try:
+            time_stepper.solve(initial_state)
+        except PETSc.Error as error:
+            # petsc4py raises a PETSc.Error from the exception of a Python callback,
+            # raise the latter, e.g. the ValueError of _jac_function_wrt_state.
+            if error.__cause__ is not None:
+                raise error.__cause__ from None
+            raise
         time_stepper.getDict()
 
         ########################################

@@ -23,16 +23,16 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
-from gemseo.algos.ode.factory import ODESolverLibraryFactory
+from gemseo.ode.factory import ODESolverLibraryFactory
 
 from gemseo_petsc.problems.smooth_ode import SmoothODE
 from gemseo_petsc.problems.vanderpol import VanderPol
 
 
 def solve_ode(ode, compute_adjoint=False, **options):
-    ODESolverLibraryFactory().execute(
-        ode,
-        algo_name="PETSC_ODE_RK",
+    factory = ODESolverLibraryFactory()
+    settings = factory.create_settings(
+        "PETSC_ODE_RK",
         time_step=0.00001,
         maximum_steps=1000000,
         compute_adjoint=compute_adjoint,
@@ -41,6 +41,7 @@ def solve_ode(ode, compute_adjoint=False, **options):
         rtol=1e-10,
         **options,
     )
+    factory.execute(ode, settings)
 
 
 def get_fd_and_exact_jacobians(
