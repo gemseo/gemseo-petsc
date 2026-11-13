@@ -645,7 +645,7 @@ test = [
 requires-dist = [
     { name = "gemseo", extras = ["all"], git = "https://gitlab.com/gemseo/dev/gemseo.git?branch=develop" },
     { name = "numpy" },
-    { name = "petsc4py", specifier = ">=3,<3.21", index = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/simple" },
+    { name = "petsc4py", specifier = ">=3,<3.24", index = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/simple" },
     { name = "scipy" },
 ]
 
@@ -1573,15 +1573,15 @@ wheels = [
 
 [[package]]
 name = "petsc4py"
-version = "3.20.5"
+version = "3.23.6"
 source = { registry = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/e770044873d7245d33b82f3ce0f86eb8d1ab0dc77017747e5615637fcbe5b059/petsc4py-3.20.5-cp311-cp311-linux_x86_64.whl", hash = "sha256:e770044873d7245d33b82f3ce0f86eb8d1ab0dc77017747e5615637fcbe5b059" },
-    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/b50063f041417971dfa9db04c959cc57f7e3137333a3c8f57dbd2891f3f36ce4/petsc4py-3.20.5-cp312-cp312-linux_x86_64.whl", hash = "sha256:b50063f041417971dfa9db04c959cc57f7e3137333a3c8f57dbd2891f3f36ce4" },
-    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/0a0043dc125eb369fef79c0cdb92ef87854a1aefda9ce418b4f1f1796d780e70/petsc4py-3.20.5-cp313-cp313-linux_x86_64.whl", hash = "sha256:0a0043dc125eb369fef79c0cdb92ef87854a1aefda9ce418b4f1f1796d780e70" },
+    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/10260e1bf6548f19445be2b8782d926d711a64885defbed1dd014cb18bb243fa/petsc4py-3.23.6-cp311-cp311-linux_x86_64.whl", hash = "sha256:10260e1bf6548f19445be2b8782d926d711a64885defbed1dd014cb18bb243fa" },
+    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/b158784fc14664978d4e22ca0bd7126c2101c5b01acaae55525a06db0f025b51/petsc4py-3.23.6-cp312-cp312-linux_x86_64.whl", hash = "sha256:b158784fc14664978d4e22ca0bd7126c2101c5b01acaae55525a06db0f025b51" },
+    { url = "https://gitlab.com/api/v4/projects/31038016/packages/pypi/files/837977fc2c7260df77abec27cd83bb13e65321e589af06fc0e400598ada6ffea/petsc4py-3.23.6-cp313-cp313-linux_x86_64.whl", hash = "sha256:837977fc2c7260df77abec27cd83bb13e65321e589af06fc0e400598ada6ffea" },
 ]
 
 [[package]]
